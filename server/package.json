@@ -1,0 +1,24 @@
+{
+	"name": "server",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"build": "tsc"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.14.0",
+		"@oslojs/crypto": "^1.0.1",
+		"@oslojs/encoding": "^1.1.0",
+		"argon2": "^0.41.1",
+		"drizzle-kit": "^0.30.6",
+		"drizzle-orm": "^0.41.0",
+		"drizzle-zod": "^0.7.1",
+		"hono": "^4.7.6",
+		"zod": "^3.24.2"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.17",
+		"tsx": "^4.7.1",
+		"typescript": "^5.0.0"
+	}
+}

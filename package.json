@@ -1,0 +1,27 @@
+{
+	"name": "bastion",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"build": "pnpm -r build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.8.0",
+	"devDependencies": {
+		"@eslint/compat": "^1.2.8",
+		"@eslint/js": "^9.24.0",
+		"eslint": "^9.24.0",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-svelte": "^3.5.1",
+		"globals": "^16.0.0",
+		"prettier": "^3.5.3",
+		"prettier-plugin-svelte": "^3.3.3",
+		"typescript-eslint": "^8.29.1"
+	}
+}

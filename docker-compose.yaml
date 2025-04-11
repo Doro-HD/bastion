@@ -1,0 +1,9 @@
+services:
+  server:
+    image: bastion-server:latest
+    ports:
+      - 3000:3000
+  client:
+    image: bastion-client:latest
+    ports:
+      - 80:80
