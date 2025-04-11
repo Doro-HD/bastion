@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 
-import { env } from '@/index';
+import * as env from '@/env';
 import { usersSchema, sessionsSchema, decksSchema, cardsSchema, tagsSchema } from './schemas/index';
 
 if (!env.DB_URL) throw new Error('DATABASE_URL is not set');

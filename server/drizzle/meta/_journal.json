@@ -1,34 +1,34 @@
 {
-  "version": "7",
-  "dialect": "sqlite",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "6",
-      "when": 1743261395100,
-      "tag": "0000_spicy_talos",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1743368122802,
-      "tag": "0001_lethal_dakota_north",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1743405556643,
-      "tag": "0002_worthless_blackheart",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1743508270106,
-      "tag": "0003_mute_the_order",
-      "breakpoints": true
-    }
-  ]
+	"version": "7",
+	"dialect": "sqlite",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "6",
+			"when": 1743261395100,
+			"tag": "0000_spicy_talos",
+			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "6",
+			"when": 1743368122802,
+			"tag": "0001_lethal_dakota_north",
+			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "6",
+			"when": 1743405556643,
+			"tag": "0002_worthless_blackheart",
+			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "6",
+			"when": 1743508270106,
+			"tag": "0003_mute_the_order",
+			"breakpoints": true
+		}
+	]
 }

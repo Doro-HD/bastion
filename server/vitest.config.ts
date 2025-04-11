@@ -1,15 +1,9 @@
-import path from 'path';
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-    resolve: {
-        alias: {
-            "@": path.resolve("./src/lib")
-        }
-    },
-    test: {
-        include: [
-            '**/*.spec.ts'
-        ]
-    },
+	plugins: [tsconfigPaths()],
+	test: {
+		include: ['**/*.spec.ts']
+	}
 });

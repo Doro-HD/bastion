@@ -28,7 +28,7 @@ const usersSignUpSchema = usersInsertSchema
 function validateUserSignUp(
 	userData: ValidateData
 ): result.Result<
-	TUsersInsert,
+	TUsersInsert & { 'confirm-password': string },
 	{ usernameError?: string; passwordError?: string; confirmPasswordError?: string }
 > {
 	const schemaResult = validateSchema(usersSignUpSchema, userData);
@@ -48,11 +48,10 @@ function validateUserSignUp(
 	return result.ok(schemaResult.data);
 }
 
-const userSignInSchema = usersInsertSchema
-	.pick({
-		username: true,
-		password: true
-	});
+const userSignInSchema = usersInsertSchema.pick({
+	username: true,
+	password: true
+});
 function validateUserSignIn(userData: ValidateData) {
 	const schemaResult = validateSchema(userSignInSchema, userData);
 	if (schemaResult.status === 'error') {
@@ -69,4 +68,10 @@ function validateUserSignIn(userData: ValidateData) {
 	return result.ok(schemaResult.data);
 }
 
-export { type TUsersSelect, usersInsertSchema, type TUsersInsert, validateUserSignUp, validateUserSignIn };
+export {
+	type TUsersSelect,
+	usersInsertSchema,
+	type TUsersInsert,
+	validateUserSignUp,
+	validateUserSignIn
+};

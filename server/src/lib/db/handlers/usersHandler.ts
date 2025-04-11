@@ -48,7 +48,10 @@ async function findUserByUsername(
 async function createUser(newUser: TUsersInsert): Promise<result.Result<TUsersInsert, unknown>> {
 	try {
 		const hashedPassword = await argon2.hash(newUser.password);
-		const [createdUser] = await db.insert(usersSchema.usersTable).values({ ...newUser, password: hashedPassword }).returning();
+		const [createdUser] = await db
+			.insert(usersSchema.usersTable)
+			.values({ ...newUser, password: hashedPassword })
+			.returning();
 
 		return result.ok(createdUser);
 	} catch (e) {

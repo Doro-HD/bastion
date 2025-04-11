@@ -32,7 +32,10 @@ function isErr<TOk, TErr>(result: Result<TOk, TErr>): result is Err<TErr> {
 	return result.status === 'error';
 }
 
-function map<TOk, TNewOk, TErr>(result: Result<TOk, TErr>, fn: (result: TOk) => Result<TNewOk, TErr>){
+function map<TOk, TNewOk, TErr>(
+	result: Result<TOk, TErr>,
+	fn: (result: TOk) => Result<TNewOk, TErr>
+) {
 	if (isOk(result)) {
 		return fn(result.data);
 	}

@@ -77,7 +77,7 @@ function deleteSessionTokenCookie(c: Context) {
 }
 
 async function verifyPassword(hashedPassword: string, password: string) {
-	return argon2.verify(hashedPassword, password)
+	return argon2.verify(hashedPassword, password);
 }
 
 export {

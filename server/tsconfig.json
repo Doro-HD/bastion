@@ -7,14 +7,10 @@
 		"verbatimModuleSyntax": true,
 		"skipLibCheck": true,
 		"types": ["node"],
-		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx",
-		"outDir": "./dist",
 		"baseUrl": "./src",
 		"paths": {
 			"@/*": ["lib/*"]
 		}
 	},
-	"include": ["src"],
-	"exclude": ["node_modules"]
+	"include": ["src/**/*.ts"]
 }

@@ -11,13 +11,15 @@ async function getDecks(): Promise<result.Result<decksValidator.TDecksSelect[], 
 	try {
 		const decks = await db.query.decksTable.findMany();
 
-		return result.ok(decks)
+		return result.ok(decks);
 	} catch (e) {
 		return result.err(e);
 	}
 }
 
-async function findDeckById(deckId: string): Promise<result.Result<decksValidator.TDecksSelect | undefined, unknown>> {
+async function findDeckById(
+	deckId: string
+): Promise<result.Result<decksValidator.TDecksSelect | undefined, unknown>> {
 	try {
 		const deck = await db.query.decksTable.findFirst({
 			where: (deck, { eq }) => eq(deck.id, deckId)
@@ -29,12 +31,18 @@ async function findDeckById(deckId: string): Promise<result.Result<decksValidato
 	}
 }
 
-async function createDeck(userId: string, newDeck: decksValidator.TDecksFormData): Promise<result.Result<decksValidator.TDecksInsert, unknown>> {
+async function createDeck(
+	userId: string,
+	newDeck: decksValidator.TDecksFormData
+): Promise<result.Result<decksValidator.TDecksInsert, unknown>> {
 	try {
 		const deckId = crypto.generateId();
-		const [deckCreated] = await db.insert(decksSchema.decksTable).values({ id: deckId, userId, ...newDeck }).returning();
+		const [deckCreated] = await db
+			.insert(decksSchema.decksTable)
+			.values({ id: deckId, userId, ...newDeck })
+			.returning();
 
-		return result.ok(deckCreated)
+		return result.ok(deckCreated);
 	} catch (e) {
 		return result.err(e);
 	}

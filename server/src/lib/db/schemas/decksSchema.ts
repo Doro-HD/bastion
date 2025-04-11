@@ -16,7 +16,4 @@ const decksRelation = relations(decksTable, ({ many }) => {
 	};
 });
 
-export {
-	decksTable,
-	decksRelation,
-};
+export { decksTable, decksRelation };

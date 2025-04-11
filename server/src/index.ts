@@ -6,8 +6,8 @@ import { authRouter } from '@/routers/authRouter';
 const app = new Hono();
 
 app.get('/', (c) => {
-	return c.json({ data: 'Hello World!'});
-})
+	return c.json({ data: 'Hello World!' });
+});
 
 app.route('/auth', authRouter);
 
