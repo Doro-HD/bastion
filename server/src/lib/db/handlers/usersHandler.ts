@@ -1,5 +1,6 @@
-import { result } from '$lib/functional';
 import argon2 from 'argon2';
+
+import { result } from '@/functional';
 import { getDB } from '../drizzle';
 import { usersSchema } from '../schemas';
 import type { TUsersSelect, TUsersInsert } from '../validators/usersValidator';

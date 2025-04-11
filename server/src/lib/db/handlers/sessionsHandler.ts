@@ -1,9 +1,9 @@
 import { eq } from 'drizzle-orm';
 
-import { result } from '$lib/functional';
-import { drizzle } from '$lib/server/db/index';
-import { sessionsSchema } from '$lib/server/db/schemas';
-import { sessionsValidator, usersValidator } from '$lib/server/db/validators';
+import { result } from '@/functional';
+import { drizzle } from '@/db/index';
+import { sessionsSchema } from '@/db/schemas';
+import { sessionsValidator, usersValidator } from '@/db/validators';
 import type { TSessionSelect } from '../validators/sessionsValidator';
 
 const db = drizzle.getDB();

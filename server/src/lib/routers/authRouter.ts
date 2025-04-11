@@ -7,7 +7,6 @@ import { result } from "@/functional/index";
 import { usersHandler } from "@/db/handlers";
 import { createSession, generateSessionToken, setSessionTokenCookie } from "@/auth";
 
-const authRouter = new Hono();
 
 const signUpValidation = validator('form', (value, c) => {
     const userResult = usersValidator.validateUserSignUp(value)
@@ -16,32 +15,6 @@ const signUpValidation = validator('form', (value, c) => {
     }
 
     return userResult.data;
-});
-authRouter.post('sign-up', signUpValidation, async (c) => {
-    const validData = c.req.valid('form');
-
-    const existingUserResult = await usersHandler.findUserByUsername(validData.username);
-    if (result.isErr(existingUserResult)) {
-        return c.json({ data: 'Server error'}, 500);
-    }
-
-    if (existingUserResult.data) {
-        return c.json({ data: 'An user with that username already exsists'}, 400);
-    }
-
-    const userCreationResult = await usersHandler.createUser(validData);
-    if (result.isErr(userCreationResult)) {
-        return c.json({ data: 'Server error'}, 500);
-    }
-
-    const sessionToken = generateSessionToken();
-    const sessionCreationResult = await createSession(sessionToken, userCreationResult.data.id);
-    if (result.isErr(sessionCreationResult)) {
-        return c.json({ data: 'Server error' }, 500);
-    }
-    setSessionTokenCookie(c, sessionToken, sessionCreationResult.data);
-
-    return c.json({ data: 'success' });
 });
 
 const signInValidation = validator('form', (value, c) => {
@@ -52,27 +25,55 @@ const signInValidation = validator('form', (value, c) => {
 
     return userResult.data;
 });
-authRouter.post('sign-in', signInValidation, async (c) => {
-    const validData = c.req.valid('form');
 
-    const existingUserResult = await usersHandler.findUserByUsername(validData.username);
-    if (result.isErr(existingUserResult)) {
-        return c.json({ data: 'Server error'}, 500);
-    }
+const authRouter = new Hono()
+    .post('sign-up', signUpValidation, async (c) => {
+        const validData = c.req.valid('form');
 
-    if (!existingUserResult.data) {
-        return c.json({ data: 'Could not find an user with that username'}, 400);
-    }
+        const existingUserResult = await usersHandler.findUserByUsername(validData.username);
+        if (result.isErr(existingUserResult)) {
+            return c.json({ data: 'Server error'}, 500);
+        }
 
-    const sessionToken = generateSessionToken();
-    const sessionCreationResult = await createSession(sessionToken, existingUserResult.data.id);
-    if (result.isErr(sessionCreationResult)) {
-        return c.json({ data: 'Server error' }, 500);
-    }
-    setSessionTokenCookie(c, sessionToken, sessionCreationResult.data);
+        if (existingUserResult.data) {
+            return c.json({ data: 'An user with that username already exsists'}, 400);
+        }
 
-    return c.json({ data: 'success' });
-});
+        const userCreationResult = await usersHandler.createUser(validData);
+        if (result.isErr(userCreationResult)) {
+            return c.json({ data: 'Server error'}, 500);
+        }
+
+        const sessionToken = generateSessionToken();
+        const sessionCreationResult = await createSession(sessionToken, userCreationResult.data.id);
+        if (result.isErr(sessionCreationResult)) {
+            return c.json({ data: 'Server error' }, 500);
+        }
+        setSessionTokenCookie(c, sessionToken, sessionCreationResult.data);
+
+        return c.json({ data: 'success' });
+    })
+    .post('sign-in', signInValidation, async (c) => {
+        const validData = c.req.valid('form');
+
+        const existingUserResult = await usersHandler.findUserByUsername(validData.username);
+        if (result.isErr(existingUserResult)) {
+            return c.json({ data: 'Server error'}, 500);
+        }
+
+        if (!existingUserResult.data) {
+            return c.json({ data: 'Could not find an user with that username'}, 400);
+        }
+
+        const sessionToken = generateSessionToken();
+        const sessionCreationResult = await createSession(sessionToken, existingUserResult.data.id);
+        if (result.isErr(sessionCreationResult)) {
+            return c.json({ data: 'Server error' }, 500);
+        }
+        setSessionTokenCookie(c, sessionToken, sessionCreationResult.data);
+
+        return c.json({ data: 'success' });
+    });
 
 export {
     authRouter

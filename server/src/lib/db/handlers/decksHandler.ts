@@ -1,9 +1,9 @@
-import { crypto } from '$lib';
-import { result } from '$lib/functional';
-import { drizzle } from '$lib/server/db';
+import { crypto } from '@/index';
+import { result } from '@/functional';
+import { drizzle } from '@/db/index';
 
-import { decksSchema } from '$lib/server/db/schemas';
-import type { decksValidator } from '$lib/server/db/validators';
+import { decksSchema } from '@/db/schemas';
+import type { decksValidator } from '@/db/validators';
 
 const db = drizzle.getDB();
 

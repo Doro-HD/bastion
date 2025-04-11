@@ -2,7 +2,7 @@ import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { createUpdateSchema } from 'drizzle-zod';
 import type { z } from 'zod';
 
-import { sessionsSchema } from '../schemas';
+import { sessionsSchema } from '@/db/schemas/index';
 
 type TSessionSelect = InferSelectModel<typeof sessionsSchema.sessionsTable>;
 type TSessionInsert = InferInsertModel<typeof sessionsSchema.sessionsTable>;

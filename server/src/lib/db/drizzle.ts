@@ -1,18 +1,16 @@
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 
-import { dev } from '$app/environment';
-import { env } from '$env/dynamic/private';
-
+import { env } from '@/index';
 import { usersSchema, sessionsSchema, decksSchema, cardsSchema, tagsSchema } from './schemas/index';
 
-if (!env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
-if (!dev && !env.DATABASE_AUTH_TOKEN) throw new Error('DATABASE_AUTH_TOKEN is not set');
+if (!env.DB_URL) throw new Error('DATABASE_URL is not set');
+if (!env.DEV && !env.DB_AUTH_TOKEN) throw new Error('DATABASE_AUTH_TOKEN is not set');
 
 function connect() {
 	const client = createClient({
-		url: env.DATABASE_URL,
-		authToken: env.DATABASE_AUTH_TOKEN
+		url: env.DB_URL,
+		authToken: env.DB_AUTH_TOKEN
 	});
 
 	return drizzle(client, {
