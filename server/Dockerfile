@@ -13,12 +13,14 @@ RUN pnpm --filter server deploy --prod /prod/server
 
 FROM builder AS runner
 
+WORKDIR /app
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 hono
 
-COPY --from=builder --chown=hono:nodejs /prod/server/node_modules /app/node_modules
-COPY --from=builder --chown=hono:nodejs /prod/server/dist /app/dist
-COPY --from=builder --chown=hono:nodejs /prod/server/package.json /app/package.json
+COPY --from=builder --chown=hono:nodejs /prod/server/node_modules ./node_modules
+COPY --from=builder --chown=hono:nodejs /prod/server/dist ./dist
+COPY --from=builder --chown=hono:nodejs /prod/server/package.json ./package.json
 
 USER hono
 EXPOSE 3000

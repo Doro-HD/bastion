@@ -6,7 +6,7 @@ import { sessionsSchema } from '@/db/schemas';
 import { sessionsValidator, usersValidator } from '@/db/validators';
 import type { TSessionSelect } from '../validators/sessionsValidator';
 
-const db = await drizzle.getDB();
+const db = drizzle.getDB();
 
 async function findSessionById(
 	sessionId: string

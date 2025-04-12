@@ -8,7 +8,8 @@ export default defineConfig({
 		tsconfigPaths(),
 		build({
 			entry: './src/index.ts',
-			port: 3000
+			port: 3000,
+			external: ['argon2']
 		}),
 		devServer({
 			entry: './src/index.ts'

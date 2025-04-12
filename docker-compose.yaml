@@ -6,4 +6,4 @@ services:
   client:
     image: bastion-client:latest
     ports:
-      - 80:80
+      - 80:8080

@@ -5,7 +5,7 @@ import { drizzle } from '@/db/index';
 import { decksSchema } from '@/db/schemas';
 import type { decksValidator } from '@/db/validators';
 
-const db = await drizzle.getDB();
+const db = drizzle.getDB();
 
 async function getDecks(): Promise<result.Result<decksValidator.TDecksSelect[], unknown>> {
 	try {
