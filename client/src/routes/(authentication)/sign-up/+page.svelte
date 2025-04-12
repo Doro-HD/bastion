@@ -1,10 +1,33 @@
-<form action="" class='grid grid-cols-2 gap-y-2'>
-    <label for="username">Username</label>
-    <input id='username' type="text" name='username'>
+<script lang="ts">
+	import { PUBLIC_API_URL } from '$env/static/public';
 
-    <label for="password">Password</label>
-    <input id='password' type="password" name='password'>
+	import Button from '$lib/components/Button.svelte';
+	import LabelInput from '$lib/components/LabelInput.svelte';
 
-    <label for="confirm-password">Confirm password</label>
-    <input id='confirm-password' type="password" name='confirm-password'>
-</form>
+	async function signUp(event: SubmitEvent) {
+		event.preventDefault();
+
+        const response = await fetch(`http://${PUBLIC_API_URL}/auth/sign-up`, {
+            method: 'POST'
+        });
+        console.log(response);
+	}
+</script>
+
+<div class="shadow p-2 flex flex-col gap-y-2">
+	<header>
+		<h1>Sign up</h1>
+	</header>
+
+	<form id="sign-up" onsubmit={signUp} class="grid grid-cols-2 gap-y-2">
+		<LabelInput name="username">Username</LabelInput>
+
+		<LabelInput type="password" name="password">Password</LabelInput>
+
+		<LabelInput type="password" name="confirm-password">Confirm password</LabelInput>
+	</form>
+
+	<footer class="flex justify-end">
+		<Button type="submit" formId="sign-up">Submit</Button>
+	</footer>
+</div>

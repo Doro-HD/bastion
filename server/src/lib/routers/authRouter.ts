@@ -26,7 +26,7 @@ const signInValidation = validator('form', (value, c) => {
 });
 
 const authRouter = new Hono()
-	.post('sign-up', signUpValidation, async (c) => {
+	.post('/sign-up', signUpValidation, async (c) => {
 		const validData = c.req.valid('form');
 
 		const usedIdResult = await usersHandler.findUserById(validData.id);
@@ -61,7 +61,7 @@ const authRouter = new Hono()
 
 		return c.json({ data: 'success' }, 201);
 	})
-	.post('sign-in', signInValidation, async (c) => {
+	.post('/sign-in', signInValidation, async (c) => {
 		const validData = c.req.valid('form');
 
 		const existingUserResult = await usersHandler.findUserByUsername(validData.username);
@@ -73,7 +73,10 @@ const authRouter = new Hono()
 			return c.json({ data: 'Could not find an user with that username' }, 404);
 		}
 
-		const isPasswordValid = await auth.verifyPassword(existingUserResult.data.password, validData.password);
+		const isPasswordValid = await auth.verifyPassword(
+			existingUserResult.data.password,
+			validData.password
+		);
 		if (!isPasswordValid) {
 			return c.json({ data: 'Incorrect password' }, 401);
 		}

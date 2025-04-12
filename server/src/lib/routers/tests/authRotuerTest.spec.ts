@@ -57,7 +57,7 @@ describe('Auth router', () => {
 					username: form.username,
 					password: form.password
 				}
-			})
+			});
 
 			expect(res.status).toBe(200);
 			expect(res.headers.get('Set-Cookie')).toBeTruthy();
@@ -73,7 +73,7 @@ describe('Auth router', () => {
 					username: 'Wrong username',
 					password: 'Wrong password'
 				}
-			})
+			});
 
 			expect(res.status).toBe(404);
 		});
@@ -84,10 +84,9 @@ describe('Auth router', () => {
 					username: form.username,
 					password: 'Wrong password'
 				}
-			})
+			});
 
 			expect(res.status).toBe(401);
 		});
-
 	});
 });
