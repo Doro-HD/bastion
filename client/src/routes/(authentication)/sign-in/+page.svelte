@@ -14,7 +14,7 @@
 
 		const formData = new FormData(formElement)
 
-        const response = await fetch(`http://${PUBLIC_API_URL}/auth/sign-up`, {
+        const response = await fetch(`http://${PUBLIC_API_URL}/auth/sign-in`, {
             method: 'POST',
 			body: formData
         });
