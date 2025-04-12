@@ -20,5 +20,8 @@
 		"typescript": "^5.0.0",
 		"unocss": "66.1.0-beta.11",
 		"vite": "^6.2.5"
+	},
+	"dependencies": {
+		"@paralleldrive/cuid2": "^2.2.2"
 	}
 }
