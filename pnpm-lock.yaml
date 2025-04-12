@@ -62,9 +62,6 @@ importers:
 
   server:
     dependencies:
-      '@faker-js/faker':
-        specifier: ^9.6.0
-        version: 9.6.0
       '@hono/node-server':
         specifier: ^1.14.0
         version: 1.14.0(hono@4.7.6)
@@ -99,6 +96,9 @@ importers:
         specifier: ^3.24.2
         version: 3.24.2
     devDependencies:
+      '@faker-js/faker':
+        specifier: ^9.6.0
+        version: 9.6.0
       '@hono/vite-build':
         specifier: ^1.6.0
         version: 1.6.0(hono@4.7.6)

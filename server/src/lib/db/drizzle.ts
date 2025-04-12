@@ -9,7 +9,7 @@ if (!env.DEV && !env.DB_AUTH_TOKEN) throw new Error('DATABASE_AUTH_TOKEN is not 
 
 function connect() {
 	const client = createClient({
-		url: env.DB_URL,
+		url: env.DB_SYNC_URL,
 		authToken: env.DB_AUTH_TOKEN
 	});
 

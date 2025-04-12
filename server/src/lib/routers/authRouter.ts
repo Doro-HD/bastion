@@ -5,6 +5,7 @@ import { usersValidator } from '@/db/validators';
 import { result } from '@/functional/index';
 import { usersHandler } from '@/db/handlers';
 import { createSession, generateSessionToken, setSessionTokenCookie } from '@/auth';
+import { auth } from '..';
 
 const signUpValidation = validator('form', (value, c) => {
 	const userResult = usersValidator.validateUserSignUp(value);
@@ -28,6 +29,15 @@ const authRouter = new Hono()
 	.post('sign-up', signUpValidation, async (c) => {
 		const validData = c.req.valid('form');
 
+		const usedIdResult = await usersHandler.findUserById(validData.id);
+		if (result.isErr(usedIdResult)) {
+			return c.json({ data: 'Server error' }, 500);
+		}
+
+		if (usedIdResult.data) {
+			return c.json({ data: 'Id has already been used' }, 200);
+		}
+
 		const existingUserResult = await usersHandler.findUserByUsername(validData.username);
 		if (result.isErr(existingUserResult)) {
 			return c.json({ data: 'Server error' }, 500);
@@ -49,7 +59,7 @@ const authRouter = new Hono()
 		}
 		setSessionTokenCookie(c, sessionToken, sessionCreationResult.data.expiresAt);
 
-		return c.json({ data: 'success' });
+		return c.json({ data: 'success' }, 201);
 	})
 	.post('sign-in', signInValidation, async (c) => {
 		const validData = c.req.valid('form');
@@ -60,7 +70,12 @@ const authRouter = new Hono()
 		}
 
 		if (!existingUserResult.data) {
-			return c.json({ data: 'Could not find an user with that username' }, 400);
+			return c.json({ data: 'Could not find an user with that username' }, 404);
+		}
+
+		const isPasswordValid = await auth.verifyPassword(existingUserResult.data.password, validData.password);
+		if (!isPasswordValid) {
+			return c.json({ data: 'Incorrect password' }, 401);
 		}
 
 		const sessionToken = generateSessionToken();
