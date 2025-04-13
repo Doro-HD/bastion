@@ -60,7 +60,7 @@ async function validateSessionToken(token: string) {
 type SessionValidationResult = Awaited<ReturnType<typeof validateSessionToken>>;
 
 async function invalidateSession(sessionId: string) {
-	sessionsHandler.deleteSession(sessionId);
+	return sessionsHandler.deleteSession(sessionId);
 }
 
 function setSessionTokenCookie(c: Context, token: string, expiresAt: Date) {

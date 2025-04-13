@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { PUBLIC_API_URL } from '$env/static/public';
 
-	import Button from '$lib/components/Button.svelte';
-	import LabelInput from '$lib/components/LabelInput.svelte';
+	import { Button, Card, LabelInput } from '$lib/components';
 
 	let formElement: HTMLFormElement | null = null;
 
@@ -14,27 +14,28 @@
 
 		const formData = new FormData(formElement)
 
-        const response = await fetch(`http://${PUBLIC_API_URL}/auth/sign-in`, {
+        const response = await fetch(`${PUBLIC_API_URL}/auth/sign-in`, {
             method: 'POST',
 			body: formData
         });
-		const data = await response.json();
-        console.log(data);
+        if (response.status === 200) {
+            goto('/');
+        }
 	}
 </script>
 
-<div class="shadow p-2 flex flex-col gap-y-2">
-	<header>
-		<h1>Sign up</h1>
-	</header>
+<Card.Root>
+	<Card.Header>
+		<h1>Sign in</h1>
+	</Card.Header>
 
-	<form id="sign-up" onsubmit={signUp} class="grid grid-cols-2 gap-y-2" bind:this={formElement}>
+	<form id="sign-in" onsubmit={signUp} class="grid grid-cols-2 gap-y-2" bind:this={formElement}>
 		<LabelInput name="username">Username</LabelInput>
 
 		<LabelInput type="password" name="password">Password</LabelInput>
 	</form>
 
-	<footer class="flex justify-end">
-		<Button type="submit" formId="sign-up">Submit</Button>
-	</footer>
-</div>
+	<Card.Footer class='flex justify-end'>
+		<Button type="submit" formId="sign-in">Sign in</Button>
+	</Card.Footer>
+</Card.Root>

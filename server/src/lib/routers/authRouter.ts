@@ -6,6 +6,7 @@ import { result } from '@/functional/index';
 import { usersHandler } from '@/db/handlers';
 import { createSession, generateSessionToken, setSessionTokenCookie } from '@/auth';
 import { auth } from '..';
+import { getCookie } from 'hono/cookie';
 
 const signUpValidation = validator('form', (value, c) => {
 	const userResult = usersValidator.validateUserSignUp(value);
@@ -89,6 +90,22 @@ const authRouter = new Hono()
 		setSessionTokenCookie(c, sessionToken, sessionCreationResult.data.expiresAt);
 
 		return c.json({ data: 'success' });
+	})
+	.get('/sign-out', async (c) => {
+		console.log(c.req.header())
+		const sessionId = getCookie(c, auth.sessionCookieName);
+		if (!sessionId) {
+			return c.json({ data: 'No session cookie found'}, 404);
+		}
+
+		const invalidationResult = await auth.invalidateSession(sessionId);
+		if (result.isErr(invalidationResult)) {
+			return c.json({ data: 'Server error'}, 500);
+		}
+
+		auth.deleteSessionTokenCookie(c);
+
+		return c.json({ data: 'success' }, 200);
 	});
 
 export { authRouter };

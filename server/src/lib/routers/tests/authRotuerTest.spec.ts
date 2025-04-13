@@ -1,7 +1,7 @@
-import { testClient } from 'hono/testing';
 import { describe, test, expect } from 'vitest';
-import { crypto } from '@/index';
+import { testClient } from 'hono/testing';
 
+import { auth, crypto } from '@/index';
 import { authRouter } from '../authRouter';
 import { faker } from '@faker-js/faker';
 
@@ -89,4 +89,21 @@ describe('Auth router', () => {
 			expect(res.status).toBe(401);
 		});
 	});
+
+	describe('Sign out', () => {
+		test('Successful sign out', async () => {
+			const res = await client['sign-out'].$get(undefined, {
+				headers: {
+					Cookie: `${auth.sessionCookieName}=foo`
+				},
+			});
+
+			expect(res.status).toBe(200);
+			expect(res.headers.get('Set-Cookie')).toBe(`${auth.sessionCookieName}=; Max-Age=0; Path=/`);
+			expect(res.headers.get('Content-Type')).toBe('application/json');
+			expect(await res.json()).toEqual({
+				data: 'success'
+			});
+		});
+	})
 });
