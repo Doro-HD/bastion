@@ -45,7 +45,7 @@ async function validateSessionToken(token: string) {
 	if (sessionExpired) {
 		await invalidateSession(session.id);
 
-		return { session: null, user: null };
+		return { session: null };
 	}
 
 	const renewSession = Date.now() >= session.expiresAt.getTime() - DAY_IN_MS * 15;

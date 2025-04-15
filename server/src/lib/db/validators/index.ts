@@ -19,6 +19,7 @@ function validateSchema<T extends ZodTypeAny>(
 	schema: T,
 	data: ValidateData
 ): result.Result<z.infer<T>, ZodError<z.infer<T>>> {
+	console.log(data)
 	const schemaResult = schema.safeParse(data);
 	if (!schemaResult.success) {
 		return result.err(schemaResult.error);

@@ -92,15 +92,14 @@ const authRouter = new Hono()
 		return c.json({ data: 'success' });
 	})
 	.get('/sign-out', async (c) => {
-		console.log(c.req.header())
 		const sessionId = getCookie(c, auth.sessionCookieName);
 		if (!sessionId) {
-			return c.json({ data: 'No session cookie found'}, 404);
+			return c.json({ data: 'No session cookie found' }, 404);
 		}
 
 		const invalidationResult = await auth.invalidateSession(sessionId);
 		if (result.isErr(invalidationResult)) {
-			return c.json({ data: 'Server error'}, 500);
+			return c.json({ data: 'Server error' }, 500);
 		}
 
 		auth.deleteSessionTokenCookie(c);
@@ -108,4 +107,4 @@ const authRouter = new Hono()
 		return c.json({ data: 'success' }, 200);
 	});
 
-export { authRouter };
+export default authRouter;

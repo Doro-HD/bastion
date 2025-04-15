@@ -9,19 +9,19 @@
 
 	async function signUp(event: SubmitEvent) {
 		event.preventDefault();
+
 		if (!formElement) {
 			return;
 		}
 
-		const formData = new FormData(formElement)
+		const formData = new FormData(formElement);
 		formData.set('id', newUserId);
 
-        const response = await fetch(`${PUBLIC_API_URL}/auth/sign-up`, {
-            method: 'POST',
+		const response = await fetch(`${PUBLIC_API_URL}/auth/sign-up`, {
+			method: 'POST',
 			body: formData
-        });
+		});
 		const data = await response.json();
-        console.log(data);
 	}
 </script>
 

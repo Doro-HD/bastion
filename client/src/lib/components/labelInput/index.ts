@@ -1,5 +1,3 @@
-import LabelInput from "./LabelInput.svelte";
+import LabelInput from './LabelInput.svelte';
 
-export {
-    LabelInput
-};
+export { LabelInput };

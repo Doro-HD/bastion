@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { testClient } from 'hono/testing';
 
 import { auth, crypto } from '@/index';
-import { authRouter } from '../authRouter';
+import authRouter from '../authRouter';
 import { faker } from '@faker-js/faker';
 
 describe('Auth router', () => {
@@ -95,7 +95,7 @@ describe('Auth router', () => {
 			const res = await client['sign-out'].$get(undefined, {
 				headers: {
 					Cookie: `${auth.sessionCookieName}=foo`
-				},
+				}
 			});
 
 			expect(res.status).toBe(200);
@@ -105,5 +105,5 @@ describe('Auth router', () => {
 				data: 'success'
 			});
 		});
-	})
+	});
 });

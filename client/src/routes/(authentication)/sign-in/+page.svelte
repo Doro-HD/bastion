@@ -12,15 +12,15 @@
 			return;
 		}
 
-		const formData = new FormData(formElement)
+		const formData = new FormData(formElement);
 
-        const response = await fetch(`${PUBLIC_API_URL}/auth/sign-in`, {
-            method: 'POST',
+		const response = await fetch(`${PUBLIC_API_URL}/auth/sign-in`, {
+			method: 'POST',
 			body: formData
-        });
-        if (response.status === 200) {
-            goto('/');
-        }
+		});
+		if (response.status === 200) {
+			goto('/');
+		}
 	}
 </script>
 
@@ -35,7 +35,7 @@
 		<LabelInput type="password" name="password">Password</LabelInput>
 	</form>
 
-	<Card.Footer class='flex justify-end'>
+	<Card.Footer class="flex justify-end">
 		<Button type="submit" formId="sign-in">Sign in</Button>
 	</Card.Footer>
 </Card.Root>
