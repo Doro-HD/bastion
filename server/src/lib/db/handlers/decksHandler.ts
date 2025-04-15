@@ -69,16 +69,32 @@ async function updateDeck(
 	updateDeck: decksValidator.TDecksUpdateFormData
 ): Promise<result.Result<decksValidator.TDecksUpdate, unknown>> {
 	try {
-		const [deckCreated] = await db
+		const [deckUpdated] = await db
 			.update(decksSchema.decksTable)
 			.set({ ...updateDeck })
 			.where(and(eq(decksSchema.decksTable.userId, userId), eq(decksSchema.decksTable.id, deckId)))
 			.returning();
 
-		return result.ok(deckCreated);
+		return result.ok(deckUpdated);
 	} catch (e) {
 		return result.err(e);
 	}
 }
 
-export { getDecks, findDeckById, createDeck, updateDeck };
+async function deleteDeck(
+	userId: string,
+	deckId: string
+): Promise<result.Result<decksValidator.TDecksSelect, unknown>> {
+	try {
+		const [deckDeleted] = await db
+			.delete(decksSchema.decksTable)
+			.where(and(eq(decksSchema.decksTable.userId, userId), eq(decksSchema.decksTable.id, deckId)))
+			.returning();
+
+		return result.ok(deckDeleted);
+	} catch (e) {
+		return result.err(e);
+	}
+}
+
+export { getDecks, findDeckById, createDeck, updateDeck, deleteDeck };

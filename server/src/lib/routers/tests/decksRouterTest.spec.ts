@@ -95,6 +95,10 @@ describe('Decks router', () => {
 		const response = await client[':deckId'].$put({
 			param: {
 				deckId: deck.id
+			},
+			form: {
+				name: 'Updated Deck name',
+				description: "Updated description"
 			}
 		});
 
@@ -106,6 +110,10 @@ describe('Decks router', () => {
 		const response = await client[':deckId'].$put({
 			param: {
 				deckId: 'Foo'
+			},
+			form: {
+				name: 'Updated Deck name',
+				description: "Updated description"
 			}
 		});
 

@@ -76,14 +76,14 @@ importers:
   server:
     dependencies:
       '@hono/node-server':
-        specifier: ^1.14.0
-        version: 1.14.0(hono@4.7.6)
+        specifier: ^1.14.1
+        version: 1.14.1(hono@4.7.6)
       '@hono/vite-dev-server':
         specifier: ^0.19.0
         version: 0.19.0(hono@4.7.6)
       '@libsql/client':
-        specifier: ^0.15.2
-        version: 0.15.2
+        specifier: ^0.15.4
+        version: 0.15.4
       '@oslojs/crypto':
         specifier: ^1.0.1
         version: 1.0.1
@@ -98,10 +98,10 @@ importers:
         version: 0.41.1
       drizzle-orm:
         specifier: ^0.41.0
-        version: 0.41.0(@libsql/client@0.15.2)(gel@2.0.2)
+        version: 0.41.0(@libsql/client@0.15.4)(gel@2.0.2)
       drizzle-zod:
         specifier: ^0.7.1
-        version: 0.7.1(drizzle-orm@0.41.0(@libsql/client@0.15.2)(gel@2.0.2))(zod@3.24.2)
+        version: 0.7.1(drizzle-orm@0.41.0(@libsql/client@0.15.4)(gel@2.0.2))(zod@3.24.2)
       hono:
         specifier: ^4.7.6
         version: 4.7.6
@@ -110,13 +110,13 @@ importers:
         version: 3.24.2
     devDependencies:
       '@faker-js/faker':
-        specifier: ^9.6.0
-        version: 9.6.0
+        specifier: ^9.7.0
+        version: 9.7.0
       '@hono/vite-build':
         specifier: ^1.6.0
         version: 1.6.0(hono@4.7.6)
       '@types/node':
-        specifier: ^20.11.17
+        specifier: ^20.17.30
         version: 20.17.30
       drizzle-kit:
         specifier: ^0.30.6
@@ -125,7 +125,7 @@ importers:
         specifier: ^4.19.3
         version: 4.19.3
       typescript:
-        specifier: ^5.0.0
+        specifier: ^5.8.3
         version: 5.8.3
       vite:
         specifier: ^6.2.6
@@ -648,12 +648,12 @@ packages:
     resolution: {integrity: sha512-ZAoA40rNMPwSm+AeHpCq8STiNAwzWLJuP8Xv4CHIc9wv/PSuExjMrmjfYNj682vW0OOiZ1HKxzvjQr9XZIisQA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@faker-js/faker@9.6.0':
-    resolution: {integrity: sha512-3vm4by+B5lvsFPSyep3ELWmZfE3kicDtmemVpuwl1yH7tqtnHdsA6hG8fbXedMVdkzgtvzWoRgjSB4Q+FHnZiw==}
+  '@faker-js/faker@9.7.0':
+    resolution: {integrity: sha512-aozo5vqjCmDoXLNUJarFZx2IN/GgGaogY4TMJ6so/WLZOWpSV7fvj2dmrV6sEAnUm1O7aCrhTibjpzeDFgNqbg==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
-  '@hono/node-server@1.14.0':
-    resolution: {integrity: sha512-YUCxJwgHRKSqjrdTk9e4VMGKN27MK5r4+MGPyZTgKH+IYbK+KtYbHeOcPGJ91KGGD6RIQiz2dAHxvjauNhOS8g==}
+  '@hono/node-server@1.14.1':
+    resolution: {integrity: sha512-vmbuM+HPinjWzPe7FFPWMMQMsbKE9gDPhaH0FFdqbGpkT5lp++tcWDTxwBl5EgS5y6JVgIaCdjeHRfQ4XRBRjQ==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -724,19 +724,19 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@libsql/client@0.15.2':
-    resolution: {integrity: sha512-D0No4jqDj5I+buvEyFajBugohzJXCBt9aRHCEXGrJS/9obnAO2z18Os3xgyPsWX0Yw4NQfSYaayRdowqkssmXA==}
+  '@libsql/client@0.15.4':
+    resolution: {integrity: sha512-m8a7giWlhLdfKVIZFd3UlBptWTS+H0toSOL09BxbqzBeFHwuVC+5ewyi4LMBxoy2TLNQGE4lO8cwpsTWmu695w==}
 
-  '@libsql/core@0.15.2':
-    resolution: {integrity: sha512-+UIN0OlzWa54MqnHbtaJ3FEJj6k2VrwrjX1sSSxzYlM+dWuadjMwOVp7gHpSYJGKWw0RQWLGge4fbW4TCvIm3A==}
+  '@libsql/core@0.15.4':
+    resolution: {integrity: sha512-NMvh6xnn3vrcd7DNehj0HiJcRWB2a8hHhJUTkOBej3Pf3KB21HOmdOUjXxJ5pGbjWXh4ezQBmHtF5ozFhocXaA==}
 
-  '@libsql/darwin-arm64@0.5.4':
-    resolution: {integrity: sha512-4PnRdklaQg27vAZxtQgKl+xBHimCH2KRgKId+h63gkAtz5yFTMmX+Q4Ez804T1BgrZuB5ujIvueEEuust2ceSQ==}
+  '@libsql/darwin-arm64@0.5.6':
+    resolution: {integrity: sha512-N0lt/I6xCTW6zE3J1I0/YH+TFnoMeZyeSorfLWg1wQi6QrB2PQ3je4R/bGViaU1uMEXaCc5OyI3GrrXJIDOLWg==}
     cpu: [arm64]
     os: [darwin]
 
-  '@libsql/darwin-x64@0.5.4':
-    resolution: {integrity: sha512-r+Z3UXQWxluXKA5cPj5KciNsmSXVTnq9/tmDczngJrogyXwdbbSShYkzov5M+YBlUCKv2VCbNnfxxoIqQnV9Gg==}
+  '@libsql/darwin-x64@0.5.6':
+    resolution: {integrity: sha512-v8YYImGB3klHvLViWAqsmgYuG32iO+Mt52VSfuqM5m8KzI2XQ2CRxKdBGYnLI9D3Q1T7upYGuHVTSoK3GpKoXQ==}
     cpu: [x64]
     os: [darwin]
 
@@ -750,36 +750,36 @@ packages:
   '@libsql/isomorphic-ws@0.1.5':
     resolution: {integrity: sha512-DtLWIH29onUYR00i0GlQ3UdcTRC6EP4u9w/h9LxpUZJWRMARk6dQwZ6Jkd+QdwVpuAOrdxt18v0K2uIYR3fwFg==}
 
-  '@libsql/linux-arm64-gnu@0.5.4':
-    resolution: {integrity: sha512-QmGXa3TGM6URe7vCOqdvr4Koay+4h5D6y4gdhnPCvXNYrRHgpq5OwEafP9GFalbO32Y1ppLY4enO2LwY0k63Qw==}
+  '@libsql/linux-arm64-gnu@0.5.6':
+    resolution: {integrity: sha512-2SdnSd/Tg+l5qN4yuc7Fh9Uvy/TakL8RiBJMSZEQkFta4FBk9H/Cp49SF9YRx9g2jItTlzOGJ+PAfnkU5HbabA==}
     cpu: [arm64]
     os: [linux]
 
-  '@libsql/linux-arm64-musl@0.5.4':
-    resolution: {integrity: sha512-cx4/7/xUjgNbiRsghRHujSvIqaTNFQC7Oo1gkGXGsh8hBwkdXr1QdOpeitq745sl6OlbInRrW2C7B2juxX3hcQ==}
+  '@libsql/linux-arm64-musl@0.5.6':
+    resolution: {integrity: sha512-DhfDtTWksAGXe70fA4cyhJHGYBB2BpLnF9EB1Rli2ACHrQbgWFHCiSrSg91tk4UVCVRDZ91KkXqU5bWL16Kwcg==}
     cpu: [arm64]
     os: [linux]
 
-  '@libsql/linux-x64-gnu@0.5.4':
-    resolution: {integrity: sha512-oPrE9Zyqd7fElS9uCGW2jn55cautD+gDIflfyF5+W/QYzll5OJ2vyMBZOBgdNopuZHrmHYihbespJn3t0WJDJg==}
+  '@libsql/linux-x64-gnu@0.5.6':
+    resolution: {integrity: sha512-lB6zcJw0u+Y3d2rN4ruxJtqxq9UjtzsoA+naJFmYEiDcls1p6OZQ+0OphO5qzTuet/MwbmiHrda/Kk15brBQBw==}
     cpu: [x64]
     os: [linux]
 
-  '@libsql/linux-x64-musl@0.5.4':
-    resolution: {integrity: sha512-XzyVdVe43MexkAaHzUvsi4tpPhfSDn3UndIYFrIu0lYkkiz4oKjTK7Iq96j2bcOeJv0pBGxiv+8Z9I6yp/aI2A==}
+  '@libsql/linux-x64-musl@0.5.6':
+    resolution: {integrity: sha512-gNbiJg0GGhKZSCTiRpbd9cD2/xT1Nj8bnXra+5ZvPYxiIaphE9xy3ELPIZjGIzBLX9dnn5E920K2tIOrBMRVBw==}
     cpu: [x64]
     os: [linux]
 
-  '@libsql/win32-x64-msvc@0.5.4':
-    resolution: {integrity: sha512-xWQyAQEsX+odBrMSXTpm3WOFeoJIX7QncCkaZcsaqdEFueOdNDIdcKAQKMoNlwtj1rCxE72RK4byw/Bflf6Jgg==}
+  '@libsql/win32-x64-msvc@0.5.6':
+    resolution: {integrity: sha512-8PtI2LrcacvFvzGOkm1CFCGWR5Y5eJDliAlZUEv7BTSAWf07FIVi21mEAyB9VG5y3VpWtY0f+6JYblrwqgqD3A==}
     cpu: [x64]
     os: [win32]
 
   '@neon-rs/load@0.0.4':
     resolution: {integrity: sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw==}
 
-  '@noble/hashes@1.7.1':
-    resolution: {integrity: sha512-B8XBPsn4vT/KJAGqDzbwztd+6Yte3P4V7iafm24bxgDe/mlRuK6xmWPuCNrKt2vDafZ8MfJLlchDG/vYafQEjQ==}
+  '@noble/hashes@1.7.2':
+    resolution: {integrity: sha512-biZ0NUSxyjLLqo6KxEJ1b+C2NAx0wtDoFvCaXHGgUkeHzf3Xc1xKumFKREuT7f7DARNZ/slvYUwFG6B0f2b6hQ==}
     engines: {node: ^14.21.3 || >=16}
 
   '@nodelib/fs.scandir@2.1.5':
@@ -1729,8 +1729,8 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
-  libsql@0.5.4:
-    resolution: {integrity: sha512-GEFeWca4SDAQFxjHWJBE6GK52LEtSskiujbG3rqmmeTO9t4sfSBKIURNLLpKDDF7fb7jmTuuRkDAn9BZGITQNw==}
+  libsql@0.5.6:
+    resolution: {integrity: sha512-k0qHpyU47iWBplT4IJKEcMgUbms8jl9cNGE6aqsdOYmSJjtZIaYkn8f4ku5DzxRHpk1+o4FK7ZwGVCExYboZqQ==}
     cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
@@ -2592,9 +2592,9 @@ snapshots:
       '@eslint/core': 0.13.0
       levn: 0.4.1
 
-  '@faker-js/faker@9.6.0': {}
+  '@faker-js/faker@9.7.0': {}
 
-  '@hono/node-server@1.14.0(hono@4.7.6)':
+  '@hono/node-server@1.14.1(hono@4.7.6)':
     dependencies:
       hono: 4.7.6
 
@@ -2604,7 +2604,7 @@ snapshots:
 
   '@hono/vite-dev-server@0.19.0(hono@4.7.6)':
     dependencies:
-      '@hono/node-server': 1.14.0(hono@4.7.6)
+      '@hono/node-server': 1.14.1(hono@4.7.6)
       hono: 4.7.6
       minimatch: 9.0.5
 
@@ -2657,25 +2657,25 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@libsql/client@0.15.2':
+  '@libsql/client@0.15.4':
     dependencies:
-      '@libsql/core': 0.15.2
+      '@libsql/core': 0.15.4
       '@libsql/hrana-client': 0.7.0
       js-base64: 3.7.7
-      libsql: 0.5.4
+      libsql: 0.5.6
       promise-limit: 2.7.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@libsql/core@0.15.2':
+  '@libsql/core@0.15.4':
     dependencies:
       js-base64: 3.7.7
 
-  '@libsql/darwin-arm64@0.5.4':
+  '@libsql/darwin-arm64@0.5.6':
     optional: true
 
-  '@libsql/darwin-x64@0.5.4':
+  '@libsql/darwin-x64@0.5.6':
     optional: true
 
   '@libsql/hrana-client@0.7.0':
@@ -2698,24 +2698,24 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@libsql/linux-arm64-gnu@0.5.4':
+  '@libsql/linux-arm64-gnu@0.5.6':
     optional: true
 
-  '@libsql/linux-arm64-musl@0.5.4':
+  '@libsql/linux-arm64-musl@0.5.6':
     optional: true
 
-  '@libsql/linux-x64-gnu@0.5.4':
+  '@libsql/linux-x64-gnu@0.5.6':
     optional: true
 
-  '@libsql/linux-x64-musl@0.5.4':
+  '@libsql/linux-x64-musl@0.5.6':
     optional: true
 
-  '@libsql/win32-x64-msvc@0.5.4':
+  '@libsql/win32-x64-msvc@0.5.6':
     optional: true
 
   '@neon-rs/load@0.0.4': {}
 
-  '@noble/hashes@1.7.1': {}
+  '@noble/hashes@1.7.2': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -2744,7 +2744,7 @@ snapshots:
 
   '@paralleldrive/cuid2@2.2.2':
     dependencies:
-      '@noble/hashes': 1.7.1
+      '@noble/hashes': 1.7.2
 
   '@petamoriken/float16@3.9.2': {}
 
@@ -3355,14 +3355,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.41.0(@libsql/client@0.15.2)(gel@2.0.2):
+  drizzle-orm@0.41.0(@libsql/client@0.15.4)(gel@2.0.2):
     optionalDependencies:
-      '@libsql/client': 0.15.2
+      '@libsql/client': 0.15.4
       gel: 2.0.2
 
-  drizzle-zod@0.7.1(drizzle-orm@0.41.0(@libsql/client@0.15.2)(gel@2.0.2))(zod@3.24.2):
+  drizzle-zod@0.7.1(drizzle-orm@0.41.0(@libsql/client@0.15.4)(gel@2.0.2))(zod@3.24.2):
     dependencies:
-      drizzle-orm: 0.41.0(@libsql/client@0.15.2)(gel@2.0.2)
+      drizzle-orm: 0.41.0(@libsql/client@0.15.4)(gel@2.0.2)
       zod: 3.24.2
 
   duplexer@0.1.2: {}
@@ -3722,18 +3722,18 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  libsql@0.5.4:
+  libsql@0.5.6:
     dependencies:
       '@neon-rs/load': 0.0.4
       detect-libc: 2.0.2
     optionalDependencies:
-      '@libsql/darwin-arm64': 0.5.4
-      '@libsql/darwin-x64': 0.5.4
-      '@libsql/linux-arm64-gnu': 0.5.4
-      '@libsql/linux-arm64-musl': 0.5.4
-      '@libsql/linux-x64-gnu': 0.5.4
-      '@libsql/linux-x64-musl': 0.5.4
-      '@libsql/win32-x64-msvc': 0.5.4
+      '@libsql/darwin-arm64': 0.5.6
+      '@libsql/darwin-x64': 0.5.6
+      '@libsql/linux-arm64-gnu': 0.5.6
+      '@libsql/linux-arm64-musl': 0.5.6
+      '@libsql/linux-x64-gnu': 0.5.6
+      '@libsql/linux-x64-musl': 0.5.6
+      '@libsql/win32-x64-msvc': 0.5.6
 
   lilconfig@2.1.0: {}
 

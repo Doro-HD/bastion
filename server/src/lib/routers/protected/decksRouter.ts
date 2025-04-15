@@ -7,21 +7,21 @@ import { decksValidator } from '@/db/validators';
 import { result } from '@/functional';
 
 const createDeckValidation = validator('form', (value, c) => {
-	const userResult = decksValidator.validateDeckInsert(value);
-	if (result.isErr(userResult)) {
+	const deckResult = decksValidator.validateDeckInsert(value);
+	if (result.isErr(deckResult)) {
 		return c.json({ data: 'Invalid data' }, 400);
 	}
 
-	return userResult.data;
+	return deckResult.data;
 });
 
 const updateDeckValidation = validator('form', (value, c) => {
-	const userResult = decksValidator.validateDeckUpdate(value);
-	if (result.isErr(userResult)) {
+	const deckResult = decksValidator.validateDeckUpdate(value);
+	if (result.isErr(deckResult)) {
 		return c.json({ data: 'Invalid data' }, 400);
 	}
 
-	return userResult.data;
+	return deckResult.data;
 });
 
 const decksRouter = new Hono<{ Variables: Variables }>()
@@ -76,15 +76,30 @@ const decksRouter = new Hono<{ Variables: Variables }>()
 		const data = c.req.valid('form');
 
 		const updateDeckResult = await decksHandler.updateDeck(userId, deckId, data)
-        console.log(updateDeckResult)
         if (result.isErr(updateDeckResult)) {
             return c.json({ data: 'Server error' }, 500);
         }
 
+        if (!updateDeckResult.data) {
+            return c.json({ data: 'Could not find deck with given id' }, 404);
+        }
+
 		return c.json({ data: updateDeckResult.data }, 200);
 	})
-	.delete('/:deckId', (c) => {
-		return c.json({}, 500);
+	.delete('/:deckId', async (c) => {
+        const userId = c.get('userId');
+        const deckId = c.req.param('deckId');
+
+        const deleteDeckResult = await decksHandler.deleteDeck(userId, deckId);
+        if (result.isErr(deleteDeckResult)) {
+            return c.json({ data: 'Server error' }, 500);
+        }
+
+        if (!deleteDeckResult.data) {
+            return c.json({ data: 'Could not find deck with given id' }, 404);
+        }
+
+		return c.json({ data: deleteDeckResult.data }, 200);
 	});
 
 export default decksRouter;
