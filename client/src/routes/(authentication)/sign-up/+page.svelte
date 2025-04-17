@@ -19,7 +19,8 @@
 
 		const response = await fetch(`${PUBLIC_API_URL}/auth/sign-up`, {
 			method: 'POST',
-			body: formData
+			body: formData,
+			credentials: 'include'
 		});
 		const data = await response.json();
 	}

@@ -6,7 +6,7 @@
 
 	let formElement: HTMLFormElement | null = null;
 
-	async function signUp(event: SubmitEvent) {
+	async function signIn(event: SubmitEvent) {
 		event.preventDefault();
 		if (!formElement) {
 			return;
@@ -16,10 +16,12 @@
 
 		const response = await fetch(`${PUBLIC_API_URL}/auth/sign-in`, {
 			method: 'POST',
-			body: formData
+			body: formData,
+			credentials: 'include'
 		});
+		console.log(response)
 		if (response.status === 200) {
-			goto('/');
+			//goto('/');
 		}
 	}
 </script>
@@ -29,7 +31,7 @@
 		<h1>Sign in</h1>
 	</Card.Header>
 
-	<form id="sign-in" onsubmit={signUp} class="grid grid-cols-2 gap-y-2" bind:this={formElement}>
+	<form id="sign-in" onsubmit={signIn} class="grid grid-cols-2 gap-y-2" bind:this={formElement}>
 		<LabelInput name="username">Username</LabelInput>
 
 		<LabelInput type="password" name="password">Password</LabelInput>

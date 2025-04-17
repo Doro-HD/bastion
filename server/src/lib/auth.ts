@@ -65,6 +65,7 @@ async function invalidateSession(sessionId: string) {
 
 function setSessionTokenCookie(c: Context, token: string, expiresAt: Date) {
 	setCookie(c, sessionCookieName, token, {
+		httpOnly: true,
 		expires: expiresAt,
 		path: '/'
 	});

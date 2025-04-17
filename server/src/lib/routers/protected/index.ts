@@ -22,7 +22,7 @@ protectedRouter.use(async (c, next) => {
 
 	c.set('userId', session.session.userId);
 
-	next();
+	await next();
 });
 
 protectedRouter.route('/decks', decksRouter);
