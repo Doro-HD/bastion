@@ -98,7 +98,7 @@ describe('Decks router', () => {
 			},
 			form: {
 				name: 'Updated Deck name',
-				description: "Updated description"
+				description: 'Updated description'
 			}
 		});
 
@@ -113,7 +113,7 @@ describe('Decks router', () => {
 			},
 			form: {
 				name: 'Updated Deck name',
-				description: "Updated description"
+				description: 'Updated description'
 			}
 		});
 

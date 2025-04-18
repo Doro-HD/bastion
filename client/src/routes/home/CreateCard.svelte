@@ -1,32 +1,34 @@
 <script lang="ts">
-	import { PUBLIC_API_URL } from '$env/static/public';
-	import { Button, Card, LabelInput, Modal } from '$lib/components';
-	import cuid2 from '@paralleldrive/cuid2';
 	import { Popover } from 'bits-ui';
+
+	import { PUBLIC_API_URL } from '$env/static/public';
+	import { Button, LabelInput } from '$lib/components';
+	import cuid2 from '@paralleldrive/cuid2';
 
 	type Props = {
 		onCreation: () => void;
 	};
 	const { onCreation }: Props = $props();
 
-	let deckId = cuid2.createId();
+	let cardId = cuid2.createId();
 	let formElement: HTMLFormElement | null = null;
 
-	async function createDeck(_event: SubmitEvent) {
+	async function createCard() {
 		if (!formElement) {
 			return;
 		}
-		const formData = new FormData(formElement);
-		formData.set('id', deckId);
 
-		const response = await fetch(PUBLIC_API_URL + '/decks', {
+		const formData = new FormData(formElement);
+		formData.set('id', cardId);
+
+		const response = await fetch(PUBLIC_API_URL + '/cards', {
 			method: 'POST',
 			body: formData,
 			credentials: 'include'
 		});
 		if (response.status === 200) {
 			onCreation();
-			deckId = cuid2.createId();
+			cardId = cuid2.createId();
 		}
 	}
 </script>
@@ -41,12 +43,12 @@
 	</Popover.Trigger>
 
 	<Popover.Portal>
-		<Popover.Content side="right" sideOffset={8} class="border-2 shadow p-2 bg-white">
-			<form class="grid grid-cols-2 gap-2" onsubmit={createDeck} bind:this={formElement}>
-				<LabelInput name="name">Deck name</LabelInput>
-				<LabelInput name="description">Deck description</LabelInput>
+		<Popover.Content side="bottom" sideOffset={8} class="border-2 shadow p-2 bg-white">
+			<form class="grid grid-cols-2 gap-2" onsubmit={createCard} bind:this={formElement}>
+				<LabelInput name="name">Card name</LabelInput>
+				<LabelInput name="description">Card description</LabelInput>
 
-				<Button type="submit">Create new deck</Button>
+				<Button type="submit">Create new Card</Button>
 			</form>
 		</Popover.Content>
 	</Popover.Portal>

@@ -10,6 +10,6 @@
 	const { class: className, onclick, children }: Props = $props();
 </script>
 
-<div class={["shadow p-2 flex flex-col gap-y-2", className]} {onclick} role='none'>
+<div class={['shadow p-2 flex flex-col gap-y-2', className]} {onclick} role="none">
 	{@render children()}
 </div>

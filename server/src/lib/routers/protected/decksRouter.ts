@@ -72,32 +72,32 @@ const decksRouter = new Hono<{ Variables: Variables }>()
 	})
 	.put('/:deckId', updateDeckValidation, async (c) => {
 		const userId = c.get('userId');
-        const deckId = c.req.param('deckId');
+		const deckId = c.req.param('deckId');
 		const data = c.req.valid('form');
 
-		const updateDeckResult = await decksHandler.updateDeck(userId, deckId, data)
-        if (result.isErr(updateDeckResult)) {
-            return c.json({ data: 'Server error' }, 500);
-        }
+		const updateDeckResult = await decksHandler.updateDeck(userId, deckId, data);
+		if (result.isErr(updateDeckResult)) {
+			return c.json({ data: 'Server error' }, 500);
+		}
 
-        if (!updateDeckResult.data) {
-            return c.json({ data: 'Could not find deck with given id' }, 404);
-        }
+		if (!updateDeckResult.data) {
+			return c.json({ data: 'Could not find deck with given id' }, 404);
+		}
 
 		return c.json({ data: updateDeckResult.data }, 200);
 	})
 	.delete('/:deckId', async (c) => {
-        const userId = c.get('userId');
-        const deckId = c.req.param('deckId');
+		const userId = c.get('userId');
+		const deckId = c.req.param('deckId');
 
-        const deleteDeckResult = await decksHandler.deleteDeck(userId, deckId);
-        if (result.isErr(deleteDeckResult)) {
-            return c.json({ data: 'Server error' }, 500);
-        }
+		const deleteDeckResult = await decksHandler.deleteDeck(userId, deckId);
+		if (result.isErr(deleteDeckResult)) {
+			return c.json({ data: 'Server error' }, 500);
+		}
 
-        if (!deleteDeckResult.data) {
-            return c.json({ data: 'Could not find deck with given id' }, 404);
-        }
+		if (!deleteDeckResult.data) {
+			return c.json({ data: 'Could not find deck with given id' }, 404);
+		}
 
 		return c.json({ data: deleteDeckResult.data }, 200);
 	});

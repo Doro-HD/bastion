@@ -48,7 +48,10 @@ function validateDeckInsert(
 }
 
 // Update
-const decksUpdateSchema = createUpdateSchema(decksSchema.decksTable).extend({ ...baseSchemaValidation, name: baseSchemaValidation.name.optional() });
+const decksUpdateSchema = createUpdateSchema(decksSchema.decksTable).extend({
+	...baseSchemaValidation,
+	name: baseSchemaValidation.name.optional()
+});
 type TDecksUpdate = z.infer<typeof decksUpdateSchema>;
 
 const decksUpdateFormDataSchema = decksUpdateSchema.omit({
