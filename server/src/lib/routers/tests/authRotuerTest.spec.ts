@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { testClient } from 'hono/testing';
 
 import { auth, crypto } from '@/index';
-import authRouter from '../authRouter';
+import { authRouter } from '@/routers/index';
 import { faker } from '@faker-js/faker';
 
 describe('Auth router', () => {

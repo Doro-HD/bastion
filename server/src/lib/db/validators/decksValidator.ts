@@ -5,12 +5,13 @@ import { z } from 'zod';
 import { result } from '@/functional';
 import { validateSchema, type ValidateData } from './index';
 import { decksSchema } from '../schemas';
+import cuid2 from '@paralleldrive/cuid2';
 
 /**
  * @description
  * Used to apply base extention to all decks schemas
  */
-const baseSchemaValidation = { name: z.string().min(5) };
+const baseSchemaValidation = { id: z.string().cuid2(), name: z.string().min(5) };
 
 type TDecksErrors = {
 	nameError?: string;

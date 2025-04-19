@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 import { decksSchema, tagsSchema } from './index';
 
@@ -7,6 +7,8 @@ const cardsTable = sqliteTable('cards', {
 	id: text('id').primaryKey(),
 	name: text('name').notNull(),
 	description: text('description').notNull(),
+	difficulty: text('difficulty', { enum: ['easy', 'medium', 'hard'] }).notNull(),
+	duration: integer('duration', { mode: 'timestamp_ms' }).notNull(),
 	deckId: text('deck_id').notNull()
 });
 

@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
-import decksRouter from './decksRouter';
 import { getCookie } from 'hono/cookie';
+
 import { auth } from '@/index';
+import decksRouter from './decksRouter';
 
 type Variables = {
 	userId: string;

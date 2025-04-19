@@ -5,6 +5,7 @@ import { result } from '@/functional';
 import * as usersValidator from './usersValidator';
 import * as sessionsValidator from './sessionsValidator';
 import * as decksValidator from './decksValidator';
+import * as cardsValidator from './cardsValidator';
 
 type ValidateData = Record<string, ParsedFormValue | ParsedFormValue[]>;
 
@@ -27,4 +28,11 @@ function validateSchema<T extends ZodTypeAny>(
 	return result.ok(schemaResult.data);
 }
 
-export { validateSchema, usersValidator, sessionsValidator, decksValidator, type ValidateData };
+export {
+	validateSchema,
+	usersValidator,
+	sessionsValidator,
+	decksValidator,
+	cardsValidator,
+	type ValidateData
+};

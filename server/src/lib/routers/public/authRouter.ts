@@ -5,7 +5,7 @@ import { usersValidator } from '@/db/validators';
 import { result } from '@/functional/index';
 import { usersHandler } from '@/db/handlers';
 import { createSession, generateSessionToken, setSessionTokenCookie } from '@/auth';
-import { auth } from '..';
+import { auth } from '../..';
 import { getCookie } from 'hono/cookie';
 
 const signUpValidation = validator('form', (value, c) => {

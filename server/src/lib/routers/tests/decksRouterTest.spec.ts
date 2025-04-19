@@ -2,12 +2,12 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { Hono } from 'hono';
 import { testClient } from 'hono/testing';
 
+import { crypto } from '@/index';
 import { decksHandler, usersHandler } from '@/db/handlers';
 import type { TUsersInsert } from '@/db/validators/usersValidator';
-import { crypto } from '@/index';
 import type { TDecksInsert } from '@/db/validators/decksValidator';
-import decksRouter from '../protected/decksRouter';
-import type { Variables } from '../protected';
+import decksRouter from '@/routers/protected/decksRouter';
+import type { Variables } from '@/routers/protected/index';
 
 describe('Decks router', () => {
 	const user: TUsersInsert = {
