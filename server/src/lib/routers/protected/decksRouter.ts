@@ -6,6 +6,7 @@ import { decksHandler } from '@/db/handlers';
 import { decksValidator } from '@/db/validators';
 import { result } from '@/functional';
 
+// validation
 const createDeckValidation = validator('form', (value, c) => {
 	const deckResult = decksValidator.validateDeckInsert(value);
 	if (result.isErr(deckResult)) {
@@ -24,6 +25,7 @@ const updateDeckValidation = validator('form', (value, c) => {
 	return deckResult.data;
 });
 
+// routes
 const decksRouter = new Hono<{ Variables: Variables }>()
 	.get('/', async (c) => {
 		const userId = c.get('userId');
