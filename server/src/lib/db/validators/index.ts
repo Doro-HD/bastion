@@ -7,7 +7,7 @@ import * as sessionsValidator from './sessionsValidator';
 import * as decksValidator from './decksValidator';
 import * as cardsValidator from './cardsValidator';
 
-type ValidateData = Record<string, ParsedFormValue | ParsedFormValue[]>;
+type ValidateData = Record<string, ParsedFormValue | ParsedFormValue[] | number>;
 
 /**
  * @description

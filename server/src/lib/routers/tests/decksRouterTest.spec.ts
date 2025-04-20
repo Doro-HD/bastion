@@ -6,8 +6,8 @@ import { crypto } from '@/index';
 import { decksHandler, usersHandler } from '@/db/handlers';
 import type { TUsersInsert } from '@/db/validators/usersValidator';
 import type { TDecksInsert } from '@/db/validators/decksValidator';
-import decksRouter from '@/routers/protected/decksRouter';
 import type { Variables } from '@/routers/protected/index';
+import decksRouter from '@/routers/protected/decksRouter';
 
 describe('Decks router', () => {
 	const user: TUsersInsert = {
@@ -22,9 +22,9 @@ describe('Decks router', () => {
 		userId: user.id
 	};
 
-	beforeAll(() => {
-		usersHandler.createUser(user);
-		decksHandler.createDeck(user.id, deck);
+	beforeAll(async () => {
+		await usersHandler.createUser(user);
+		await decksHandler.createDeck(user.id, deck);
 	});
 
 	const testDecksRouter = new Hono<{ Variables: Variables }>()

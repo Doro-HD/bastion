@@ -8,7 +8,8 @@ const cardsTable = sqliteTable('cards', {
 	name: text('name').notNull(),
 	description: text('description').notNull(),
 	difficulty: text('difficulty', { enum: ['easy', 'medium', 'hard'] }).notNull(),
-	duration: integer('duration', { mode: 'timestamp_ms' }).notNull(),
+	duration: integer('duration').notNull(),
+	durationUnitType: text('duration_unit_type', { enum: ['minutes', 'hours'] }).notNull(),
 	deckId: text('deck_id').notNull()
 });
 

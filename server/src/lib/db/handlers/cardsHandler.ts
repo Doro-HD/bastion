@@ -2,7 +2,7 @@ import { result } from '@/functional';
 import { getDB } from '@/db/drizzle';
 import type { cardsValidator } from '@/db/validators/index';
 import { cardsSchema } from '../schemas';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 const db = getDB();
 
@@ -21,6 +21,27 @@ async function findCardsByDeck(
 		});
 
 		return result.ok(cards);
+	} catch (e) {
+		return result.err(e);
+	}
+}
+
+/**
+ * @description
+ * Gets all cards related to a deck,
+ * @param deckId - The id of the deck
+ * @returns A result containing all cards related to the deck
+ */
+async function findRandomCardByDeck(
+	deckId: string
+): Promise<result.Result<cardsValidator.TCardsSelect | undefined, unknown>> {
+	try {
+		const card = await db.query.cardsTable.findFirst({
+			where: (card, { eq }) => eq(card.deckId, deckId),
+			orderBy: sql`RANDOM()`
+		});
+
+		return result.ok(card);
 	} catch (e) {
 		return result.err(e);
 	}
@@ -77,8 +98,10 @@ async function updateCard(
  * @param cardId - The id of the card to delete
  * @returns - A result containg the deleted card
  */
-async function deleteCard(cardId: string): Promise<result.Result<cardsValidator.TCardsSelect, unknown>> {
-    try {
+async function deleteCard(
+	cardId: string
+): Promise<result.Result<cardsValidator.TCardsSelect, unknown>> {
+	try {
 		const [card] = await db
 			.delete(cardsSchema.cardsTable)
 			.where(eq(cardsSchema.cardsTable.id, cardId))
@@ -90,4 +113,4 @@ async function deleteCard(cardId: string): Promise<result.Result<cardsValidator.
 	}
 }
 
-export { findCardsByDeck, createCard, updateCard, deleteCard };
+export { findCardsByDeck, findRandomCardByDeck, createCard, updateCard, deleteCard };

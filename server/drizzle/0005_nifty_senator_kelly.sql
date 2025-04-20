@@ -1,0 +1,1 @@
+ALTER TABLE `cards` ADD `duration_unit_type` text NOT NULL;

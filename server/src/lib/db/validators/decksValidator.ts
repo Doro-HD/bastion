@@ -56,6 +56,7 @@ const decksUpdateSchema = createUpdateSchema(decksSchema.decksTable).extend({
 type TDecksUpdate = z.infer<typeof decksUpdateSchema>;
 
 const decksUpdateFormDataSchema = decksUpdateSchema.omit({
+	id: true,
 	userId: true
 });
 type TDecksUpdateFormData = z.infer<typeof decksUpdateFormDataSchema>;

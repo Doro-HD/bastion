@@ -28,7 +28,8 @@ type TCardsInsertFormData = z.infer<typeof cardsInsertFormDataSchema>;
 function validateCardInsert(
 	cardData: ValidateData
 ): result.Result<TCardsInsertFormData, TCardsErrors> {
-	const schemaResult = validateSchema(cardsInsertFormDataSchema, cardData);
+	const duration = Number(cardData['duration'])
+	const schemaResult = validateSchema(cardsInsertFormDataSchema, { ...cardData, duration });
 	if (schemaResult.status === 'error') {
 		const { name, description, difficulty, duration } = schemaResult.err.format();
 		const nameError = name?._errors.join(',');
@@ -49,7 +50,7 @@ function validateCardInsert(
 
 // Update
 const cardsUpdateSchema = createUpdateSchema(cardsSchema.cardsTable)
-	.extend(baseSchemaValidation)
+	.extend({ ...baseSchemaValidation, name: baseSchemaValidation.name.optional() })
 	.omit({ id: true, deckId: true });
 type TCardsUpdate = z.infer<typeof cardsUpdateSchema>;
 
@@ -59,7 +60,8 @@ type TCardsUpdateFormData = z.infer<typeof cardsUpdateFormDataSchema>;
 function validateCardUpdate(
 	cardData: ValidateData
 ): result.Result<TCardsUpdateFormData, TCardsErrors> {
-	const schemaResult = validateSchema(cardsUpdateFormDataSchema, cardData);
+	const duration = Number(cardData['duration'])
+	const schemaResult = validateSchema(cardsUpdateFormDataSchema, { ...cardData, duration });
 	if (schemaResult.status === 'error') {
 		const { name, description, difficulty, duration } = schemaResult.err.format();
 		const nameError = name?._errors.join(',');
