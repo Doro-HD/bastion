@@ -6,9 +6,10 @@
 	import cuid2 from '@paralleldrive/cuid2';
 
 	type Props = {
+		deckId: string;
 		onCreation: () => void;
 	};
-	const { onCreation }: Props = $props();
+	const { deckId, onCreation }: Props = $props();
 
 	let cardId = cuid2.createId();
 	let formElement: HTMLFormElement | null = null;
@@ -20,6 +21,10 @@
 
 		const formData = new FormData(formElement);
 		formData.set('id', cardId);
+		formData.set('deckId', deckId);
+		formData.set('duration', '10');
+		formData.set('durationUnitType', 'minutes');
+		formData.set('difficulty', 'easy');
 
 		const response = await fetch(PUBLIC_API_URL + '/cards', {
 			method: 'POST',
