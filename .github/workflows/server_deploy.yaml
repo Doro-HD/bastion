@@ -25,7 +25,8 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - name: Build
+      - name: Produce build
+        run: pnpm --filter server install
         run: pnpm --filter server build
 
       - name: Deploy
