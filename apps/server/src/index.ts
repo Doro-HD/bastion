@@ -7,7 +7,7 @@ import { env } from './lib';
 const app = new Hono()
 	.use(
 		cors({
-			origin: env.ORIGIN,
+			origin: env.CLIENT_ORIGIN,
 			credentials: true
 		})
 	)
