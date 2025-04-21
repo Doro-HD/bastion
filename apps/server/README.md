@@ -16,3 +16,4 @@ Using cloudflare's vite plugin we can run the project locally
 For building the application we use vite
 
 ## Deploy
+For deployment we uses wrangler in our ci/cd pipeline

@@ -10,6 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: client_production
     name: Deploy
     env:
       PROJECT: client
@@ -29,6 +30,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm --filter $PROJECT install
+
+      - name: Build
+        run: pnpm --filter $PROJECT build
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3

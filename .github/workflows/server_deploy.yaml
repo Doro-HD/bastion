@@ -10,6 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: api_production
     name: Deploy
     env:
       PROJECT: server
