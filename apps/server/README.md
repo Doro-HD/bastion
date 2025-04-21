@@ -1,7 +1,7 @@
 # Bastion Server
 The server app for bastion
 
-## Stack
+# Stack
 The stack used to build this app
 
 ### Vite
