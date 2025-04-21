@@ -2,6 +2,7 @@
 The server app for bastion
 
 ## Stack
+The stack used to build this app
 
 ### Vite
 This project uses Vite for it's development, both for local development and building the final artifact

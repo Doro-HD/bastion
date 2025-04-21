@@ -10,7 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: api-production
+    environment: api_production
     name: Deploy
     env:
       VITE_DB_SYNC_URL: ${{ secrets.DB_URL }}
