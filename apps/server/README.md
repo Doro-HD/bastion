@@ -13,5 +13,6 @@ This project uses Hono as it's main framework for handling API related functiona
 Using cloudflare's vite plugin we can run the project locally
 
 ## Build
+For building the application we use vite
 
 ## Deploy
