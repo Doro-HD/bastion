@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - apps/server/**
+      - apps/client/**
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
     env:
-      PROJECT: server
+      PROJECT: client
     steps:
       - uses: actions/checkout@v4
 
@@ -38,4 +38,4 @@ jobs:
         with:
           wranglerVersion: 4.12.0
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: apps/server
+          workingDirectory: apps/client

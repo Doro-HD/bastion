@@ -12,7 +12,9 @@
 		"client:dev": "pnpm --filter client dev",
 		"build": "pnpm -r build"
 	},
-	"keywords": [],
+	"keywords": [
+		
+	],
 	"author": "",
 	"license": "ISC",
 	"packageManager": "pnpm@10.8.0",
@@ -26,5 +28,10 @@
 		"prettier": "^3.5.3",
 		"prettier-plugin-svelte": "^3.3.3",
 		"typescript-eslint": "^8.29.1"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	}
 }
