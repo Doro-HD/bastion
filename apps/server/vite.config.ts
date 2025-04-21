@@ -1,18 +1,14 @@
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-import build from '@hono/vite-build/cloudflare-workers';
-import devServer from '@hono/vite-dev-server';
+import { cloudflare } from '@cloudflare/vite-plugin'
 
 export default defineConfig({
+	build: {
+		minify: true
+	},
 	plugins: [
 		tsconfigPaths(),
-		build({
-			entry: './src/index.ts',
-			external: ['argon2']
-		}),
-		devServer({
-			entry: './src/index.ts'
-		})
+		cloudflare(),
 	]
 });
