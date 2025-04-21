@@ -4,7 +4,7 @@ import { testClient } from 'hono/testing';
 import { crypto } from '@/index';
 import { cardsHandler, decksHandler } from '@/db/handlers';
 import { cardsValidator, decksValidator } from '@/db/validators';
-import cardsRouter from '@/routers/protected/cardsRouer';
+import cardsRouter from '@/routers/protected/cardsRouter';
 
 describe('Card router', () => {
     const deck: decksValidator.TDecksInsert = {

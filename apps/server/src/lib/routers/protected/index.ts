@@ -3,7 +3,7 @@ import { getCookie } from 'hono/cookie';
 
 import { auth } from '@/index';
 import decksRouter from './decksRouter';
-import cardsRouter from './cardsRouer';
+import cardsRouter from './cardsRouter';
 
 type Variables = {
 	userId: string;
