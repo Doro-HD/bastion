@@ -10,6 +10,7 @@ This project uses Vite for it's development, both for local development and buil
 This project uses Hono as it's main framework for handling API related functionality
 
 ## Dev
+Using cloudflare's vite plugin we can run the project locally
 
 ## Build
 
