@@ -3,7 +3,7 @@ import { deleteCookie, setCookie } from 'hono/cookie';
 
 import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
-import argon2 from 'argon2';
+import argon2 from 'argon2-browser';
 
 import { sessionsHandler } from '@/db/handlers/index';
 import { result } from '@/functional/index';

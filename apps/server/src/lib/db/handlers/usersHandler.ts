@@ -1,4 +1,4 @@
-import argon2 from 'argon2';
+import argon2 from 'argon2-browser';
 
 import { result } from '@/functional';
 import { getDB } from '../drizzle';

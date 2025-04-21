@@ -11,10 +11,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
 	build: {
-		minify: true,
-	},
-	define: {
-		__dirname: JSON.stringify(__dirname)
+		minify: false,
 	},
 	plugins: [
 		tsconfigPaths(),
