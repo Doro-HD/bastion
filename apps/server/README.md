@@ -1,8 +1,2 @@
-```
-npm install
-npm run dev
-```
-
-```
-open http://localhost:3000
-```
+# Bastion Server
+The server app for bastion
