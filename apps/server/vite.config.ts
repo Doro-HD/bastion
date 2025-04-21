@@ -5,7 +5,10 @@ import { cloudflare } from '@cloudflare/vite-plugin'
 
 export default defineConfig({
 	build: {
-		minify: true
+		minify: true,
+		rollupOptions: {
+			external: ['argon2']
+		}
 	},
 	plugins: [
 		tsconfigPaths(),
