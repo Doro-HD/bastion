@@ -16,7 +16,7 @@ jobs:
       VITE_DB_SYNC_URL: ${{ secrets.DB_URL }}
       VITE_DB_AUTH_TOKEN: ${{ secrets.DB_AUTH_TOKEN }}
       VITE_DEV: false
-      VITE_CLIENT_ORIGIN: ${{ secrets.CLIENT_ORIGIN }}
+      VITE_CLIENT_ORIGIN: ${{ vars.CLIENT_ORIGIN }}
       PROJECT: server
     steps:
       - uses: actions/checkout@v4
