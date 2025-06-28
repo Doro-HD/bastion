@@ -1,7 +1,12 @@
 import APIClient from '$lib/apiClients/index';
-import type { TResult } from '$lib/result';
-import type { IAPIError } from '$lib/apiClients/types';
-import type { TValidateResponse } from './types';
+import type { TAPIResult } from '$lib/apiClients/types';
+import type {
+	TSignInRequest,
+	TSignInResponse,
+	TSignUpRequest,
+	TSignUpResponse,
+	TValidateResponse
+} from './types';
 
 class AuthClient {
 	#apiClient: APIClient;
@@ -10,11 +15,19 @@ class AuthClient {
 		this.#apiClient = new APIClient('/auth');
 	}
 
-	async signUp() {}
+	async signUp(user: TSignUpRequest): Promise<TAPIResult<TSignUpRequest>> {
+		return this.#apiClient.post<TSignUpResponse>({
+			body: { ...user }
+		});
+	}
 
-	async signIn() {}
+	async signIn(request: TSignInRequest): Promise<TAPIResult<TSignInResponse>> {
+		return this.#apiClient.post({
+			body: { ...request }
+		});
+	}
 
-	async validate(): Promise<TResult<TValidateResponse, IAPIError>> {
+	async validate(): Promise<TAPIResult<TValidateResponse>> {
 		return this.#apiClient.get<TValidateResponse>({ path: '/validate' });
 	}
 }

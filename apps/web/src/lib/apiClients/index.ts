@@ -1,7 +1,6 @@
 import { PUBLIC_API_URL } from '$env/static/public';
-import type { TResult } from '$lib/result';
 import result from '$lib/result';
-import type { IAPIError, IAPIOptions, TPath, TGetDeleteOptions, IPostPutOptions } from './types';
+import type { TAPIResult, IAPIOptions, TPath, TGetDeleteOptions, IPostPutOptions } from './types';
 
 class APIClient {
 	#url: string;
@@ -13,10 +12,10 @@ class APIClient {
 		this.#url = `${PUBLIC_API_URL}${basePath}`;
 	}
 
-	async #apiCall<T>(options: IAPIOptions): Promise<TResult<T, IAPIError>> {
+	async #apiCall<T>(options: IAPIOptions): Promise<TAPIResult<T>> {
 		let query = null;
 		if (options.query) {
-			const pairs = Object.entries(options.query).map((key, value) => `${key}=${value}`);
+			const pairs = Object.entries(options.query).map(([key, value]) => `${key}=${value}`);
 			query = `?${pairs.join('&')}`;
 		}
 
@@ -28,40 +27,50 @@ class APIClient {
 					body: JSON.stringify(options.body)
 				}
 			);
-			if (res.status !== 200) {
-				return result.err({ message: '' });
+
+			switch (res.status) {
+				case 200:
+					const data = await res.json();
+
+					return result.ok({ status: 'ok', data });
+				case 400:
+					return result.ok({ status: 'bad request' });
+				case 401:
+					return result.ok({ status: 'unauthorized' });
+				case 404:
+					return result.ok({ status: 'not found' });
+				case 500:
+					return result.ok({ status: 'server error' });
+				default:
+					return result.err({ status: 'client error' });
 			}
-
-			const data: T = await res.json();
-
-			return result.ok(data);
 		} catch (e) {
-			return result.err({ message: '' });
+			return result.err({ status: 'client error' });
 		}
 	}
 
-	async get<T>(options?: TGetDeleteOptions): Promise<TResult<T, IAPIError>> {
+	async get<T>(options?: TGetDeleteOptions): Promise<TAPIResult<T>> {
 		return this.#apiCall<T>({
 			method: 'get',
 			...options
 		});
 	}
 
-	async post(options: IPostPutOptions) {
-		return this.#apiCall({
+	async post<T>(options: IPostPutOptions): Promise<TAPIResult<T>> {
+		return this.#apiCall<T>({
 			method: 'post',
 			...options
 		});
 	}
 
-	async put(options: IPostPutOptions) {
+	async put<T>(options: IPostPutOptions): Promise<TAPIResult<T>> {
 		return this.#apiCall({
 			method: 'put',
 			...options
 		});
 	}
 
-	async delete(options?: TGetDeleteOptions) {
+	async delete<T>(options?: TGetDeleteOptions): Promise<TAPIResult<T>> {
 		return this.#apiCall({
 			method: 'delete',
 			...options

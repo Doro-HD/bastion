@@ -24,3 +24,4 @@ function getAuthStore(): AuthStore {
 }
 
 export default getAuthStore;
+export { AuthStore };
