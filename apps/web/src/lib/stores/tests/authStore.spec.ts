@@ -6,7 +6,7 @@ import type { IAPIUser } from '$lib/apiClients/authClient/types';
 
 describe('Auth store', () => {
 	beforeEach(() => {
-		authStore = getAuthStore();
+		authStore = new AuthStore();
 	});
 
 	let authStore: AuthStore;
