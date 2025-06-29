@@ -24,3 +24,6 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+
+      - name: Run tests
+        run: pnpm --filter web test
