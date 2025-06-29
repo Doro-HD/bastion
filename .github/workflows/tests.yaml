@@ -25,5 +25,8 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Install dependencies
+        run: pnpm --filter web install
+
       - name: Run tests
         run: pnpm --filter web test
