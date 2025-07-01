@@ -28,5 +28,8 @@ jobs:
       - name: Install dependencies
         run: pnpm --filter web install --frozen-lockfile
 
+      - name: Install browser
+        run: pnpm --filter web exec playwright install
+
       - name: Run tests
         run: pnpm --filter web test
