@@ -42,6 +42,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@doro-hd/ts_result':
+        specifier: ^1.0.0
+        version: 1.0.0
       hono:
         specifier: ^4.7.11
         version: 4.8.0
@@ -51,6 +54,10 @@ importers:
         version: 4.20.3(@cloudflare/workers-types@4.20250619.0)
 
   apps/web:
+    dependencies:
+      '@doro-hd/ts_result':
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
@@ -192,6 +199,9 @@ packages:
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
+
+  '@doro-hd/ts_result@1.0.0':
+    resolution: {integrity: sha512-CGbvhjN2RIu6G8dK1gCglpOCBrfT49VzF6ODUuC6DHnl4j/6t0JPz2DbKcQTveaYRpPCecskFU8BNOkgmV5FYA==, tarball: https://npm.pkg.github.com/download/@doro-hd/ts_result/1.0.0/8f507f8fa0fb6ab21f83ee8feada88842f155eee}
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
@@ -2257,6 +2267,10 @@ snapshots:
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+
+  '@doro-hd/ts_result@1.0.0':
+    dependencies:
+      typescript: 5.8.3
 
   '@emnapi/runtime@1.4.3':
     dependencies:

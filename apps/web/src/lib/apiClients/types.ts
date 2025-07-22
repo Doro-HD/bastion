@@ -1,4 +1,4 @@
-import type { TResult } from '$lib/result';
+import { result } from '@doro-hd/ts_result';
 
 interface IAPIResponseOk<T> {
 	status: 'ok';
@@ -36,8 +36,12 @@ interface IClientError {
  * @description
  * A helper type so all api client functions return the same type
  */
-type TAPIResult<T> = TResult<TAPIResponseUnion<T>, IClientError>;
+type TAPIResult<T> = result.TResult<TAPIResponseUnion<T>, IClientError>;
 
+/**
+ * @description
+ * A string that must start with '/'
+*/
 type TPath = `/${string}`;
 type TQuery = Record<string, string>;
 type TBody = Record<string, string>;
