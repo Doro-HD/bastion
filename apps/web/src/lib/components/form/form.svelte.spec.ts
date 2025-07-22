@@ -7,6 +7,7 @@ import { createRawSnippet } from 'svelte';
 
 it('Should have a form element', async () => {
 	render(Form, {
+		'aria-label': 'foo',
 		onsubmit: () => {},
 		children: createRawSnippet(() => {
 			return {
@@ -24,6 +25,7 @@ it('Should call submit function via child', async () => {
 	// implicit children render test
 	const spy = vi.fn();
 	render(Form, {
+		'aria-label': 'foo',
 		onsubmit: spy,
 		children: createRawSnippet(() => {
 			return {

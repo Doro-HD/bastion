@@ -3,12 +3,13 @@
 
 	interface IProps {
 		id?: string;
+		'aria-label': string;
 		onsubmit: () => void;
 		children: Snippet;
 	}
-	const { id, onsubmit, children }: IProps = $props();
+	const { id, 'aria-label': ariaLabel, onsubmit, children }: IProps = $props();
 </script>
 
-<form {id} {onsubmit} aria-label="Foo">
+<form {id} {onsubmit} aria-label={ariaLabel}>
 	{@render children()}
 </form>
