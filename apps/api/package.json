@@ -1,14 +1,26 @@
 {
 	"name": "api",
+	"type": "module",
 	"scripts": {
 		"dev": "wrangler dev",
+		"test": "vitest watch",
 		"deploy": "wrangler deploy --minify",
 		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
 	},
 	"dependencies": {
-		"hono": "^4.7.11"
+		"@hono/zod-validator": "^0.7.0",
+		"@libsql/client": "^0.15.10",
+		"drizzle-orm": "^0.44.2",
+		"hono": "^4.7.11",
+		"zod": "^3.25.76"
 	},
 	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.50",
+		"@cloudflare/workers-types": "^4.20250719.0",
+		"@faker-js/faker": "^9.8.0",
+		"drizzle-kit": "^0.31.4",
+		"vite-tsconfig-paths": "^5.1.4",
+		"vitest": "^3.2.4",
 		"wrangler": "^4.4.0"
 	}
 }
