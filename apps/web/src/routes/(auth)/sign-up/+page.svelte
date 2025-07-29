@@ -1,4 +1,5 @@
 <script lang="ts">
+	import * as Card from '$lib/components/card';
 	import Form from '$lib/components/form';
 
 	function signUp() {
@@ -6,17 +7,17 @@
 	}
 </script>
 
-<div class="w-82 border-2 p-2">
-	<div>
-		<Form id="sign-up" onsubmit={signUp}>
+<Card.Root>
+	<Card.Content>
+		<Form id="sign-up" aria-label="sign-up" onsubmit={signUp}>
 			<div>
 				<label for="username">Username</label>
 				<input id="username" type="text" name="username" placeholder="username" />
 			</div>
 		</Form>
-	</div>
+	</Card.Content>
 
-	<div class="flex justify-end">
+	<Card.Actions>
 		<button type="submit" form="sign-up">Submit</button>
-	</div>
-</div>
+	</Card.Actions>
+</Card.Root>

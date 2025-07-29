@@ -1,5 +1,5 @@
 import { PUBLIC_API_URL } from '$env/static/public';
-import result from '$lib/result';
+import { result } from '@doro-hd/ts_result';
 import type { TAPIResult, IAPIOptions, TPath, TGetDeleteOptions, IPostPutOptions } from './types';
 
 class APIClient {
@@ -30,6 +30,7 @@ class APIClient {
 
 			switch (res.status) {
 				case 200:
+				case 201:
 					const data = await res.json();
 
 					return result.ok({ status: 'ok', data });
