@@ -1,5 +1,4 @@
-import APIClient from '$lib/apiClients/index';
-import type { TAPIResult } from '$lib/apiClients/types';
+import APIClient from '@doro-hd/api-client';
 import type {
 	TSignInRequest,
 	TSignInResponse,
@@ -15,20 +14,24 @@ class AuthClient {
 		this.#apiClient = new APIClient('/auth');
 	}
 
-	async signUp(user: TSignUpRequest): Promise<TAPIResult<TSignUpRequest>> {
+	async signUp(request: TSignUpRequest) {
 		return this.#apiClient.post<TSignUpResponse>({
-			body: { ...user }
-		});
-	}
-
-	async signIn(request: TSignInRequest): Promise<TAPIResult<TSignInResponse>> {
-		return this.#apiClient.post({
+			path: '/sign-up',
 			body: { ...request }
 		});
 	}
 
-	async validate(): Promise<TAPIResult<TValidateResponse>> {
-		return this.#apiClient.get<TValidateResponse>({ path: '/validate' });
+	async signIn(request: TSignInRequest) {
+		return this.#apiClient.post<TSignInResponse>({
+			path: '/sign-in',
+			body: { ...request }
+		});
+	}
+
+	async validate() {
+		return this.#apiClient.get<TValidateResponse>({
+			path: '/validate'
+		});
 	}
 }
 

@@ -1,14 +1,13 @@
 import type { ClientInit } from '@sveltejs/kit';
 
 import AuthClient from '$lib/apiClients/authClient';
-import getAuthStore from '$lib/stores/authStore';
-import result from '$lib/result';
+import getAuthStore from '$lib/stores/authStore.svelte';
 
 export const init: ClientInit = async () => {
 	const authClient = new AuthClient();
 
 	const validateResult = await authClient.validate();
-	if (result.isOk(validateResult)) {
+	if (validateResult.name === 'ok') {
 		const data = validateResult.data;
 		const authStore = getAuthStore();
 

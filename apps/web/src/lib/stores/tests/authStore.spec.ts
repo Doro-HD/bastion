@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { faker } from '@faker-js/faker';
 
-import getAuthStore, { AuthStore } from '$lib/stores/authStore.svelte';
+import { AuthStore } from '$lib/stores/authStore.svelte';
 import type { IAPIUser } from '$lib/apiClients/authClient/types';
 
 describe('Auth store', () => {
 	beforeEach(() => {
-		authStore = getAuthStore();
+		authStore = new AuthStore();
 	});
 
 	let authStore: AuthStore;
@@ -15,7 +15,7 @@ describe('Auth store', () => {
 		const user: IAPIUser = { username: faker.internet.username() };
 		authStore.setUser(user);
 
-		expect(authStore.user).toBe(user);
+		expect(authStore.user).toStrictEqual(user);
 	});
 
 	it('Should remove the user state', () => {

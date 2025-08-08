@@ -1,2 +1,1 @@
-<a href="/foo">Foo</a>
-<a href="/bar">Bar</a>
+<h1>Welcome to Bastion</h1>
