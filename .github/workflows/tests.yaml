@@ -7,7 +7,7 @@ on:
 
 jobs:
   web-client:
-    name: Client tests
+    name: Web client tests
     runs-on: ubuntu-latest
 
     steps:

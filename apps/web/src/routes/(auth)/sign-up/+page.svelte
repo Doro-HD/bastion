@@ -5,7 +5,7 @@
 	let username = $state('');
 
 	async function signUp() {
-		const _isSuccess = authService.signUp({ username });
+		authService.signUp({ username });
 	}
 </script>
 
