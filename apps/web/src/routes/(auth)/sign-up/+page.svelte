@@ -1,9 +1,11 @@
 <script lang="ts">
-	import * as Card from '$lib/components/card';
-	import Form from '$lib/components/form';
+	import { Card, Form } from '$lib/components';
+	import authService from '$lib/service/authService';
 
-	function signUp() {
-		console.log('Submit');
+	let username = $state('');
+
+	async function signUp() {
+		const _isSuccess = authService.signUp({ username });
 	}
 </script>
 
@@ -12,7 +14,13 @@
 		<Form id="sign-up" aria-label="sign-up" onsubmit={signUp}>
 			<div>
 				<label for="username">Username</label>
-				<input id="username" type="text" name="username" placeholder="username" />
+				<input
+					id="username"
+					type="text"
+					name="username"
+					placeholder="username"
+					bind:value={username}
+				/>
 			</div>
 		</Form>
 	</Card.Content>
