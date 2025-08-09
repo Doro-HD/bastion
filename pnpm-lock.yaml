@@ -45,9 +45,6 @@ importers:
 
   apps/api:
     dependencies:
-      '@doro-hd/ts_result':
-        specifier: ^1.0.0
-        version: 1.0.0
       '@hono/zod-validator':
         specifier: ^0.7.0
         version: 0.7.2(hono@4.9.0)(zod@3.25.76)
@@ -283,9 +280,6 @@ packages:
   '@csstools/css-tokenizer@3.0.4':
     resolution: {integrity: sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==}
     engines: {node: '>=18'}
-
-  '@doro-hd/ts_result@1.0.0':
-    resolution: {integrity: sha512-CGbvhjN2RIu6G8dK1gCglpOCBrfT49VzF6ODUuC6DHnl4j/6t0JPz2DbKcQTveaYRpPCecskFU8BNOkgmV5FYA==, tarball: https://npm.pkg.github.com/download/@doro-hd/ts_result/1.0.0/8f507f8fa0fb6ab21f83ee8feada88842f155eee}
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
@@ -2990,10 +2984,6 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
 
   '@csstools/css-tokenizer@3.0.4': {}
-
-  '@doro-hd/ts_result@1.0.0':
-    dependencies:
-      typescript: 5.9.2
 
   '@drizzle-team/brocli@0.10.2': {}
 

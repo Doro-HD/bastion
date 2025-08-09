@@ -8,7 +8,7 @@ on:
 
 jobs:
   web-client:
-    name: Web client tests
+    name: Web client
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +33,7 @@ jobs:
         run: pnpm --filter web test
 
   api:
-    name: API tests
+    name: API
     runs-on: ubuntu-latest
 
     steps:
