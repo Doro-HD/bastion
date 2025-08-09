@@ -52,7 +52,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm --filter web install --frozen-lockfile
+        run: pnpm --filter api install --frozen-lockfile
 
       - name: Run tests
         run: pnpm --filter api test

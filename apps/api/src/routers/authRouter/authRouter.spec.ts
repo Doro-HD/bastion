@@ -8,10 +8,10 @@ import result from '@/result';
 
 const basePath = '/auth';
 
-afterEach(() => vi.clearAllMocks())
+afterEach(() => vi.clearAllMocks());
 
 describe('Sign up', () => {
-	const path = `${basePath}/sign-up`
+	const path = `${basePath}/sign-up`;
 
 	it('Should succeed with correct data', async () => {
 		const createUserSpy = vi
@@ -31,15 +31,13 @@ describe('Sign up', () => {
 			env
 		);
 
-
 		expect(res.status).toBe(201);
 
-		const jsonData: { id: string, username: string } = await res.json()
+		const jsonData: { id: string; username: string } = await res.json();
 
 		// value expectations
-		expect(jsonData.id).toBeTruthy()
-		expect(jsonData.username).toBe(data.username)
-
+		expect(jsonData.id).toBeTruthy();
+		expect(jsonData.username).toBe(data.username);
 
 		expect(createUserSpy).toHaveBeenCalledOnce();
 		expect(createUserSpy).toBeCalledWith(data);

@@ -4,12 +4,12 @@
  */
 interface OkResponse<T> {
 	/**
-	* @property An ok response can only be a succesful one eg. 200, 201
-	*/
+	 * @property An ok response can only be a succesful one eg. 200, 201
+	 */
 	status: 200 | 201;
 	/**
-	* @property The requested data
-	*/
+	 * @property The requested data
+	 */
 	data: T;
 }
 
@@ -27,7 +27,7 @@ interface ErrResponse {
 	 * @property Details about the error
 	 */
 	err: {
-		reason: string
+		reason: string;
 	};
 }
 

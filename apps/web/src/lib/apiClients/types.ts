@@ -41,7 +41,7 @@ type TAPIResult<T> = result.TResult<TAPIResponseUnion<T>, IClientError>;
 /**
  * @description
  * A string that must start with '/'
-*/
+ */
 type TPath = `/${string}`;
 type TQuery = Record<string, string>;
 type TBody = Record<string, string>;

@@ -19,12 +19,15 @@ const publicrouter = new Hono<IAuthENV>()
 
 		const createResult = await userHandler.createUser(data);
 		if (result.isErr(createResult) || !createResult.data) {
-			const errResponse: ErrResponse = { status: 500, err: { reason: 'Could not create new user' } }
+			const errResponse: ErrResponse = {
+				status: 500,
+				err: { reason: 'Could not create new user' }
+			};
 
 			return c.json(errResponse.err, errResponse.status);
 		}
 
-		const okResponse: OkResponse<TUserSelect> = { status: 201, data: createResult.data }
+		const okResponse: OkResponse<TUserSelect> = { status: 201, data: createResult.data };
 
 		return c.json(okResponse.data, okResponse.status);
 	})

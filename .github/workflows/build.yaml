@@ -30,7 +30,7 @@ jobs:
         run: pnpm --filter api install --frozen-lockfile
 
       - name: build
-        run: pnpm --filter api bulid
+        run: pnpm --filter api build
 
   web:
     name: Web client
@@ -55,4 +55,4 @@ jobs:
         run: pnpm --filter web install --frozen-lockfile
 
       - name: build
-        run: pnpm bulid
+        run: pnpm build
