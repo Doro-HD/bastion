@@ -1,5 +1,5 @@
-declare module 'cloudflare:test' {
+declare module "cloudflare:test" {
 	// ProvidedEnv controls the type of `import("cloudflare:test").env`
-	// @ts-ignore - Can be empty for now
-	interface ProvidedEnv extends Env {}
+	// @ts-expect-error - Can be empty for now
+	interface ProvidedEnv extends Env { }
 }
