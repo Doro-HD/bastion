@@ -17,7 +17,7 @@ function createValidator<TSchema extends z.$ZodType, TTarget extends keyof Valid
 	return zValidator(target, schema, (result, c) => {
 		if (!result.success) {
 			const prettyError = z.prettifyError(result.error);
-			const errResponse: ErrResponse = { status: 400, err: { reason: prettyError } }
+			const errResponse: ErrResponse = { status: 400, err: { reason: prettyError } };
 
 			return c.json(errResponse.err, errResponse.status);
 		}
