@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 
 import app from '@/index';
 import UserHandler from '@/db/users/handler';
-import result from '@/result';
+import { result } from '@doro-hd/result';
 
 const basePath = '/auth';
 

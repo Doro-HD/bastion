@@ -1,7 +1,7 @@
 import connect, { TConnection } from '@/db/index';
 import { TUserSelect, TUserInsert, TUserTable } from './types';
 import { userTable } from './schema';
-import result, { TResult } from '@/result';
+import { result } from '@doro-hd/result';
 
 class UserHandler {
 	#client: TConnection;
@@ -12,7 +12,7 @@ class UserHandler {
 		this.#table = userTable;
 	}
 
-	async createUser(newUser: TUserInsert): Promise<TResult<TUserSelect | undefined, string>> {
+	async createUser(newUser: TUserInsert): Promise<result.TResult<TUserSelect | undefined, string>> {
 		try {
 			const id = crypto.randomUUID();
 			const users = await this.#client
@@ -28,7 +28,7 @@ class UserHandler {
 
 	async findUserByUsername(
 		username: TUserSelect['username']
-	): Promise<TResult<TUserSelect | undefined, string>> {
+	): Promise<result.TResult<TUserSelect | undefined, string>> {
 		try {
 			const user = await this.#client.query.userTable.findFirst({
 				where: (user, { eq }) => eq(user.username, username)

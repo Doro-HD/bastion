@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
 import { z } from 'zod/v4';
+import { result } from '@doro-hd/result';
 
 import { IAuthENV } from './index';
 import { createValidator } from '@/middleware/validator';
-import result from '@/result';
-import { ErrResponse, OkResponse } from '@/routers/types';
+import { okResponse, errResponse } from '@/routers/types';
 import { TUserSelect } from '@/db/users/types';
 
 const signUpSchema = z.object({
@@ -19,12 +19,12 @@ const publicrouter = new Hono<IAuthENV>()
 
 		const createResult = await userHandler.createUser(data);
 		if (result.isErr(createResult) || !createResult.data) {
-			const errResponse: ErrResponse = { status: 500, err: { reason: 'Could not create new user' } }
+			const errResponse = errResponse(500, { reason: 'Could not create the new user' })
 
 			return c.json(errResponse.err, errResponse.status);
 		}
 
-		const okResponse: OkResponse<TUserSelect> = { status: 201, data: createResult.data }
+		const okResponse = okResponse(201, createResult.data)
 
 		return c.json(okResponse.data, okResponse.status);
 	})

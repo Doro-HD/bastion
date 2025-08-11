@@ -31,4 +31,18 @@ interface ErrResponse {
 	};
 }
 
-export { OkResponse, ErrResponse };
+function okResponse<T>(status: OkResponse<T>['status'], data: T): OkResponse<T> {
+	return {
+		status,
+		data
+	}
+}
+
+function errResponse(status: ErrResponse['status'], err: ErrResponse['err']): ErrResponse {
+	return {
+		status,
+		err
+	}
+}
+
+export { okResponse, errResponse };

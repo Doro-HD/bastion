@@ -45,6 +45,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@doro-hd/result':
+        specifier: jsr:^1.1.0
+        version: '@jsr/doro-hd__result@1.1.0'
       '@hono/zod-validator':
         specifier: ^0.7.0
         version: 0.7.0(hono@4.8.0)(zod@3.25.76)
@@ -54,9 +57,6 @@ importers:
       drizzle-orm:
         specifier: ^0.44.2
         version: 0.44.2(@cloudflare/workers-types@4.20250719.0)(@libsql/client@0.15.10)
-      '@doro-hd/ts_result':
-        specifier: ^1.0.0
-        version: 1.0.0
       hono:
         specifier: ^4.7.11
         version: 4.8.0
@@ -87,10 +87,6 @@ importers:
         version: 4.20.3(@cloudflare/workers-types@4.20250719.0)
 
   apps/web:
-    dependencies:
-      '@doro-hd/ts_result':
-        specifier: ^1.0.0
-        version: 1.0.0
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
@@ -273,13 +269,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-<<<<<<< HEAD
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
-=======
-  '@doro-hd/ts_result@1.0.0':
-    resolution: {integrity: sha512-CGbvhjN2RIu6G8dK1gCglpOCBrfT49VzF6ODUuC6DHnl4j/6t0JPz2DbKcQTveaYRpPCecskFU8BNOkgmV5FYA==, tarball: https://npm.pkg.github.com/download/@doro-hd/ts_result/1.0.0/8f507f8fa0fb6ab21f83ee8feada88842f155eee}
->>>>>>> f993560bb28a0a603f62ae0f6bed345e9b37580c
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
@@ -938,6 +929,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
+  '@jsr/doro-hd__result@1.1.0':
+    resolution: {integrity: sha512-95yUOgepDYPkCdPvg8OBEhDouhPLAWNCLaH8jHdvT/CE0EP/qChURmmCx+ZWmu21+Cvl9f4orGc5aRHKBgOKGA==, tarball: https://npm.jsr.io/~/11/@jsr/doro-hd__result/1.1.0.tgz}
 
   '@libsql/client@0.15.10':
     resolution: {integrity: sha512-J9cJQwrgH92JlPBYjUGxPIH5G9z3j/V/aPnQvcmmCgjatdVb/f7bzK3yNq15Phc+gVuKMwox3toXL+58qUMylg==}
@@ -2822,13 +2816,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-<<<<<<< HEAD
   '@drizzle-team/brocli@0.10.2': {}
-=======
-  '@doro-hd/ts_result@1.0.0':
-    dependencies:
-      typescript: 5.8.3
->>>>>>> f993560bb28a0a603f62ae0f6bed345e9b37580c
 
   '@emnapi/runtime@1.4.3':
     dependencies:
@@ -3235,6 +3223,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@jsr/doro-hd__result@1.1.0': {}
 
   '@libsql/client@0.15.10':
     dependencies:
