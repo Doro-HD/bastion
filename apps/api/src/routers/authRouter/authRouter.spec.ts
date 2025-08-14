@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker';
 import app from '@/index';
 import UserHandler from '@/db/users/handler';
 import { result } from '@doro-hd/result';
+import SessionHandler from '@/db/sessions/handler';
 
 const basePath = '/auth';
 
@@ -145,28 +146,46 @@ describe('Validate', () => {
 	const path = `${basePath}/validate`;
 
 	it('Should succed with correct data', async () => {
+		const findUserSpy = vi
+			.spyOn(SessionHandler.prototype, 'findUserFromSession')
+			.mockImplementation(async () => result.ok({ status: 'some', data: { id: faker.string.uuid(), username: faker.internet.username() } }));
+		const token = 'foo.bar';
 		const res = await app.request(
 			path,
 			{
 				method: 'get',
 				headers: {
-					Cookie: 'auth-token=foo'
+					Cookie: `auth-token=${token}`
 				}
 			},
 			env
 		);
 
 		expect(res.status).toBe(200);
+		expect(findUserSpy).toHaveBeenCalledExactlyOnceWith(token)
 	});
 
-	it('Should fail with unauthorized, 401', async () => {
+	it('Should fail with unauthorized, 401 when an invalid token is provided', async () => {
+		const token = 'foobar';
 		const res = await app.request(
 			path,
 			{
 				method: 'get',
 				headers: {
-					Cookie: 'auth-token=foo'
+					Cookie: `auth-token=${token}`
 				}
+			},
+			env
+		);
+
+		expect(res.status).toBe(401);
+	});
+
+	it('Should fail with unauthorized, 401 when no token is provided', async () => {
+		const res = await app.request(
+			path,
+			{
+				method: 'get',
 			},
 			env
 		);

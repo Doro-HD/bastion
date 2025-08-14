@@ -106,10 +106,15 @@ class SessionHandler {
 			return sessionResult;
 		}
 
+		if (sessionResult.data.status === 'none') {
+			return result.ok(option.none())
+		}
+		const data = sessionResult.data.data
+
 		try {
 			const session = await this.#client.query.sessionTable.findFirst({
 				columns: {},
-				where: (session, { eq }) => eq(session.id, sessionResult.data.id),
+				where: (session, { eq }) => eq(session.id, data.id),
 				with: {
 					user: true
 				}
@@ -152,28 +157,30 @@ class SessionHandler {
 	 * @param token - The session token to validate
 	 * @returns A result containing the session
 	 */
-	async #validateSession(token: string): Promise<result.TResult<TSessionSelect, string>> {
+	async #validateSession(token: string): Promise<result.TResult<option.TOption<TSessionSelect>, unknown>> {
+		// the authorization vaidator handles the length of the token when split on a dot
 		const tokenParts = token.split('.');
-		if (tokenParts.length !== 2) {
-			return result.err('Invalid token');
-		}
 
 		const sessionId = tokenParts[0];
 		const sessionSecret = tokenParts[1];
 
 		const sessionResult = await this.findSession(sessionId);
-		if (result.isErr(sessionResult) || sessionResult.data.status === 'none') {
-			return result.err('Could not find token');
+		if (result.isErr(sessionResult)) {
+			return sessionResult
+		}
+
+		if (sessionResult.data.status === 'none') {
+			return sessionResult;
 		}
 		const data = sessionResult.data.data;
 
 		const tokenSecretHash = await hashSecret(sessionSecret);
 		const validSecret = constantTimeEqual(tokenSecretHash, data.secretHash);
 		if (!validSecret) {
-			return result.err('Invalid token');
+			return result.err('Expired token');
 		}
 
-		return result.ok(data);
+		return result.ok(option.some(data));
 	}
 }
 
