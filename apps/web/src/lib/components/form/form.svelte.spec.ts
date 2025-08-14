@@ -1,6 +1,5 @@
 import { expect, it, vi } from 'vitest';
-import { render } from 'vitest-browser-svelte';
-import { page } from '@vitest/browser/context';
+import { fireEvent, render, screen } from '@testing-library/svelte';
 
 import Form from './Form.svelte';
 import { createRawSnippet } from 'svelte';
@@ -16,9 +15,9 @@ it('Should have a form element', async () => {
 		})
 	});
 
-	const form = page.getByRole('form');
+	const form = screen.getByRole('form');
 
-	await expect.element(form).toBeInTheDocument();
+	expect(form).toBeInTheDocument();
 });
 
 it('Should call submit function via child', async () => {
@@ -34,8 +33,8 @@ it('Should call submit function via child', async () => {
 		})
 	});
 
-	const button = page.getByRole('button');
-	await button.click();
+	const button = screen.getByRole('button');
+	await fireEvent.click(button);
 
 	expect(spy).toHaveBeenCalledOnce();
 });

@@ -4,13 +4,17 @@ import { result } from '@doro-hd/result';
 
 import { IAuthENV } from './index';
 import { createValidator } from '@/middleware/validator';
-import { okResponse, errResponse } from '@/routers/types';
-import { TUserSelect } from '@/db/users/types';
+import { errResponse, okResponse } from '@/routers/types';
 
 const signUpSchema = z.object({
 	username: z.string().min(5).max(25)
 });
 const signUpValidator = createValidator('json', signUpSchema);
+
+const signInSchema = z.object({
+	username: z.string().min(5).max(25)
+});
+const signInValidator = createValidator('json', signInSchema);
 
 const publicrouter = new Hono<IAuthENV>()
 	.post('/sign-up', signUpValidator, async (c) => {
@@ -19,17 +23,40 @@ const publicrouter = new Hono<IAuthENV>()
 
 		const createResult = await userHandler.createUser(data);
 		if (result.isErr(createResult) || !createResult.data) {
-			const errResponse = errResponse(500, { reason: 'Could not create the new user' })
+			const errRes = errResponse(500, {
+				reason: 'Could not create the new user'
+			});
 
-			return c.json(errResponse.err, errResponse.status);
+			return c.json(errRes.err, errRes.status);
 		}
 
-		const okResponse = okResponse(201, createResult.data)
+		const okRes = okResponse(201, createResult.data);
 
-		return c.json(okResponse.data, okResponse.status);
+		return c.json(okRes.data, okRes.status);
 	})
-	.post('/sign-in', (c) => {
-		return c.text('Not implemented', 500);
+	.post('/sign-in', signInValidator, async (c) => {
+		const data = c.req.valid('json');
+		const userHandler = c.get('userHandler');
+
+		const searchResult = await userHandler.findUserByUsername(data.username);
+
+		if (result.isErr(searchResult)) {
+			const errRes = errResponse(500, {
+				reason: 'Could not find user'
+			});
+
+			return c.json(errRes.err, errRes.status);
+		} else if (!searchResult.data) {
+			const errRes = errResponse(404, {
+				reason: 'Could not find the requested user'
+			});
+
+			return c.json(errRes.err, errRes.status);
+		}
+
+		const okRes = okResponse(200, searchResult.data);
+
+		return c.json(okRes.data, okRes.status);
 	});
 
 export default publicrouter;
