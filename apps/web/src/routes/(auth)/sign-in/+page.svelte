@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as Card from '$lib/components/card';
 	import Form from '$lib/components/form';
+
 	import authService from '$lib/service/authService';
 
 	let username = $state('');

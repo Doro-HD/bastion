@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"api:test": "pnpm --filter api test"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.3.1",
@@ -24,6 +25,7 @@
 		]
 	},
 	"dependencies": {
+		"drizzle-zod": "^0.8.2",
 		"typescript-eslint": "^8.39.0"
 	}
 }
