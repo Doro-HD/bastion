@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { z } from 'zod/v4';
 import { result } from '@doro-hd/result';
 
-import { IAuthENV } from './index';
+import { IAuthENV, injectUserHandler } from './index';
 import { createValidator } from '@/middleware/validator';
 import { errResponse, okResponse } from '@/routers/types';
 
@@ -17,6 +17,7 @@ const signInSchema = z.object({
 const signInValidator = createValidator('json', signInSchema);
 
 const publicrouter = new Hono<IAuthENV>()
+	.use((c, next) => injectUserHandler(c, next))
 	.post('/sign-up', signUpValidator, async (c) => {
 		const data = c.req.valid('json');
 		const userHandler = c.get('userHandler');

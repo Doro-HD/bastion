@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
-import authRouter from './authRouter';
+import publicRouter from './publicRouter';
+import protectedRouter from './protectedRouter';
 
 interface IENV {
 	Bindings: {
@@ -8,7 +9,7 @@ interface IENV {
 	};
 }
 
-const app = new Hono<IENV>().route('/auth', authRouter);
+const app = new Hono<IENV>().route('/', publicRouter).route('/', protectedRouter);
 
 export default app;
 export { IENV };

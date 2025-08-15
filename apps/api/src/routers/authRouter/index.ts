@@ -1,9 +1,8 @@
-import { Hono } from 'hono';
-
 import publicrouter from './publicRouter';
 import protectedRouter from './protectedRouter';
 import UserHandler from '@/db/users/handler';
 import { IENV } from '@/routers/index';
+import { createMiddleware } from 'hono/factory';
 
 interface IAuthENV extends IENV {
 	Variables: {
@@ -11,15 +10,17 @@ interface IAuthENV extends IENV {
 	};
 }
 
-const authRouter = new Hono<IAuthENV>()
-	.use(async (c, next) => {
-		const userHandler = new UserHandler(c.env.DB_URL, c.env.DB_AUTH_TOKEN);
-		c.set('userHandler', userHandler);
+const injectUserHandler = createMiddleware<IAuthENV>(async (c, next) => {
+	const userHandler = new UserHandler(c.env.DB_URL, c.env.DB_AUTH_TOKEN)
+	c.set('userHandler', userHandler)
 
-		await next();
-	})
-	.route('/', publicrouter)
-	.route('/', protectedRouter);
+	await next()
+})
 
-export default authRouter;
-export { IAuthENV };
+const routers = {
+	path: '/auth' as const,
+	publicrouter,
+	protectedRouter
+}
+
+export { IAuthENV, routers, injectUserHandler };
