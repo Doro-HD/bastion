@@ -121,9 +121,9 @@ describe('Sign in', () => {
 	});
 
 	it('Should fail with user not found, 404', async () => {
-		const signInSpy = vi
-			.spyOn(UserHandler.prototype, 'findUserByUsername')
-			.mockImplementation(async () => result.ok(undefined));
+		vi.spyOn(UserHandler.prototype, 'findUserByUsername').mockImplementation(async () =>
+			result.ok(undefined)
+		);
 		const res = await app.request(
 			path,
 			{
