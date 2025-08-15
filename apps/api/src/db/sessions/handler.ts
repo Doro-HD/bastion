@@ -107,9 +107,9 @@ class SessionHandler {
 		}
 
 		if (sessionResult.data.status === 'none') {
-			return result.ok(option.none())
+			return result.ok(option.none());
 		}
-		const data = sessionResult.data.data
+		const data = sessionResult.data.data;
 
 		try {
 			const session = await this.#client.query.sessionTable.findFirst({
@@ -157,7 +157,9 @@ class SessionHandler {
 	 * @param token - The session token to validate
 	 * @returns A result containing the session
 	 */
-	async #validateSession(token: string): Promise<result.TResult<option.TOption<TSessionSelect>, unknown>> {
+	async #validateSession(
+		token: string
+	): Promise<result.TResult<option.TOption<TSessionSelect>, unknown>> {
 		// the authorization vaidator handles the length of the token when split on a dot
 		const tokenParts = token.split('.');
 
@@ -166,7 +168,7 @@ class SessionHandler {
 
 		const sessionResult = await this.findSession(sessionId);
 		if (result.isErr(sessionResult)) {
-			return sessionResult
+			return sessionResult;
 		}
 
 		if (sessionResult.data.status === 'none') {

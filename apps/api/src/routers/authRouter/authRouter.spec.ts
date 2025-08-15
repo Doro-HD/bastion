@@ -148,7 +148,12 @@ describe('Validate', () => {
 	it('Should succed with correct data', async () => {
 		const findUserSpy = vi
 			.spyOn(SessionHandler.prototype, 'findUserFromSession')
-			.mockImplementation(async () => result.ok({ status: 'some', data: { id: faker.string.uuid(), username: faker.internet.username() } }));
+			.mockImplementation(async () =>
+				result.ok({
+					status: 'some',
+					data: { id: faker.string.uuid(), username: faker.internet.username() }
+				})
+			);
 		const token = 'foo.bar';
 		const res = await app.request(
 			path,
@@ -162,7 +167,7 @@ describe('Validate', () => {
 		);
 
 		expect(res.status).toBe(200);
-		expect(findUserSpy).toHaveBeenCalledExactlyOnceWith(token)
+		expect(findUserSpy).toHaveBeenCalledExactlyOnceWith(token);
 	});
 
 	it('Should fail with unauthorized, 401 when an invalid token is provided', async () => {
@@ -185,7 +190,7 @@ describe('Validate', () => {
 		const res = await app.request(
 			path,
 			{
-				method: 'get',
+				method: 'get'
 			},
 			env
 		);

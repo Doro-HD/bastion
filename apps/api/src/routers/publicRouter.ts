@@ -1,10 +1,9 @@
-import { Hono } from "hono";
-import { IENV } from "./index";
-import { routers as authRouters } from "./authRouter";
+import { Hono } from 'hono';
+import { IENV } from './index';
+import { routers as authRouters } from './authRouter';
 
-interface IPublicEnv extends IENV { }
+interface IPublicEnv extends IENV {}
 
-const publicRouter = new Hono<IPublicEnv>()
-	.route(authRouters.path, authRouters.publicrouter)
+const publicRouter = new Hono<IPublicEnv>().route(authRouters.path, authRouters.publicrouter);
 
 export default publicRouter;

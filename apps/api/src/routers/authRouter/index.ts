@@ -11,16 +11,16 @@ interface IAuthENV extends IENV {
 }
 
 const injectUserHandler = createMiddleware<IAuthENV>(async (c, next) => {
-	const userHandler = new UserHandler(c.env.DB_URL, c.env.DB_AUTH_TOKEN)
-	c.set('userHandler', userHandler)
+	const userHandler = new UserHandler(c.env.DB_URL, c.env.DB_AUTH_TOKEN);
+	c.set('userHandler', userHandler);
 
-	await next()
-})
+	await next();
+});
 
 const routers = {
 	path: '/auth' as const,
 	publicrouter,
 	protectedRouter
-}
+};
 
 export { IAuthENV, routers, injectUserHandler };
