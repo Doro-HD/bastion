@@ -2,19 +2,19 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "api",
 	"main": "src/index.ts",
-	"compatibility_date": "2025-06-19"
+	"compatibility_date": "2025-06-19",
 	// "compatibility_flags": [
 	//   "nodejs_compat"
 	// ],
 	// "vars": {
 	//   "MY_VAR": "my-variable"
 	// },
-	// "kv_namespaces": [
-	//   {
-	//     "binding": "MY_KV_NAMESPACE",
-	//     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-	//   }
-	// ],
+	"kv_namespaces": [
+		{
+			"binding": "SESSIONS",
+			"id": "5fd2b8e5922e4dc9ad1ac987f3c7575c"
+		}
+	]
 	// "r2_buckets": [
 	//   {
 	//     "binding": "MY_BUCKET",
