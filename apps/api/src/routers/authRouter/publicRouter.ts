@@ -10,30 +10,32 @@ import { sessionExpiresInSeconds } from '@/db/sessions/handler';
 import { TUserSelect } from '@/db/users/types';
 
 /**
-	* @description
-	* setSession is used to set the session cookie and unify session logic
-	*/
+ * @description
+ * setSession is used to set the session cookie and unify session logic
+ */
 async function setSession(c: Context<IAuthENV>, user: TUserSelect) {
 	const sessionHandler = c.get('sessionHandler');
 
-
-	const sessionResult = await sessionHandler.createSession(user.username)
+	const sessionResult = await sessionHandler.createSession(user.username);
 	if (result.isErr(sessionResult) || sessionResult.data.status === 'none') {
-		return sessionResult
+		return sessionResult;
 	}
 
-	const data = sessionResult.data.data
+	const data = sessionResult.data.data;
 
 	setCookie(c, 'auth-token', data.token, {
 		path: '/',
 		httpOnly: true,
 		maxAge: sessionExpiresInSeconds,
 		secure: c.env.PROD
-	})
+	});
 
-	await c.env.SESSIONS.put(sessionResult.data.data.token, JSON.stringify({ session: { secretHash: data.session.secretHash }, user }))
+	await c.env.SESSIONS.put(
+		sessionResult.data.data.token,
+		JSON.stringify({ session: { secretHash: data.session.secretHash }, user })
+	);
 
-	return sessionResult
+	return sessionResult;
 }
 
 const signUpSchema = z.object({
@@ -62,7 +64,7 @@ const publicrouter = new Hono<IAuthENV>()
 			return c.json(errRes.err, errRes.status);
 		}
 
-		const sessionResult = await setSession(c, createResult.data)
+		const sessionResult = await setSession(c, createResult.data);
 		if (result.isErr(sessionResult) || sessionResult.data.status === 'none') {
 			const errRes = errResponse(500, {
 				reason: 'Could not create the new user'
@@ -95,7 +97,7 @@ const publicrouter = new Hono<IAuthENV>()
 			return c.json(errRes.err, errRes.status);
 		}
 
-		const sessionResult = await setSession(c, searchResult.data)
+		const sessionResult = await setSession(c, searchResult.data);
 		if (result.isErr(sessionResult) || sessionResult.data.status === 'none') {
 			const errRes = errResponse(500, {
 				reason: 'Could not create the new user'

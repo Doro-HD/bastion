@@ -25,7 +25,7 @@ describe('Sign up', () => {
 	const path = `${basePath}/sign-up`;
 
 	it('Should succeed with correct data', async () => {
-		const userId = faker.string.uuid()
+		const userId = faker.string.uuid();
 		const createUserSpy = vi
 			.spyOn(UserHandler.prototype, 'createUser')
 			.mockImplementation(async (newUser) =>
@@ -35,12 +35,12 @@ describe('Sign up', () => {
 				})
 			);
 
-		const token = 'foo.bar'
+		const token = 'foo.bar';
 		const session = {
 			id: token.split('.')[0],
-			secretHash: Buffer.from("someHashValue"),
+			secretHash: Buffer.from('someHashValue'),
 			createdAt: Date.now(),
-			userId: faker.string.uuid(),
+			userId: faker.string.uuid()
 		};
 		const createSessionSpy = vi
 			.spyOn(SessionHandler.prototype, 'createSession')
@@ -53,10 +53,7 @@ describe('Sign up', () => {
 				)
 			);
 
-
-
-		const sessionStoreSpy = vi.spyOn(env.SESSIONS, 'put')
-
+		const sessionStoreSpy = vi.spyOn(env.SESSIONS, 'put');
 
 		const data = { username: faker.internet.username() };
 		const res = await app.request(
@@ -76,13 +73,18 @@ describe('Sign up', () => {
 		const jsonData: { id: string; username: string } = await res.json();
 
 		// value expectations
-		expect(res.headers.get('Set-Cookie')).toBe(`auth-token=${token}; Max-Age=86400; Path=/; HttpOnly`)
+		expect(res.headers.get('Set-Cookie')).toBe(
+			`auth-token=${token}; Max-Age=86400; Path=/; HttpOnly`
+		);
 		expect(jsonData.id).toBe(userId);
 		expect(jsonData.username).toBe(data.username);
 
 		expect(createUserSpy).toHaveBeenCalledExactlyOnceWith(data);
 		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(data.username);
-		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(token, JSON.stringify({ session: { secretHash: session.secretHash }, user: { id: userId, ...data } }))
+		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(
+			token,
+			JSON.stringify({ session: { secretHash: session.secretHash }, user: { id: userId, ...data } })
+		);
 	});
 
 	it('Should fail with bad request, 400', async () => {
@@ -106,7 +108,7 @@ describe('Sign in', () => {
 	const path = `${basePath}/sign-in`;
 
 	it('Should succeed with correct data', async () => {
-		const userId = faker.string.uuid()
+		const userId = faker.string.uuid();
 		const signInSpy = vi
 			.spyOn(UserHandler.prototype, 'findUserByUsername')
 			.mockImplementation(async (username) =>
@@ -116,13 +118,13 @@ describe('Sign in', () => {
 				})
 			);
 
-		const token = 'foo.bar'
+		const token = 'foo.bar';
 		const session = {
 			id: token.split('.')[0],
-			secretHash: Buffer.from("someHashValue"),
+			secretHash: Buffer.from('someHashValue'),
 			createdAt: Date.now(),
-			userId: userId,
-		}
+			userId: userId
+		};
 		const createSessionSpy = vi
 			.spyOn(SessionHandler.prototype, 'createSession')
 			.mockImplementation(async () =>
@@ -134,8 +136,7 @@ describe('Sign in', () => {
 				)
 			);
 
-
-		const sessionStoreSpy = vi.spyOn(env.SESSIONS, 'put')
+		const sessionStoreSpy = vi.spyOn(env.SESSIONS, 'put');
 
 		const username = faker.internet.username();
 		const res = await app.request(
@@ -153,12 +154,20 @@ describe('Sign in', () => {
 		);
 
 		expect(res.status).toBe(200);
-		expect(res.headers.get('Set-Cookie')).toBe(`auth-token=${token}; Max-Age=86400; Path=/; HttpOnly`)
+		expect(res.headers.get('Set-Cookie')).toBe(
+			`auth-token=${token}; Max-Age=86400; Path=/; HttpOnly`
+		);
 
 		expect(signInSpy).toHaveBeenCalledOnce();
 		expect(signInSpy).toHaveBeenCalledWith(username);
 		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(username);
-		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith('foo.bar', JSON.stringify({ session: { secretHash: session.secretHash }, user: { id: userId, username } }))
+		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(
+			'foo.bar',
+			JSON.stringify({
+				session: { secretHash: session.secretHash },
+				user: { id: userId, username }
+			})
+		);
 	});
 
 	it('Should fail with bad request, 400', async () => {
@@ -199,7 +208,7 @@ describe('Validate', () => {
 	const path = `${basePath}/validate`;
 
 	it('Should succed with correct data from session handler', async () => {
-		const data = { id: faker.string.uuid(), username: faker.internet.username() }
+		const data = { id: faker.string.uuid(), username: faker.internet.username() };
 		const findUserSpy = vi
 			.spyOn(SessionHandler.prototype, 'findUserFromSession')
 			.mockImplementation(async () =>
@@ -209,9 +218,7 @@ describe('Validate', () => {
 				})
 			);
 
-		const sessionStoreSpy = vi
-			.spyOn(env.SESSIONS, 'get')
-
+		const sessionStoreSpy = vi.spyOn(env.SESSIONS, 'get');
 
 		const token = 'foo.bar';
 		const res = await app.request(
@@ -226,28 +233,27 @@ describe('Validate', () => {
 		);
 
 		expect(res.status).toBe(200);
-		expect((await res.json())).toStrictEqual(data)
+		expect(await res.json()).toStrictEqual(data);
 
 		expect(findUserSpy).toHaveBeenCalledExactlyOnceWith(token);
-		expect(sessionStoreSpy).toHaveBeenCalledOnce()
-
+		expect(sessionStoreSpy).toHaveBeenCalledOnce();
 	});
 
 	it('Should succed with correct data from session store', async () => {
-		const expectation = { session: { secretHash: Buffer.from("someHashValue") }, user: { id: faker.string.uuid(), username: faker.internet.username() } }
+		const expectation = {
+			session: { secretHash: Buffer.from('someHashValue') },
+			user: { id: faker.string.uuid(), username: faker.internet.username() }
+		};
 
 		const sessionStoreSpy = vi
 			.spyOn(env.SESSIONS, 'get')
-			.mockImplementation(() => JSON.stringify(expectation))
+			.mockImplementation(() => JSON.stringify(expectation));
 
 		const validateSpy = vi
 			.spyOn(SessionHandler.prototype, 'validateSession')
-			.mockImplementation(async () => true)
+			.mockImplementation(async () => true);
 
-		const findUserSpy = vi
-			.spyOn(SessionHandler.prototype, 'findUserFromSession')
-
-
+		const findUserSpy = vi.spyOn(SessionHandler.prototype, 'findUserFromSession');
 
 		const token = 'foo.bar';
 		const res = await app.request(
@@ -261,14 +267,14 @@ describe('Validate', () => {
 			env
 		);
 
-		const data = await res.json()
+		const data = await res.json();
 
 		expect(res.status).toBe(200);
-		expect(data).toStrictEqual(expectation.user)
+		expect(data).toStrictEqual(expectation.user);
 
 		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(token);
-		expect(validateSpy).toHaveBeenCalledOnce()
-		expect(findUserSpy).toHaveBeenCalledTimes(0)
+		expect(validateSpy).toHaveBeenCalledOnce();
+		expect(findUserSpy).toHaveBeenCalledTimes(0);
 	});
 
 	it('Should fail with unauthorized, 401 when an invalid token is provided', async () => {

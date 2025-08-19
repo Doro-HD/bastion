@@ -26,7 +26,6 @@ const injectSessionHandler = createMiddleware<IAuthENV>(async (c, next) => {
 	await next();
 });
 
-
 const routers = {
 	path: '/auth' as const,
 	publicrouter,

@@ -33,23 +33,24 @@ const protectedRouter = new Hono<IProtectedEnv>()
 		}
 
 		const sessionHandler = new SessionHandler(c.env.DB_URL, c.env.DB_AUTH_TOKEN);
-		const dataString = await c.env.SESSIONS.get(authorizationResult.data.authToken)
+		const dataString = await c.env.SESSIONS.get(authorizationResult.data.authToken);
 
 		if (dataString) {
-			const data = JSON.parse(dataString)
-			const sessionSecret = authorizationResult.data.authToken.split('.')[1]
+			const data = JSON.parse(dataString);
+			const sessionSecret = authorizationResult.data.authToken.split('.')[1];
 
-			const isSessionValid = await sessionHandler.validateSession(sessionSecret, data.session.secretHash)
+			const isSessionValid = await sessionHandler.validateSession(
+				sessionSecret,
+				data.session.secretHash
+			);
 			if (!isSessionValid) {
 				const errRes = errResponse(401, { reason: 'Invalid token' });
 
 				return c.json(errRes.err, errRes.status);
-
 			}
 
 			c.set('user', data.user);
 		} else {
-
 			const sessionResult = await sessionHandler.findUserFromSession(
 				authorizationResult.data.authToken
 			);
