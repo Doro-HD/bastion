@@ -4,8 +4,10 @@ import protectedRouter from './protectedRouter';
 
 interface IENV {
 	Bindings: {
+		PROD: boolean;
 		DB_URL: string;
 		DB_AUTH_TOKEN: string;
+		SESSIONS: KVNamespace;
 	};
 }
 

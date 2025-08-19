@@ -153,7 +153,24 @@ class SessionHandler {
 
 	/**
 	 * @description
-	 * #validateSession will validate the provided session token
+	 * validateSession will validate a session from the provided sessionSecret against the provided session's secret
+	 * @param sessionSecret - The session secret from the token
+	 * @param sessionHash - The session hash from the db to validate the secret against
+	 */
+	async validateSession(sessionSecret: string, sessionHash: Uint8Array<ArrayBufferLike>): Promise<boolean> {
+		const tokenSecretHash = await hashSecret(sessionSecret);
+		const validSecret = constantTimeEqual(tokenSecretHash, sessionHash);
+
+		if (!validSecret) {
+			return false
+		}
+
+		return true
+	}
+
+	/**
+	 * @description
+	 * #validateSession will find a session from the provided token and validate it
 	 * @param token - The session token to validate
 	 * @returns A result containing the session
 	 */
@@ -176,9 +193,9 @@ class SessionHandler {
 		}
 		const data = sessionResult.data.data;
 
-		const tokenSecretHash = await hashSecret(sessionSecret);
-		const validSecret = constantTimeEqual(tokenSecretHash, data.secretHash);
-		if (!validSecret) {
+		const isSessionValid = this.validateSession(sessionSecret, data)
+
+		if (!isSessionValid) {
 			return result.err('Expired token');
 		}
 
@@ -187,3 +204,6 @@ class SessionHandler {
 }
 
 export default SessionHandler;
+export {
+	sessionExpiresInSeconds
+}

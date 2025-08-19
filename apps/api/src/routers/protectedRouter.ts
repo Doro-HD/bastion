@@ -33,25 +33,42 @@ const protectedRouter = new Hono<IProtectedEnv>()
 		}
 
 		const sessionHandler = new SessionHandler(c.env.DB_URL, c.env.DB_AUTH_TOKEN);
+		const dataString = await c.env.SESSIONS.get(authorizationResult.data.authToken)
 
-		const sessionResult = await sessionHandler.findUserFromSession(
-			authorizationResult.data.authToken
-		);
-		if (result.isErr(sessionResult)) {
-			const errRes = errResponse(500, { reason: 'Database error' });
+		if (dataString) {
+			const data = JSON.parse(dataString)
+			const sessionSecret = authorizationResult.data.authToken.split('.')[1]
 
-			return c.json(errRes.err, errRes.status);
+			const isSessionValid = await sessionHandler.validateSession(sessionSecret, data.session.secretHash)
+			if (!isSessionValid) {
+				const errRes = errResponse(401, { reason: 'Invalid token' });
+
+				return c.json(errRes.err, errRes.status);
+
+			}
+
+			c.set('user', data.user);
+		} else {
+
+			const sessionResult = await sessionHandler.findUserFromSession(
+				authorizationResult.data.authToken
+			);
+			if (result.isErr(sessionResult)) {
+				const errRes = errResponse(500, { reason: 'Database error' });
+
+				return c.json(errRes.err, errRes.status);
+			}
+
+			if (sessionResult.data.status === 'none') {
+				const errRes = errResponse(404, {
+					reason: 'Could not find any user with the provided token'
+				});
+
+				return c.json(errRes.err, errRes.status);
+			}
+
+			c.set('user', sessionResult.data.data);
 		}
-
-		if (sessionResult.data.status === 'none') {
-			const errRes = errResponse(404, {
-				reason: 'Could not find any user with the provided token'
-			});
-
-			return c.json(errRes.err, errRes.status);
-		}
-
-		c.set('user', sessionResult.data.data);
 
 		await next();
 	})
