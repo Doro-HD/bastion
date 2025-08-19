@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  api:
+  build-api:
     name: API
     runs-on: ubuntu-latest
 
@@ -32,7 +32,7 @@ jobs:
       - name: build
         run: pnpm --filter api build
 
-  web:
+  build-web:
     name: Web client
     runs-on: ubuntu-latest
 

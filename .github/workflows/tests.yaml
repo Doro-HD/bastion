@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  web-client:
+  test-web-client:
     name: Web client
     runs-on: ubuntu-latest
 
@@ -32,7 +32,7 @@ jobs:
       - name: Run tests
         run: pnpm --filter web test
 
-  api:
+  test-api:
     name: API
     runs-on: ubuntu-latest
 
