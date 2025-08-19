@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  api:
-    name: API
+  build-api:
+    name: Build API
     runs-on: ubuntu-latest
 
     steps:
@@ -32,8 +32,8 @@ jobs:
       - name: build
         run: pnpm --filter api build
 
-  web:
-    name: Web client
+  build-web:
+    name: Build web client
     runs-on: ubuntu-latest
 
     steps:
