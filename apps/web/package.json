@@ -9,9 +9,10 @@
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check-types": "pnpm run check",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test:unit": "vitest",
-		"test": "pnpm run test:unit -- --run",
+		"test:unit": "vitest run",
+		"test": "pnpm run test:unit",
 		"format": "prettier --config ../../.prettierrc --write .",
 		"lint": "prettier --config ../../.prettierrc --check . && eslint ."
 	},
