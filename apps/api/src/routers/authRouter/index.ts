@@ -1,4 +1,4 @@
-import publicrouter from './publicRouter';
+import publicRouter from './publicRouter';
 import protectedRouter from './protectedRouter';
 import UserHandler from '@/db/users/handler';
 import { IENV } from '@/routers/index';
@@ -28,7 +28,7 @@ const injectSessionHandler = createMiddleware<IAuthENV>(async (c, next) => {
 
 const routers = {
 	path: '/auth' as const,
-	publicrouter,
+	publicRouter,
 	protectedRouter
 };
 
