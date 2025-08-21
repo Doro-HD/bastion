@@ -2,25 +2,35 @@
 	"name": "api",
 	"type": "module",
 	"scripts": {
-		"dev": "wrangler dev",
-		"test": "vitest run",
-		"build": "tsc",
 		"check-types": "tsc --noEmit",
-		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
+		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write .",
+		"test": "vitest run",
+		"dev": "wrangler dev",
+		"build": "tsc"
 	},
 	"dependencies": {
-		"@doro-hd/result": "jsr:^1.1.0",
 		"@hono/zod-validator": "^0.7.0",
 		"@libsql/client": "^0.15.10",
+		"api-client": "link:jsr:@doro-hd/api-client",
 		"drizzle-orm": "^0.44.2",
 		"hono": "^4.7.11",
+		"result": "link:jsr:@doro-hd/result",
 		"zod": "^3.25.76"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.8.50",
 		"@cloudflare/workers-types": "^4.20250719.0",
+		"@eslint/compat": "^1.3.2",
+		"@eslint/js": "^9.33.0",
 		"@faker-js/faker": "^9.8.0",
 		"drizzle-kit": "^0.31.4",
+		"eslint": "^9.33.0",
+		"eslint-config-prettier": "^10.1.8",
+		"globals": "^16.3.0",
+		"prettier": "^3.6.2",
+		"typescript-eslint": "^8.34.1",
 		"vite-tsconfig-paths": "^5.1.4",
 		"vitest": "^3.2.4",
 		"wrangler": "^4.4.0"

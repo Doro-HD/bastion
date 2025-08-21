@@ -5,20 +5,12 @@
 		"moduleResolution": "Bundler",
 		"strict": true,
 		"skipLibCheck": true,
-		"lib": [
-			"ESNext"
-		],
+		"lib": ["ESNext"],
 		"paths": {
-			"@/*": [
-				"./src/*"
-			]
+			"@/*": ["./src/*"]
 		},
 		"outDir": "dist"
 	},
-	"include": [
-		"./src/**/*.ts"
-	],
-	"exclude": [
-		"./src/**/*.spec.ts"
-	]
+	"include": ["./src/**/*.ts"],
+	"exclude": ["./src/**/*.spec.ts"]
 }

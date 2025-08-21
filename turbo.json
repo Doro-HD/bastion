@@ -11,6 +11,8 @@
 				"^check-types"
 			]
 		},
+		"lint": {},
+		"format": {},
 		"dev": {
 			"persistent": true,
 			"cache": false
