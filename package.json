@@ -7,6 +7,7 @@
 	"scripts": {
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
+		"check-types": "turbo check-types",
 		"dev": "turbo dev",
 		"test": "turbo test",
 		"build": "turbo build"
