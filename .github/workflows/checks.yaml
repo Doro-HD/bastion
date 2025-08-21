@@ -1,4 +1,4 @@
-name: Tests
+name: Checks
 
 on:
   pull_request:
@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  test-web-client:
-    name: Test web client
+  check-types:
+    name: Check types
     runs-on: ubuntu-latest
 
     steps:
@@ -27,13 +27,13 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm --filter web install --frozen-lockfile
+        run: pnpm --frozen-lockfile
 
-      - name: Run tests
-        run: pnpm --filter web test
+      - name: Check types
+        run: pnpm check-types
 
-  test-api:
-    name: Test API
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +52,33 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm --filter api install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Linting
+        run: pnpm lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests
-        run: pnpm --filter api test
+        run: pnpm test
+
