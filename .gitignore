@@ -8,6 +8,7 @@ node_modules
 .svelte-kit
 build
 dist
+.turbo
 
 # OS
 .DS_Store

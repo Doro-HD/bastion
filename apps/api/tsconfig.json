@@ -6,10 +6,11 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"lib": ["ESNext"],
-		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx",
 		"paths": {
-			"@/*": ["./src/*"]
-		}
-	}
+			"$/*": ["./src/*"]
+		},
+		"outDir": "dist"
+	},
+	"include": ["./src/**/*.ts"],
+	"exclude": ["./src/**/*.spec.ts"]
 }

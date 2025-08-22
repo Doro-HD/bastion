@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { KVNamespace } from '@cloudflare/workers-types';
 
 import publicRouter from './publicRouter';
 import protectedRouter from './protectedRouter';
