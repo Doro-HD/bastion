@@ -1,8 +1,11 @@
 import { defineWorkersProject } from '@cloudflare/vitest-pool-workers/config';
-import tsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineWorkersProject({
-	plugins: [tsConfigPaths()],
+	resolve: {
+		alias: {
+			$: '/src'
+		}
+	},
 	test: {
 		typecheck: {
 			tsconfig: './tsconfig.test.json'

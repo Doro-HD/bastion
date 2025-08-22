@@ -4,10 +4,10 @@ import { z } from 'zod/v4';
 import { result } from '@doro-hd/result';
 
 import { IAuthENV, injectSessionHandler, injectUserHandler } from './index';
-import { createValidator } from '@/middleware/validator';
-import { errResponse, okResponse } from '@/routers/types';
-import { sessionExpiresInSeconds } from '@/db/sessions/handler';
-import { TUserSelect } from '@/db/users/types';
+import { createValidator } from '$/middleware/validator';
+import { errResponse, okResponse } from '$/routers/types';
+import { sessionExpiresInSeconds } from '$/db/sessions/handler';
+import { TUserSelect } from '$/db/users/types';
 
 /**
  * @description

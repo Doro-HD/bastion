@@ -8,7 +8,7 @@
 	<h1>Bastion</h1>
 
 	{#if authStore.isAuthorized}
-		<a href="">Logout</a>
+		<button>Logout</button>
 	{:else}
 		<a href="/sign-in">Log In</a>
 	{/if}

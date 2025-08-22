@@ -1,9 +1,9 @@
 import publicRouter from './publicRouter';
 import protectedRouter from './protectedRouter';
-import UserHandler from '@/db/users/handler';
-import { IENV } from '@/routers/index';
+import UserHandler from '$/db/users/handler';
+import { IENV } from '$/routers/index';
 import { createMiddleware } from 'hono/factory';
-import SessionHandler from '@/db/sessions/handler';
+import SessionHandler from '$/db/sessions/handler';
 
 interface IAuthENV extends IENV {
 	Variables: {
