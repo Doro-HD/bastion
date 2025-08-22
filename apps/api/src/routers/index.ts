@@ -1,9 +1,9 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import { KVNamespace } from "@cloudflare/workers-types";
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { KVNamespace } from '@cloudflare/workers-types';
 
-import publicRouter from "./publicRouter";
-import protectedRouter from "./protectedRouter";
+import publicRouter from './publicRouter';
+import protectedRouter from './protectedRouter';
 
 interface IENV {
 	Bindings: {
@@ -19,21 +19,15 @@ const app = new Hono<IENV>()
 	.use(async (c, next) => {
 		const corsMiddleware = cors({
 			origin: c.env.CORS_ORIGIN,
-			allowMethods: [
-				"GET",
-				"POST",
-				"PUT",
-				"DELETE",
-				"OPTIONS",
-			],
-			allowHeaders: ["Content-Type"],
-			credentials: true,
+			allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+			allowHeaders: ['Content-Type'],
+			credentials: true
 		});
 
 		return corsMiddleware(c, next);
 	})
-	.route("/", publicRouter)
-	.route("/", protectedRouter);
+	.route('/', publicRouter)
+	.route('/', protectedRouter);
 
 export default app;
 export { IENV };

@@ -44,6 +44,7 @@
 		"vitest": "^3.2.3"
 	},
 	"dependencies": {
-		"api-client": "link:jsr:@doro-hd/api-client"
+		"@doro-hd/api-client": "jsr:^1.0.0",
+		"@doro-hd/result": "jsr:^1.1.0"
 	}
 }

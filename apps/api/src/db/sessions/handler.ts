@@ -1,15 +1,11 @@
-import { eq } from "drizzle-orm";
-import { option, result } from "@doro-hd/result";
+import { eq } from 'drizzle-orm';
+import { option, result } from '@doro-hd/result';
 
-import {
-	constantTimeEqual,
-	generateSecureRandomString,
-	hashSecret,
-} from "@/crypto";
-import connect, { TConnection } from "@/db/index";
-import { TSessionInsert, TSessionSelect, TSessionTable } from "./types";
-import { sessionTable } from "./schema";
-import { TUserSelect } from "@/db/users/types";
+import { constantTimeEqual, generateSecureRandomString, hashSecret } from '$/crypto';
+import connect, { TConnection } from '$/db/index';
+import { TSessionInsert, TSessionSelect, TSessionTable } from './types';
+import { sessionTable } from './schema';
+import { TUserSelect } from '$/db/users/types';
 
 const sessionExpiresInSeconds = 60 * 60 * 24; // 1 day
 
@@ -29,15 +25,8 @@ class SessionHandler {
 	 * @returns A result containing the newly created session and the token to set as a cookie
 	 */
 	async createSession(
-		userId: TUserSelect["id"],
-	): Promise<
-		result.TResult<
-			option.TOption<
-				{ session: TSessionInsert; token: string }
-			>,
-			unknown
-		>
-	> {
+		userId: TUserSelect['id']
+	): Promise<result.TResult<option.TOption<{ session: TSessionInsert; token: string }>, unknown>> {
 		try {
 			const now = new Date();
 
@@ -50,10 +39,8 @@ class SessionHandler {
 				.values({
 					id,
 					secretHash: Buffer.from(secretHash),
-					createdAt: Math.floor(
-						now.getTime() / 1000,
-					),
-					userId,
+					createdAt: Math.floor(now.getTime() / 1000),
+					userId
 				})
 				.returning();
 
@@ -62,11 +49,9 @@ class SessionHandler {
 				return result.ok(option.none());
 			}
 
-			const token = id + "." + secret;
+			const token = id + '.' + secret;
 
-			return result.ok(
-				option.some({ session: sessionOption, token }),
-			);
+			return result.ok(option.some({ session: sessionOption, token }));
 		} catch (err) {
 			return result.err(err);
 		}
@@ -79,32 +64,25 @@ class SessionHandler {
 	 * @returns An optional session
 	 */
 	async findSession(
-		sessionId: string,
+		sessionId: string
 	): Promise<result.TResult<option.TOption<TSessionSelect>, unknown>> {
 		try {
 			const now = new Date();
 
-			const sessionResult = await this.#client.query
-				.sessionTable.findFirst({
-					where: (session, { eq }) =>
-						eq(session.id, sessionId),
-				});
+			const sessionResult = await this.#client.query.sessionTable.findFirst({
+				where: (session, { eq }) => eq(session.id, sessionId)
+			});
 			if (!sessionResult) {
 				return result.ok(option.none());
 			}
 
 			const session = {
 				...sessionResult,
-				createdAt: new Date(
-					sessionResult.createdAt * 1000,
-				),
+				createdAt: new Date(sessionResult.createdAt * 1000)
 			};
 
 			// Check expiration
-			if (
-				now.getTime() - session.createdAt.getTime() >=
-				sessionExpiresInSeconds * 1000
-			) {
+			if (now.getTime() - session.createdAt.getTime() >= sessionExpiresInSeconds * 1000) {
 				return this.deleteSession(sessionId);
 			}
 
@@ -121,28 +99,26 @@ class SessionHandler {
 	 * @returns A result containing an optional user
 	 */
 	async findUserFromSession(
-		token: string,
+		token: string
 	): Promise<result.TResult<option.TOption<TUserSelect>, unknown>> {
 		const sessionResult = await this.#validateSession(token);
 		if (result.isErr(sessionResult)) {
 			return sessionResult;
 		}
 
-		if (sessionResult.data.status === "none") {
+		if (sessionResult.data.status === 'none') {
 			return result.ok(option.none());
 		}
 		const data = sessionResult.data.data;
 
 		try {
-			const session = await this.#client.query.sessionTable
-				.findFirst({
-					columns: {},
-					where: (session, { eq }) =>
-						eq(session.id, data.id),
-					with: {
-						user: true,
-					},
-				});
+			const session = await this.#client.query.sessionTable.findFirst({
+				columns: {},
+				where: (session, { eq }) => eq(session.id, data.id),
+				with: {
+					user: true
+				}
+			});
 
 			if (!session) {
 				return result.ok(option.none());
@@ -161,7 +137,7 @@ class SessionHandler {
 	 * @returns A result containing an optional session
 	 */
 	async deleteSession(
-		sessionId: TSessionSelect["id"],
+		sessionId: TSessionSelect['id']
 	): Promise<result.TResult<option.TOption<TSessionSelect>, unknown>> {
 		try {
 			const returnedSessions = await this.#client
@@ -183,13 +159,10 @@ class SessionHandler {
 	 */
 	async validateSession(
 		sessionSecret: string,
-		sessionHash: Uint8Array<ArrayBufferLike>,
+		sessionHash: Uint8Array<ArrayBufferLike>
 	): Promise<boolean> {
 		const tokenSecretHash = await hashSecret(sessionSecret);
-		const validSecret = constantTimeEqual(
-			tokenSecretHash,
-			sessionHash,
-		);
+		const validSecret = constantTimeEqual(tokenSecretHash, sessionHash);
 
 		if (!validSecret) {
 			return false;
@@ -205,10 +178,10 @@ class SessionHandler {
 	 * @returns A result containing the session
 	 */
 	async #validateSession(
-		token: string,
+		token: string
 	): Promise<result.TResult<option.TOption<TSessionSelect>, unknown>> {
 		// the authorization vaidator handles the length of the token when split on a dot
-		const tokenParts = token.split(".");
+		const tokenParts = token.split('.');
 
 		const sessionId = tokenParts[0];
 		const sessionSecret = tokenParts[1];
@@ -218,18 +191,15 @@ class SessionHandler {
 			return sessionResult;
 		}
 
-		if (sessionResult.data.status === "none") {
+		if (sessionResult.data.status === 'none') {
 			return sessionResult;
 		}
 		const data = sessionResult.data.data;
 
-		const isSessionValid = this.validateSession(
-			sessionSecret,
-			data.secretHash,
-		);
+		const isSessionValid = this.validateSession(sessionSecret, data.secretHash);
 
 		if (!isSessionValid) {
-			return result.err("Expired token");
+			return result.err('Expired token');
 		}
 
 		return result.ok(option.some(data));

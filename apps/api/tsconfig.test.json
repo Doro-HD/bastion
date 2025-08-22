@@ -6,7 +6,7 @@
 		]
 	},
 	"include": [
-		"./**/*.spec.ts",
+		"./src/**/*.spec.ts",
 		"./worker-configuration.d.ts" // output of `wrangler types`
 	]
 }

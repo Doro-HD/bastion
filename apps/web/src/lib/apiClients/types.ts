@@ -1,4 +1,4 @@
-import { result } from '@doro-hd/ts_result';
+import { result } from '@doro-hd/result';
 
 interface IAPIResponseOk<T> {
 	status: 'ok';

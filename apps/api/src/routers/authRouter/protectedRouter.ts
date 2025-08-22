@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 
-import { okResponse } from '@/routers/types';
+import { okResponse } from '$/routers/types';
 import { IProtectedEnv } from '../protectedRouter';
 
 const protectedRouter = new Hono<IProtectedEnv>().get('/validate', async (c) => {

@@ -7,7 +7,7 @@
 		"skipLibCheck": true,
 		"lib": ["ESNext"],
 		"paths": {
-			"@/*": ["./src/*"]
+			"$/*": ["./src/*"]
 		},
 		"outDir": "dist"
 	},

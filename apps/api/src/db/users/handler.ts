@@ -1,4 +1,4 @@
-import connect, { TConnection } from '@/db/index';
+import connect, { TConnection } from '$/db/index';
 import { TUserSelect, TUserInsert, TUserTable } from './types';
 import { userTable } from './schema';
 import { result } from '@doro-hd/result';
