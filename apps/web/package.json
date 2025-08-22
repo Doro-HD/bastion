@@ -42,5 +42,8 @@
 		"typescript-eslint": "^8.20.0",
 		"vite": "^6.2.6",
 		"vitest": "^3.2.3"
+	},
+	"dependencies": {
+		"api-client": "link:jsr:@doro-hd/api-client"
 	}
 }

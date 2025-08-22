@@ -1,13 +1,13 @@
-import type { TAPIResult } from '@doro-hd/api-client';
-import AuthClient from '$lib/apiClients/authClient';
+import type { TAPIResult } from "api-client";
+import AuthClient from "$lib/apiClients/authClient";
 import type {
 	IAPIUser,
 	TSignInRequest,
 	TSignInResponse,
 	TSignUpRequest,
-	TSignUpResponse
-} from '$lib/apiClients/authClient/types';
-import getAuthStore from '$lib/stores/authStore.svelte';
+	TSignUpResponse,
+} from "$lib/apiClients/authClient/types";
+import getAuthStore from "$lib/stores/authStore.svelte";
 
 const authClient = new AuthClient();
 const authStore = getAuthStore();
@@ -21,7 +21,7 @@ const authStore = getAuthStore();
 function handleResult<T extends IAPIUser>(apiResult: TAPIResult<T>): boolean {
 	let isSuccess = false;
 
-	if (apiResult.name === 'ok' || apiResult.name === 'created') {
+	if (apiResult.name === "ok" || apiResult.name === "created") {
 		authStore.setUser(apiResult.data);
 		isSuccess = true;
 	}
@@ -58,7 +58,7 @@ const authService = {
 		const validateResult = await authClient.validate();
 
 		return handleResult(validateResult);
-	}
+	},
 };
 
 export default authService;
