@@ -5,7 +5,7 @@ on:
     branches:
       - dev
 jobs:
-  deploy:
+  web-stageing-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
