@@ -21,7 +21,8 @@ class UserHandler {
 				.returning();
 
 			return result.ok(users.at(0));
-		} catch {
+		} catch (err) {
+			console.log(err)
 			return result.err('Could not insert new user');
 		}
 	}

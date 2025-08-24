@@ -16,7 +16,7 @@ import { TUserSelect } from '$/db/users/types';
 async function setSession(c: Context<IAuthENV>, user: TUserSelect) {
 	const sessionHandler = c.get('sessionHandler');
 
-	const sessionResult = await sessionHandler.createSession(user.username);
+	const sessionResult = await sessionHandler.createSession(user.id);
 	if (result.isErr(sessionResult) || sessionResult.data.status === 'none') {
 		return sessionResult;
 	}
@@ -65,9 +65,10 @@ const publicrouter = new Hono<IAuthENV>()
 		}
 
 		const sessionResult = await setSession(c, createResult.data);
+		console.log(sessionResult)
 		if (result.isErr(sessionResult) || sessionResult.data.status === 'none') {
 			const errRes = errResponse(500, {
-				reason: 'Could not create the new user'
+				reason: 'Could not create a session for the new user'
 			});
 
 			return c.json(errRes.err, errRes.status);

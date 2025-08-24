@@ -3,9 +3,9 @@
 	"name": "api",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-06-19",
-	// "compatibility_flags": [
-	//   "nodejs_compat"
-	// ],
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
 	"vars": {
 		"CORS_ORIGIN": "http://localhost:5173"
 	},

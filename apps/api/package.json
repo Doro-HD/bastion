@@ -2,6 +2,8 @@
 	"name": "api",
 	"type": "module",
 	"scripts": {
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
 		"check-types": "tsc --noEmit",
 		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
 		"lint": "prettier --check . && eslint .",
@@ -27,6 +29,7 @@
 		"@eslint/js": "^9.33.0",
 		"@faker-js/faker": "^9.8.0",
 		"@types/node": "^24.3.0",
+		"dotenv": "^17.2.1",
 		"drizzle-kit": "^0.31.4",
 		"eslint": "^9.33.0",
 		"eslint-config-prettier": "^10.1.8",
