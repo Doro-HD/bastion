@@ -22,6 +22,6 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           workingDirectory: "apps/api"
-          env: stageing
+          environment: stageing
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
