@@ -22,7 +22,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm --filer web install --frozen-lockfile
+        run: pnpm --filter web install --frozen-lockfile
 
       - name: Build app
         run: pnpm --filter web build
