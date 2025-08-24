@@ -38,7 +38,7 @@ class SessionHandler {
 				.insert(this.#table)
 				.values({
 					id,
-					secretHash: Buffer.from(secretHash),
+					secretHash: secretHash,
 					createdAt: Math.floor(now.getTime() / 1000),
 					userId
 				})
@@ -196,7 +196,7 @@ class SessionHandler {
 		}
 		const data = sessionResult.data.data;
 
-		const isSessionValid = this.validateSession(sessionSecret, data.secretHash);
+		const isSessionValid = this.validateSession(sessionSecret, data.secretHash as Uint8Array);
 
 		if (!isSessionValid) {
 			return result.err('Expired token');
