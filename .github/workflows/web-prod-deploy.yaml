@@ -15,6 +15,18 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm --filer web install --frozen-lockfile
+
+      - name: Build app
+        run: pnpm --filter web build
+
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
