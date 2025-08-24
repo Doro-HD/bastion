@@ -15,7 +15,7 @@ jobs:
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
-          version: 4.4.0
+          wranglerVersion: 4.4.0
           workingDirectory: "apps/web"
           environment: production
           apiToken: ${{ secrets.CF_API_TOKEN }}
