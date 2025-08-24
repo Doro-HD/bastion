@@ -80,7 +80,7 @@ describe('Sign up', () => {
 		expect(jsonData.username).toBe(data.username);
 
 		expect(createUserSpy).toHaveBeenCalledExactlyOnceWith(data);
-		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(data.username);
+		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(userId);
 		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(
 			token,
 			JSON.stringify({ session: { secretHash: session.secretHash }, user: { id: userId, ...data } })
@@ -160,7 +160,7 @@ describe('Sign in', () => {
 
 		expect(signInSpy).toHaveBeenCalledOnce();
 		expect(signInSpy).toHaveBeenCalledWith(username);
-		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(username);
+		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(userId);
 		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(
 			'foo.bar',
 			JSON.stringify({
