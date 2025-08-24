@@ -65,7 +65,7 @@ const publicrouter = new Hono<IAuthENV>()
 		}
 
 		const sessionResult = await setSession(c, createResult.data);
-		console.log(sessionResult)
+		console.log(sessionResult);
 		if (result.isErr(sessionResult) || sessionResult.data.status === 'none') {
 			const errRes = errResponse(500, {
 				reason: 'Could not create a session for the new user'

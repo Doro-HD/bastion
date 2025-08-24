@@ -22,7 +22,7 @@ class UserHandler {
 
 			return result.ok(users.at(0));
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 			return result.err('Could not insert new user');
 		}
 	}

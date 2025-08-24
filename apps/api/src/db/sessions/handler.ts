@@ -196,7 +196,7 @@ class SessionHandler {
 		}
 		const data = sessionResult.data.data;
 
-		const isSessionValid = this.validateSession(sessionSecret, data.secretHash);
+		const isSessionValid = this.validateSession(sessionSecret, data.secretHash as Uint8Array);
 
 		if (!isSessionValid) {
 			return result.err('Expired token');
