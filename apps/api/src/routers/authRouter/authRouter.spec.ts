@@ -2,17 +2,17 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { env } from 'cloudflare:test';
 import { faker } from '@faker-js/faker';
 
-import app from '@/index';
-import UserHandler from '@/db/users/handler';
+import app from '$/routers/index';
+import UserHandler from '$/db/users/handler';
 import { option, result } from '@doro-hd/result';
-import SessionHandler from '@/db/sessions/handler';
+import SessionHandler from '$/db/sessions/handler';
 
 const basePath = '/auth';
 
 afterEach(() => vi.clearAllMocks());
 
 beforeEach(() => {
-	vi.mock(import('@/db/index'), async (importOriginal) => {
+	vi.mock(import('$/db/index'), async (importOriginal) => {
 		const module = await importOriginal();
 		return {
 			...module,
@@ -80,7 +80,7 @@ describe('Sign up', () => {
 		expect(jsonData.username).toBe(data.username);
 
 		expect(createUserSpy).toHaveBeenCalledExactlyOnceWith(data);
-		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(data.username);
+		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(userId);
 		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(
 			token,
 			JSON.stringify({ session: { secretHash: session.secretHash }, user: { id: userId, ...data } })
@@ -160,7 +160,7 @@ describe('Sign in', () => {
 
 		expect(signInSpy).toHaveBeenCalledOnce();
 		expect(signInSpy).toHaveBeenCalledWith(username);
-		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(username);
+		expect(createSessionSpy).toHaveBeenCalledExactlyOnceWith(userId);
 		expect(sessionStoreSpy).toHaveBeenCalledExactlyOnceWith(
 			'foo.bar',
 			JSON.stringify({

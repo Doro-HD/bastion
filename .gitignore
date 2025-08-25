@@ -8,6 +8,7 @@ node_modules
 .svelte-kit
 build
 dist
+.turbo
 
 # OS
 .DS_Store
@@ -20,6 +21,9 @@ Thumbs.db
 !.env.test
 .dev.vars
 
-# Vite
+# config
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+local.db
+local.db-*

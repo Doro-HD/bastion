@@ -1,15 +1,19 @@
-name: Style
+name: Migrate stageing db
 
 on:
-  pull_request:
+  push:
+    paths:
+      - apps/api/migrations/*
     branches:
       - dev
-      - main
 
 jobs:
-  lint:
-    name: Lint
+  db-migrate-stageing:
+    name: DB migrate stageing
     runs-on: ubuntu-latest
+    env:
+      DB_URL: ${{ secrets.DB_STAGEING_URL }}
+      DB_TOKEN: ${{ secrets.DB_STAGEING_TOKEN }}
 
     steps:
       - name: Check out code
@@ -17,8 +21,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -27,7 +29,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm --filter web install --frozen-lockfile
+        run: pnpm --filter api install --frozen-lockfile
 
-      - name: Linting
-        run: pnpm lint
+      - name: Run migrations
+        run: pnpm --filter api db:migrate 
