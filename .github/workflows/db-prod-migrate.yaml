@@ -3,7 +3,7 @@ name: Migrate prod db
 on:
   push:
     paths:
-      - apps/api/src/db/**/schema.ts
+      - apps/api/migrations/*
     branches:
       - main 
 
