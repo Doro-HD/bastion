@@ -1,4 +1,4 @@
-import { errResponse, TErrResponseStatus } from '@/routers/types';
+import { errResponse, TErrResponseStatus } from '$/routers/types';
 import { zValidator } from '@hono/zod-validator';
 import { ValidationTargets } from 'hono';
 import * as z from 'zod/v4/core';

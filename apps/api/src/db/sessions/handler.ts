@@ -1,11 +1,11 @@
 import { eq } from 'drizzle-orm';
 import { option, result } from '@doro-hd/result';
 
-import { constantTimeEqual, generateSecureRandomString, hashSecret } from '@/crypto';
-import connect, { TConnection } from '@/db/index';
+import { constantTimeEqual, generateSecureRandomString, hashSecret } from '$/crypto';
+import connect, { TConnection } from '$/db/index';
 import { TSessionInsert, TSessionSelect, TSessionTable } from './types';
 import { sessionTable } from './schema';
-import { TUserSelect } from '../users/types';
+import { TUserSelect } from '$/db/users/types';
 
 const sessionExpiresInSeconds = 60 * 60 * 24; // 1 day
 
@@ -38,7 +38,7 @@ class SessionHandler {
 				.insert(this.#table)
 				.values({
 					id,
-					secretHash: Buffer.from(secretHash),
+					secretHash: secretHash,
 					createdAt: Math.floor(now.getTime() / 1000),
 					userId
 				})
@@ -196,7 +196,7 @@ class SessionHandler {
 		}
 		const data = sessionResult.data.data;
 
-		const isSessionValid = this.validateSession(sessionSecret, data);
+		const isSessionValid = this.validateSession(sessionSecret, data.secretHash as Uint8Array);
 
 		if (!isSessionValid) {
 			return result.err('Expired token');

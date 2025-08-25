@@ -5,8 +5,8 @@ import { result } from '@doro-hd/result';
 import { IENV } from './index';
 import { errResponse } from './types';
 import { routers as authRouters } from './authRouter';
-import { TUserSelect } from '@/db/users/types';
-import SessionHandler from '@/db/sessions/handler';
+import { TUserSelect } from '$/db/users/types';
+import SessionHandler from '$/db/sessions/handler';
 import { getCookie } from 'hono/cookie';
 
 const authTokenSchema = z

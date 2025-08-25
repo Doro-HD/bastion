@@ -6,7 +6,7 @@ const sessionTable = sqliteTable(
 	'sessions',
 	{
 		id: text('id').primaryKey(),
-		secretHash: blob('secret_hash', { mode: 'buffer' }).notNull(),
+		secretHash: blob('secret_hash').notNull(),
 		createdAt: integer('created_at').notNull(),
 		userId: text('user_id').notNull()
 	},
