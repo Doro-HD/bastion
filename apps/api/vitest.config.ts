@@ -13,7 +13,7 @@ export default defineWorkersProject({
 		include: ['./src/**/*.spec.ts'],
 		globals: true,
 		poolOptions: {
-			workers: { wrangler: { configPath: './wrangler.jsonc' } }
+			workers: { wrangler: { configPath: './wrangler.jsonc', environment: 'dev' } }
 		}
 	}
 });

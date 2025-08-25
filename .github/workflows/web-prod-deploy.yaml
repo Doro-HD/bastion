@@ -1,0 +1,38 @@
+name: Deploy web to production
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  web-prod-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm --filter web install --frozen-lockfile
+
+      - name: Build app
+        run: pnpm --filter web build
+
+      - name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          wranglerVersion: 4.4.0
+          packageManager: pnpm
+          workingDirectory: "apps/web"
+          environment: production
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
