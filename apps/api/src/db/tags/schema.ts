@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { blob, foreignKey, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { foreignKey, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { userTable } from '../users/schema';
 
 const tagTable = sqliteTable(
