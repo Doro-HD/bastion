@@ -1,18 +1,44 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "api",
+	"name": "bastion-api",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-06-19",
 	"compatibility_flags": ["nodejs_compat"],
-	"vars": {
-		"CORS_ORIGIN": "http://localhost:5173"
-	},
-	"kv_namespaces": [
-		{
-			"binding": "SESSIONS",
-			"id": "5fd2b8e5922e4dc9ad1ac987f3c7575c"
+	"env": {
+		"dev": {
+			"kv_namespaces": [
+				{
+					"binding": "SESSIONS",
+					"id": "666631a58b9345ed8529564c87bc2cfd"
+				}
+			],
+			"vars": {
+				"CORS_ORIGIN": "http://localhost:5173"
+			}
+		},
+		"stageing": {
+			"kv_namespaces": [
+				{
+					"binding": "SESSIONS",
+					"id": "666631a58b9345ed8529564c87bc2cfd"
+				}
+			],
+			"vars": {
+				"CORS_ORIGIN": "http://localhost:5173"
+			}
+		},
+		"production": {
+			"kv_namespaces": [
+				{
+					"binding": "SESSIONS",
+					"id": "bbf547173e8641ea9294734ac842f99a"
+				}
+			],
+			"vars": {
+				"CORS_ORIGIN": "http://localhost:5173"
+			}
 		}
-	]
+	}
 	// "r2_buckets": [
 	//   {
 	//     "binding": "MY_BUCKET",
