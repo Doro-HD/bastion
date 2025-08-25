@@ -1,7 +1,7 @@
 name: Deploy API to stageing
 
 on:
-  pull_request:
+  push:
     branches:
       - dev
 jobs:
