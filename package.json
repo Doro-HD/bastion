@@ -1,0 +1,16 @@
+{
+	"name": "hono",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"api:dev": "pnpm --filter api dev"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.17.1",
+	"dependencies": {
+		"neverthrow": "^8.2.0"
+	}
+}
