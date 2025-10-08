@@ -23,7 +23,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm --filter api install --frozen-lockfile
 
       - name: format
         run: pnpm --filter api format:check
