@@ -23,7 +23,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm --filter api install
 
       - name: format
         run: pnpm --filter api format:check
