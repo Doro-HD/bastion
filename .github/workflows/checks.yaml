@@ -23,10 +23,10 @@ jobs:
           cache: pnpm
 
       - name: format
-        run: pnpm format:check
+        run: pnpm --filter api format:check
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm --filter api lint
 
 
 
