@@ -22,11 +22,14 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: format
-        run: pnpm format:check
+        run: pnpm --filter api format:check
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm --filter api lint
 
 
 

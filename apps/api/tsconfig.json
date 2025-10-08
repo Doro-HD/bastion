@@ -1,27 +1,17 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "NodeNext",
-		"strict": true,
-		"verbatimModuleSyntax": true,
-		"skipLibCheck": true,
-		"types": [
-			"node"
-		],
-		"outDir": "./dist",
-		"paths": {
-			"$lib/*": [
-				"./src/lib/*"
-			],
-			"$db/*": [
-				"./src/db/*"
-			],
-			"$routers/*": [
-				"./src/routers/*"
-			]
-		}
-	},
-	"exclude": [
-		"node_modules"
-	]
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "outDir": "./dist",
+    "paths": {
+      "$lib/*": ["./src/lib/*"],
+      "$db/*": ["./src/db/*"],
+      "$routers/*": ["./src/routers/*"]
+    }
+  },
+  "exclude": ["node_modules"]
 }
