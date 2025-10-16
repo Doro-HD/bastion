@@ -7,8 +7,12 @@ import {
   type TUser,
 } from "$lib/auth.js";
 import { createDB } from "$db/index.js";
+import authRouter from "./authRouter.js";
 
 interface IEnv {
+  Bindings: {
+    CORS_ORIGIN: string;
+  };
   Variables: {
     auth: TAuth;
     authData?: {
@@ -18,25 +22,26 @@ interface IEnv {
   };
 }
 
+function createRouter<TEnv extends IEnv = IEnv>() {
+  return new Hono<TEnv>({
+    strict: false,
+  });
+}
+
 type TContext<TEnv extends IEnv = IEnv> = Context<TEnv>;
 
-const app = new Hono<IEnv>()
-  .use(
-    "*",
-    cors({
-      origin: "http://localhost:3000", // replace with your origin
+const app = createRouter()
+  .use("*", async (c, next) => {
+    const corsHandler = cors({
+      origin: c.env.CORS_ORIGIN,
       allowHeaders: ["Content-Type", "Authorization"],
       allowMethods: ["GET", "POST", "OPTIONS"],
       exposeHeaders: ["Content-Length"],
       maxAge: 600,
       credentials: true,
-    }),
-  )
-  // mounting the better-auth handler
-  .on(["POST", "GET"], "/api/auth/*", (c) => {
-    const auth = c.get("auth");
+    });
 
-    return auth.handler(c.req.raw);
+    return corsHandler(c, next);
   })
   // set auth instance
   .use(async (c, next) => {
@@ -59,7 +64,8 @@ const app = new Hono<IEnv>()
       c.set("authData", { session, user });
     }
     await next();
-  });
+  })
+  .route("/", authRouter);
 
 export default app;
-export { type IEnv, type TContext };
+export { createRouter, type IEnv, type TContext };

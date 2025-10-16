@@ -9,10 +9,10 @@ function createAuth(db: TDB) {
     emailAndPassword: {
       enabled: true,
     },
-    plugins: [username(), passkey()],
     database: drizzleAdapter(db, {
       provider: "pg",
     }),
+    plugins: [username(), passkey()],
   });
 }
 
