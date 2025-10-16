@@ -1,8 +1,9 @@
+import { PUBLIC_API_URL } from "$env/static/public";
 import { createAuthClient } from 'better-auth/client';
 import { usernameClient } from 'better-auth/client/plugins';
 
 const authClient = createAuthClient({
-	baseURL: 'http://localhost:3000/auth',
+	baseURL: `${PUBLIC_API_URL}/auth`,
 	plugins: [usernameClient()]
 });
 
