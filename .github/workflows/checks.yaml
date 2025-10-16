@@ -23,13 +23,13 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm -r install --frozen-lockfile
 
       - name: format
-        run: pnpm --filter api format:check
+        run: pnpm -r format:check
 
       - name: Lint
-        run: pnpm --filter api lint
+        run: pnpm -r lint
 
 
 

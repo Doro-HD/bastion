@@ -4,6 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"format": "pnpm -r format",
+		"format:check": "pnpm -r format:check",
+		"lint": "pnpm -r lint",
 		"api:dev": "pnpm --filter api dev"
 	},
 	"keywords": [],
