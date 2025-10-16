@@ -33,7 +33,7 @@ type TContext<TEnv extends IEnv = IEnv> = Context<TEnv>;
 const app = createRouter()
   .use("*", async (c, next) => {
     const corsHandler = cors({
-      origin: "http://localhost:5173",
+      origin: c.env.CORS_ORIGIN,
       allowHeaders: ["Content-Type", "Authorization"],
       allowMethods: ["GET", "POST", "OPTIONS"],
       exposeHeaders: ["Content-Length"],
