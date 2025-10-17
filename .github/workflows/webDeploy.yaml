@@ -25,7 +25,11 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm -r install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+
+      - name: Build
+        run: pnpm --filter web build
 
       - name: Deploy web
         run: pnpm web:deploy
