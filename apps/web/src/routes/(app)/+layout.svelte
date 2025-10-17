@@ -9,7 +9,7 @@
 	const { children }: TProps = $props();
 
 	if (browser) {
-		authService.nonAuthenticatedOnly();
+		authService.authenticatedOnly();
 	}
 </script>
 

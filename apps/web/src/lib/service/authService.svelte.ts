@@ -2,34 +2,41 @@ import { goto } from '$app/navigation';
 import { authStore } from '$lib/stores/authStore.svelte';
 
 function authenticate(username: string) {
-	let authUsername = username;
+	authStore.authenticate(username);
+	localStorage.setItem('username', username);
+}
 
+function authenticateFromStorage() {
 	const storedUsername = localStorage.getItem('username');
 	if (storedUsername) {
-		authUsername = storedUsername;
+		authStore.authenticate(storedUsername);
+		localStorage.setItem('username', storedUsername);
+
+		return true;
 	}
 
-	authStore.authenticate(authUsername);
-	localStorage.setItem('username', authUsername);
+	return false;
 }
 
 const authService = {
 	signUp: (username: string) => {
-		authenticate(username);
+		const isAuthenticated = authenticateFromStorage();
+		if (!isAuthenticated) {
+			authenticate(username);
+		}
 	},
 	login: (username: string) => {
-		authenticate(username);
+		const isAuthenticated = authenticateFromStorage();
+		if (!isAuthenticated) {
+			authenticate(username);
+		}
 	},
 	signOut: () => {
 		authStore.signOut();
 		localStorage.removeItem('username');
 	},
 	authenticatedOnly: () => {
-		const storedUsername = localStorage.getItem('username');
-		if (storedUsername) {
-			authStore.authenticate(storedUsername);
-			localStorage.setItem('username', storedUsername);
-		}
+		authenticateFromStorage()
 		$effect(() => {
 			if (!authStore.isAuthenticated) {
 				goto('/login');
@@ -37,11 +44,7 @@ const authService = {
 		});
 	},
 	nonAuthenticatedOnly: () => {
-		const storedUsername = localStorage.getItem('username');
-		if (storedUsername) {
-			authStore.authenticate(storedUsername);
-			localStorage.setItem('username', storedUsername);
-		}
+		authenticateFromStorage()
 		$effect(() => {
 			if (authStore.isAuthenticated) {
 				goto('/home');
