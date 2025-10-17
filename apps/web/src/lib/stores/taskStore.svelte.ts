@@ -1,4 +1,4 @@
-import { browser } from "$app/environment";
+import { browser } from '$app/environment';
 
 interface ITask {
 	id: string;
@@ -12,9 +12,9 @@ class TaskStore {
 
 	constructor() {
 		if (browser) {
-			let storedTaskJson = localStorage.getItem("tasks");
+			let storedTaskJson = localStorage.getItem('tasks');
 			if (!storedTaskJson) {
-				storedTaskJson = "[]"
+				storedTaskJson = '[]';
 			}
 
 			const storedTasks = JSON.parse(storedTaskJson);
@@ -38,13 +38,10 @@ class TaskStore {
 	}
 
 	removeTask(taskID: string) {
-		this.tasks = this.tasks.filter(task => task.id !== taskID);
+		this.tasks = this.tasks.filter((task) => task.id !== taskID);
 	}
 }
 
 const taskStore = new TaskStore();
 
-export {
-	taskStore,
-	type ITask
-}
+export { taskStore, type ITask };
