@@ -16,8 +16,5 @@
 	"packageManager": "pnpm@10.17.1",
 	"dependencies": {
 		"neverthrow": "^8.2.0"
-	},
-	"devDependencies": {
-		"@deno/svelte-adapter": "^0.1.0"
 	}
 }

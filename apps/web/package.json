@@ -38,6 +38,7 @@
 		"vitest": "^3.2.4"
 	},
 	"dependencies": {
+		"@deno/svelte-adapter": "^0.1.0",
 		"better-auth": "^1.3.27",
 		"zod": "^4.1.12"
 	}
