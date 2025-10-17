@@ -8,7 +8,8 @@
 		"format:check": "pnpm -r format:check",
 		"lint": "pnpm -r lint",
 		"api:dev": "pnpm --filter api dev",
-		"web:dev": "pnpm --filter web dev"
+		"web:dev": "pnpm --filter web dev",
+		"web:deploy": "pnpm --filter web run deploy"
 	},
 	"keywords": [],
 	"author": "",
