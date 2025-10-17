@@ -36,7 +36,7 @@ const authService = {
 		localStorage.removeItem('username');
 	},
 	authenticatedOnly: () => {
-		authenticateFromStorage()
+		authenticateFromStorage();
 		$effect(() => {
 			if (!authStore.isAuthenticated) {
 				goto('/login');
@@ -44,7 +44,7 @@ const authService = {
 		});
 	},
 	nonAuthenticatedOnly: () => {
-		authenticateFromStorage()
+		authenticateFromStorage();
 		$effect(() => {
 			if (authStore.isAuthenticated) {
 				goto('/home');
