@@ -47,6 +47,9 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Install dependencies
+        run: pnpm -r install --frozen-lockfile
+
       - name: Is api deployable
         run: pnpm api:deploy:dry
 
