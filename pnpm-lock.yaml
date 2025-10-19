@@ -14,18 +14,12 @@ importers:
 
   apps/api:
     dependencies:
-      '@hono/node-server':
-        specifier: ^1.19.4
-        version: 1.19.5(hono@4.9.10)
       '@neondatabase/serverless':
         specifier: ^1.0.1
         version: 1.0.2
       better-auth:
         specifier: ^1.3.16
         version: 1.3.27(@sveltejs/kit@2.46.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.39.12)(vite@7.1.9(@types/node@22.18.8)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)))(svelte@5.39.12)(vite@7.1.9(@types/node@22.18.8)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)))(svelte@5.39.12)
-      dotenv:
-        specifier: ^17.2.2
-        version: 17.2.3
       drizzle-orm:
         specifier: ^0.44.5
         version: 0.44.6(@cloudflare/workers-types@4.20251011.0)(@neondatabase/serverless@1.0.2)(@types/pg@8.15.5)(kysely@0.28.7)
@@ -51,6 +45,19 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.9.3
+      wrangler:
+        specifier: ^4.43.0
+        version: 4.43.0(@cloudflare/workers-types@4.20251011.0)
+
+  apps/foo:
+    dependencies:
+      hono:
+        specifier: ^4.10.1
+        version: 4.10.1
+    devDependencies:
+      wrangler:
+        specifier: ^4.4.0
+        version: 4.43.0(@cloudflare/workers-types@4.20251011.0)
 
   apps/web:
     dependencies:
@@ -640,12 +647,6 @@ packages:
 
   '@hexagon/base64@1.1.28':
     resolution: {integrity: sha512-lhqDEAvWixy3bZ+UOYbPwUbBkwBq5C1LAJ/xPC8Oi+lL54oyakv/npbA0aU2hgCsx/1NUd4IBvV03+aUBWxerw==}
-
-  '@hono/node-server@1.19.5':
-    resolution: {integrity: sha512-iBuhh+uaaggeAuf+TftcjZyWh2GEgZcVGXkNtskLVoWaXhnJtC5HLHrU8W1KHDoucqO1MswwglmkWLFyiDn4WQ==}
-    engines: {node: '>=18.14.1'}
-    peerDependencies:
-      hono: ^4
 
   '@iconify-json/lucide@1.2.69':
     resolution: {integrity: sha512-xOhNf74m+C+nSCObfEqYi34dXk1GMfMUcOB+gfqKY/bn0RcsPLinGfgouOvrUFEreDEFbCti7sdheTf5HESLTA==}
@@ -1353,10 +1354,6 @@ packages:
   devalue@5.3.2:
     resolution: {integrity: sha512-UDsjUbpQn9kvm68slnrs+mfxwFkIflOhkanmyabZ8zOYk8SMEIbJ3TK+88g70hSIeytu4y18f0z/hYHMTrXIWw==}
 
-  dotenv@17.2.3:
-    resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
-    engines: {node: '>=12'}
-
   drizzle-kit@0.31.5:
     resolution: {integrity: sha512-+CHgPFzuoTQTt7cOYCV6MOw2w8vqEn/ap1yv4bpZOWL03u7rlVRQhUY0WYT3rHsgVTXwYQDZaSUJSQrMBUKuWg==}
     hasBin: true
@@ -1534,6 +1531,10 @@ packages:
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+
+  hono@4.10.1:
+    resolution: {integrity: sha512-rpGNOfacO4WEPClfkEt1yfl8cbu10uB1lNpiI33AKoiAHwOS8lV748JiLx4b5ozO/u4qLjIvfpFsPXdY5Qjkmg==}
+    engines: {node: '>=16.9.0'}
 
   hono@4.9.10:
     resolution: {integrity: sha512-AlI15ijFyKTXR7eHo7QK7OR4RoKIedZvBuRjO8iy4zrxvlY5oFCdiRG/V/lFJHCNXJ0k72ATgnyzx8Yqa5arug==}
@@ -2441,10 +2442,6 @@ snapshots:
 
   '@hexagon/base64@1.1.28': {}
 
-  '@hono/node-server@1.19.5(hono@4.9.10)':
-    dependencies:
-      hono: 4.9.10
-
   '@iconify-json/lucide@1.2.69':
     dependencies:
       '@iconify/types': 2.0.0
@@ -3106,8 +3103,6 @@ snapshots:
 
   devalue@5.3.2: {}
 
-  dotenv@17.2.3: {}
-
   drizzle-kit@0.31.5:
     dependencies:
       '@drizzle-team/brocli': 0.10.2
@@ -3257,6 +3252,8 @@ snapshots:
   globals@15.15.0: {}
 
   graceful-fs@4.2.11: {}
+
+  hono@4.10.1: {}
 
   hono@4.9.10: {}
 

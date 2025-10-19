@@ -6,6 +6,7 @@
 	"scripts": {
 		"format": "pnpm -r format",
 		"format:check": "pnpm -r format:check",
+		"dev": "pnpm -r dev",
 		"lint": "pnpm -r lint",
 		"api:dev": "pnpm --filter api dev",
 		"web:dev": "pnpm --filter web dev",

@@ -1,4 +1,3 @@
-import env from "./env.js";
-import auth from "./auth.js";
+import * as auth from "./auth.js";
 
-export { env, auth };
+export { auth };
