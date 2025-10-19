@@ -1,9 +1,9 @@
-name: Web deploy
+name: API deploy
 
 on:
   push:
     paths:
-      - apps/web/**
+      - apps/api/**
     branches:
       - main
 
@@ -29,10 +29,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-
-      - name: Build
-        run: pnpm --filter web build
-
-      - name: Deploy web
-        run: pnpm web:deploy
+      - name: Deploy api
+        run: pnpm api:deploy
 

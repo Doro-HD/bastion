@@ -6,10 +6,14 @@
 	"scripts": {
 		"format": "pnpm -r format",
 		"format:check": "pnpm -r format:check",
+		"dev": "pnpm -r dev",
 		"lint": "pnpm -r lint",
 		"api:dev": "pnpm --filter api dev",
+		"api:deploy": "pnpm --filter api run deploy",
+		"api:deploy:dry": "pnpm --filter api run deploy:dry",
 		"web:dev": "pnpm --filter web dev",
-		"web:deploy": "pnpm --filter web run deploy"
+		"web:deploy": "pnpm --filter web run deploy",
+		"web:deploy:dry": "pnpm --filter web run deploy:dry"
 	},
 	"keywords": [],
 	"author": "",

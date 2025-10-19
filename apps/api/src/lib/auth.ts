@@ -4,8 +4,16 @@ import { username } from "better-auth/plugins/username";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { type TDB } from "$db/index.js";
 
-function createAuth(db: TDB) {
+function createAuth(
+  betterAuthURL: string,
+  betterAuthSecret: string,
+  trustedOrigin: string,
+  db: TDB,
+) {
   return betterAuth({
+    baseURL: betterAuthURL,
+    secret: betterAuthSecret,
+    trustedOrigins: [trustedOrigin],
     emailAndPassword: {
       enabled: true,
     },

@@ -5,7 +5,7 @@
     "strict": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "types": ["node"],
+    "types": ["worker-configuration.d.ts"],
     "outDir": "./dist",
     "paths": {
       "$lib/*": ["./src/lib/*"],

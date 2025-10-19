@@ -16,7 +16,8 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright test",
-		"deploy": "wrangler deploy"
+		"deploy": "wrangler --minify deploy",
+		"deploy:dry": "wrangler deploy --dry-run"
 	},
 	"devDependencies": {
 		"@iconify-json/lucide": "^1.2.69",

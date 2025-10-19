@@ -10,9 +10,7 @@ import { createDB } from "$db/index.js";
 import authRouter from "./authRouter.js";
 
 interface IEnv {
-  Bindings: {
-    CORS_ORIGIN: string;
-  };
+  Bindings: CloudflareBindings;
   Variables: {
     auth: TAuth;
     authData?: {
@@ -46,7 +44,12 @@ const app = createRouter()
   // set auth instance
   .use(async (c, next) => {
     const db = createDB(c);
-    const auth = createAuth(db);
+    const auth = createAuth(
+      c.env.BETTER_AUTH_URL,
+      c.env.BETTER_AUTH_SECRET,
+      c.env.CORS_ORIGIN,
+      db,
+    );
 
     c.set("auth", auth);
     await next();
