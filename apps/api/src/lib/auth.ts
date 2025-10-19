@@ -13,7 +13,7 @@ function createAuth(
   return betterAuth({
     baseURL: betterAuthURL,
     secret: betterAuthSecret,
-    trustedOrigins: ["http://localhost:5173"],
+    trustedOrigins: [trustedOrigin],
     emailAndPassword: {
       enabled: true,
     },
