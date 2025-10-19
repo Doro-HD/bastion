@@ -53,6 +53,10 @@ jobs:
       - name: Is api deployable
         run: pnpm api:deploy:dry
 
+
+      - name: Build web
+        run: pnpm --filter web build
+
       - name: Is web deployable
         run: pnpm web:deploy:dry
 
