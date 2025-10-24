@@ -14,6 +14,10 @@
 		activeTask = drawnTask;
 		modal.showModal();
 	}
+
+	function setModal(element: HTMLDialogElement) {
+		modal = element;
+	}
 </script>
 
 <div class="flex flex-col items-center gap-y-2 pt-2 text-center">
@@ -24,13 +28,7 @@
 	</div>
 </div>
 
-<dialog
-	{@attach (element) => {
-		modal = element;
-	}}
-	id="drawn-task"
-	class="modal"
->
+<dialog {@attach (element) => setModal(element)} id="drawn-task" class="modal">
 	<div class="modal-box">
 		<h3 class="text-lg font-bold">{activeTask?.name}</h3>
 
