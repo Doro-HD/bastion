@@ -2,14 +2,14 @@ import { goto } from '$app/navigation';
 import { authStore } from '$lib/stores/authStore.svelte';
 
 function authenticate(username: string) {
-	authStore.authenticate(username);
+	authStore.setUser(username);
 	localStorage.setItem('username', username);
 }
 
 function authenticateFromStorage() {
 	const storedUsername = localStorage.getItem('username');
 	if (storedUsername) {
-		authStore.authenticate(storedUsername);
+		authStore.setUser(storedUsername);
 		localStorage.setItem('username', storedUsername);
 
 		return true;
@@ -32,7 +32,7 @@ const authService = {
 		}
 	},
 	signOut: () => {
-		authStore.signOut();
+		authStore.removeUser();
 		localStorage.removeItem('username');
 	},
 	authenticatedOnly: () => {
