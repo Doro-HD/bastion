@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { authService } from '$lib/service/authService.svelte';
 	import { z } from 'zod/v4';
+	import { authService } from '$lib/service/authService.svelte';
+	import { Button } from '$lib/components/button';
 
 	const loginSchema = z.object({
 		username: z.string().min(3)
@@ -32,9 +33,9 @@
 			</form>
 
 			<div class="card-actions justify-end">
-				<button class="btn btn-ghost">Sign up</button>
+				<Button variant={{ style: 'ghost' }}>Sign up</Button>
 
-				<button type="submit" form="login-form" class="btn btn-primary">Login</button>
+				<Button variant={{ color: 'primary' }} type="submit" form="login-form">Login</Button>
 			</div>
 		</div>
 	</div>

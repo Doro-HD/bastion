@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { authStore } from '$lib/stores/authStore.svelte';
 	import { taskStore, type ITask } from '$lib/stores/taskStore.svelte';
+	import { Button } from '$lib/components/button';
 
 	let modal: HTMLDialogElement;
 	let activeTask: ITask | null = null;
@@ -20,7 +21,7 @@
 	<h1 class="text-4xl font-bold">Welcome {authStore.username}</h1>
 
 	<div class="w-lg">
-		<button class="btn btn-primary" onclick={drawTask}>Draw task</button>
+		<Button variant={{ color: 'primary' }} onclick={drawTask}>Draw task</Button>
 	</div>
 </div>
 
@@ -38,7 +39,7 @@
 
 		<div class="modal-action">
 			<form method="dialog">
-				<button class="btn">Close</button>
+				<Button>Close</Button>
 			</form>
 		</div>
 	</div>

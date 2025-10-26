@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { authService } from '$lib/service/authService.svelte';
 	import { authStore } from '$lib/stores/authStore.svelte';
+	import { Button } from '$lib/components/button';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 
 	let isAuthenticated = $derived(authStore.isAuthenticated);
@@ -23,7 +24,7 @@
 
 	<div>
 		{#if isAuthenticated}
-			<button onclick={signOut} class="btn text-lg btn-ghost">Sign out</button>
+			<Button variant={{ style: 'ghost' }} onclick={signOut} class="text-lg">Sign out</Button>
 		{:else}
 			<a href="/login" class="btn text-lg btn-ghost">Login</a>
 		{/if}

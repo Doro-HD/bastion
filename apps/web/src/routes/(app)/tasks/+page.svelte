@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { taskService } from '$lib/service/taskService';
 	import { taskStore } from '$lib/stores/taskStore.svelte';
+	import { Button } from '$lib/components/button';
 
 	const modalID = crypto.randomUUID();
 	let modal: HTMLDialogElement;
@@ -31,13 +32,13 @@
 		{#each taskStore.tasks as task (task.id)}
 			<div class="group card h-30 w-sm bg-base-100 shadow-sm">
 				<div class="absolute top-0 right-0 hidden p-2 group-hover:block">
-					<button
-						class="btn btn-circle btn-sm btn-error"
+					<Button
+						variant={{ color: 'error', size: 'sm', modifier: 'circle' }}
 						title="Delete task {task.name}"
 						onclick={() => deleteTask(task.id)}
 					>
 						<span class="icon-[lucide--x]"></span>
-					</button>
+					</Button>
 				</div>
 
 				<div class="card-body">
@@ -50,13 +51,13 @@
 	</div>
 
 	<div class="absolute top-0 right-0 p-2">
-		<button
-			class="btn btn-circle btn-secondary"
+		<Button
+			variant={{ color: 'secondary', modifier: 'circle' }}
 			title="Create new task"
 			onclick={() => modal.showModal()}
 		>
 			<span class="icon-[lucide--plus]"></span>
-		</button>
+		</Button>
 	</div>
 </div>
 
@@ -82,10 +83,10 @@
 
 		<div class="modal-action">
 			<form method="dialog">
-				<button class="btn">Close</button>
+				<Button>Close</Button>
 			</form>
 
-			<button type="submit" form="create-task-form" class="btn btn-primary">Save</button>
+			<Button variant={{ color: 'primary' }} type="submit" form="create-task-form">Save</Button>
 		</div>
 	</div>
 </dialog>
