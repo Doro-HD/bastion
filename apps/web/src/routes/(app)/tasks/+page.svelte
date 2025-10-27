@@ -22,6 +22,10 @@
 	function deleteTask(taskID: string) {
 		taskService.deleteTask(taskID);
 	}
+
+	function setModal(element: HTMLDialogElement) {
+		modal = element;
+	}
 </script>
 
 <div class="relative flex flex-col items-center gap-y-2 pt-2 text-center">
@@ -60,13 +64,7 @@
 	</div>
 </div>
 
-<dialog
-	{@attach (element) => {
-		modal = element;
-	}}
-	id={modalID}
-	class="modal"
->
+<dialog {@attach (element) => setModal(element)} id={modalID} class="modal">
 	<div class="modal-box">
 		<h3 class="text-lg font-bold">Create new task</h3>
 
