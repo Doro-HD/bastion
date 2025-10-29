@@ -2,12 +2,12 @@ import { vi, describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 
-import Button from './Button.svelte';
+import Button from '../Button.svelte';
 import { createRawSnippet } from 'svelte';
 
 describe('Positive', () => {
 	it('Should render button', async () => {
-		render(Button, { children: createRawSnippet(() => ({ render: () => 'Click me' })) });
+		render(Button, { children: createRawSnippet(() => ({ render: () => '<p>Click me</p>' })) });
 
 		const button = screen.getByRole('button');
 
@@ -22,10 +22,10 @@ describe('Positive', () => {
 		['info', 'btn-info'],
 		['success', 'btn-success'],
 		['warning', 'btn-warning'],
-		['error', 'btn-error'],
+		['error', 'btn-error']
 	])('Should use correct color class based on prop', async (color, className) => {
 		const screen = render(Button, {
-			children: createRawSnippet(() => ({ render: () => 'Click me' })),
+			children: createRawSnippet(() => ({ render: () => '<p>Click me</p>' })),
 			variant: { color }
 		});
 
@@ -39,10 +39,10 @@ describe('Positive', () => {
 		['dash', 'btn-dash'],
 		['soft', 'btn-soft'],
 		['ghost', 'btn-ghost'],
-		['link', 'btn-link'],
+		['link', 'btn-link']
 	])('Should use correct style class based on prop', async (style, className) => {
 		const screen = render(Button, {
-			children: createRawSnippet(() => ({ render: () => 'Click me' })),
+			children: createRawSnippet(() => ({ render: () => '<p>Click me</p>' })),
 			variant: { style }
 		});
 
@@ -53,10 +53,10 @@ describe('Positive', () => {
 
 	it.each([
 		['active', 'btn-active'],
-		['disabled', 'btn-disabled'],
+		['disabled', 'btn-disabled']
 	])('Should use correct behaviour class based on prop', async (behaviour, className) => {
 		const screen = render(Button, {
-			children: createRawSnippet(() => ({ render: () => 'Click me' })),
+			children: createRawSnippet(() => ({ render: () => '<p>Click me</p>' })),
 			variant: { behaviour }
 		});
 
@@ -70,10 +70,10 @@ describe('Positive', () => {
 		['sm', 'btn-sm'],
 		['md', 'btn-md'],
 		['lg', 'btn-lg'],
-		['xl', 'btn-xl'],
+		['xl', 'btn-xl']
 	])('Should use correct size class based on prop', async (size, className) => {
 		const screen = render(Button, {
-			children: createRawSnippet(() => ({ render: () => 'Click me' })),
+			children: createRawSnippet(() => ({ render: () => '<p>Click me</p>' })),
 			variant: { size }
 		});
 
@@ -86,10 +86,10 @@ describe('Positive', () => {
 		['wide', 'btn-wide'],
 		['block', 'btn-block'],
 		['square', 'btn-square'],
-		['circle', 'btn-circle'],
+		['circle', 'btn-circle']
 	])('Should use correct modifier class based on prop', async (modifier, className) => {
 		const screen = render(Button, {
-			children: createRawSnippet(() => ({ render: () => 'Click me' })),
+			children: createRawSnippet(() => ({ render: () => '<p>Click me</p>' })),
 			variant: { modifier }
 		});
 
@@ -98,12 +98,12 @@ describe('Positive', () => {
 		expect(button.className.includes(className)).toBeTruthy();
 	});
 
-	it("Should call function on click", async () => {
+	it('Should call function on click', async () => {
 		const user = userEvent.setup();
-		const spy = vi.fn()
+		const spy = vi.fn();
 
 		const screen = render(Button, {
-			children: createRawSnippet(() => ({ render: () => 'Click me' })),
+			children: createRawSnippet(() => ({ render: () => '<p>Click me</p>' })),
 			onclick: spy
 		});
 
@@ -111,5 +111,5 @@ describe('Positive', () => {
 		await user.click(button);
 
 		expect(spy).toHaveBeenCalledOnce();
-	})
+	});
 });

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { taskService } from '$lib/service/taskService';
 	import { taskStore } from '$lib/stores/taskStore.svelte';
-	import { Button } from '$lib/components/button';
+	import Card from '$lib/components/card';
+	import Button from '$lib/components/button';
 
 	const modalID = crypto.randomUUID();
 	let modal: HTMLDialogElement;
@@ -30,7 +31,7 @@
 
 	<div class="grid grid-cols-3 gap-2 text-left">
 		{#each taskStore.tasks as task (task.id)}
-			<div class="group card h-30 w-sm bg-base-100 shadow-sm">
+			<Card.Root class="group">
 				<div class="absolute top-0 right-0 hidden p-2 group-hover:block">
 					<Button
 						variant={{ color: 'error', size: 'sm', modifier: 'circle' }}
@@ -41,12 +42,12 @@
 					</Button>
 				</div>
 
-				<div class="card-body">
-					<h2 class="card-title">{task.name}</h2>
+				<Card.Body>
+					<Card.Title>{task.name}</Card.Title>
 
 					<p>{task.description}</p>
-				</div>
-			</div>
+				</Card.Body>
+			</Card.Root>
 		{/each}
 	</div>
 

@@ -1,7 +1,13 @@
-<label class="swap swap-rotate" aria-label="Toggle dark mode">
-	<input type="checkbox" class="theme-controller" value="dim" />
+<script lang="ts">
+	import Swap from '$lib/components/swap';
+</script>
 
-	<span class="swap-on icon-[lucide--sun] size-7"></span>
+<Swap.Root themeValue="dim">
+	<Swap.Item type="on">
+		<span class="icon-[lucide--sun] size-7"></span>
+	</Swap.Item>
 
-	<span class="swap-off icon-[lucide--moon] size-7"></span>
-</label>
+	<Swap.Item type="off">
+		<span class="icon-[lucide--moon] size-7"></span>
+	</Swap.Item>
+</Swap.Root>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { authService } from '$lib/service/authService.svelte';
 	import { authStore } from '$lib/stores/authStore.svelte';
-	import { Button } from '$lib/components/button';
+	import Button from '$lib/components/button';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 
 	let isAuthenticated = $derived(authStore.isAuthenticated);

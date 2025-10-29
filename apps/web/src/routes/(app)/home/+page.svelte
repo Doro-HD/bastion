@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { authStore } from '$lib/stores/authStore.svelte';
 	import { taskStore, type ITask } from '$lib/stores/taskStore.svelte';
-	import { Button } from '$lib/components/button';
+	import Button from '$lib/components/button';
 
 	let modal: HTMLDialogElement;
 	let activeTask: ITask | null = null;
