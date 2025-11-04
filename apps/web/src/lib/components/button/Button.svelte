@@ -1,29 +1,11 @@
+<!--
+@component
+Button is a simple wrapper around a button tag with daisyui variant props
+-->
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import { type IButtonProps } from './index';
 
-	type TButtonAttributes = Omit<HTMLButtonAttributes, 'class'>;
-
-	interface IProps extends TButtonAttributes {
-		class?: string;
-		variant?: {
-			color?:
-				| 'neutral'
-				| 'primary'
-				| 'secondary'
-				| 'accent'
-				| 'info'
-				| 'success'
-				| 'warning'
-				| 'error';
-			style?: 'outline' | 'dash' | 'soft' | 'ghost' | 'link';
-			behaviour?: 'active' | 'disabled';
-			size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-			modifier?: 'wide' | 'block' | 'square' | 'circle';
-		};
-		children: Snippet;
-	}
-	const { class: className, variant, children, ...attributes }: IProps = $props();
+	const { class: className, variant, children, ...attributes }: IButtonProps = $props();
 
 	function getColor() {
 		switch (variant?.color) {

@@ -9,6 +9,11 @@
 	const { themeValue, children, class: className }: IProps = $props();
 </script>
 
+<!--
+@component
+Swap.Root is the root component of swap
+-->
+
 <label data-testid="swap-root" class={['swap', className]}>
 	{#if themeValue}
 		<input type="checkbox" class="theme-controller" value={themeValue} />

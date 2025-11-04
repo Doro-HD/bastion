@@ -47,6 +47,11 @@
 	}
 </script>
 
+<!--
+@component
+Card.Root is the main component of a Card, it is also this component which accepts variant options
+-->
+
 <div
 	data-testid="card-root"
 	class={['card', getStyle(), getModifier(), getSize(), className]}

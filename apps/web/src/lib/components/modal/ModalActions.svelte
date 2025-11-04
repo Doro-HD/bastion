@@ -9,10 +9,10 @@
 </script>
 
 <!--
-@component
-Card.Actions is a container for card relevant actions
+component
+Modal.Actions is a container for modal relevant actions
 -->
 
-<div data-testid="card-actions" class={['card-actions', className]} {...attributes}>
+<div data-testid="modal-actions" class={['modal-action', className]} {...attributes}>
 	{@render children()}
 </div>

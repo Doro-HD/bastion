@@ -18,7 +18,7 @@ describe('Positive', () => {
 
 		const card = screen.getByTestId('card-root');
 
-		expect(card.className.includes("card")).toBeTruthy();
+		expect(card.className.includes('card')).toBeTruthy();
 	});
 
 	it.each([
@@ -112,7 +112,7 @@ describe('Negative', () => {
 		const card = screen.getByTestId('card-root');
 
 		for (const className of card.classList) {
-			expect(opposingClassnames).not.toContain(className)
+			expect(opposingClassnames).not.toContain(className);
 		}
 	});
 });

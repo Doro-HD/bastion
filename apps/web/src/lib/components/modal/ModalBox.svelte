@@ -9,10 +9,10 @@
 </script>
 
 <!--
-@component
-Card.Actions is a container for card relevant actions
+component
+Modal.Box is the actual modal that is shown upon being triggered
 -->
 
-<div data-testid="card-actions" class={['card-actions', className]} {...attributes}>
+<div data-testid="modal-box" class={['modal-box', className]} {...attributes}>
 	{@render children()}
 </div>

@@ -18,6 +18,6 @@ describe('Positive', () => {
 
 		const card = screen.getByTestId('card-actions');
 
-		expect(card.className.includes("card-actions")).toBeTruthy();
+		expect(card.className.includes('card-actions')).toBeTruthy();
 	});
 });

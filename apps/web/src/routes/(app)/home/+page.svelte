@@ -2,18 +2,20 @@
 	import { authStore } from '$lib/stores/authStore.svelte';
 	import { taskStore, type ITask } from '$lib/stores/taskStore.svelte';
 	import Button from '$lib/components/button';
+	import Modal from '$lib/components/modal';
+	import { getModalContext, type TModalContext } from '$lib/components/modal/modalContext';
 
-	let modal: HTMLDialogElement;
 	let activeTask: ITask | null = null;
 
-	function drawTask() {
+	function drawTask(modalCtx: TModalContext) {
 		const drawnTask = taskStore.getRandomTask();
 		if (!drawnTask) {
 			return;
 		}
 
 		activeTask = drawnTask;
-		modal.showModal();
+
+		modalCtx.open();
 	}
 </script>
 
@@ -21,26 +23,24 @@
 	<h1 class="text-4xl font-bold">Welcome {authStore.username}</h1>
 
 	<div class="w-lg">
-		<Button variant={{ color: 'primary' }} onclick={drawTask}>Draw task</Button>
+		<Modal.Root>
+			<Button
+				variant={{ color: 'primary' }}
+				onclick={() => {
+					const modalCtx = getModalContext();
+					drawTask(modalCtx);
+				}}>Draw task</Button
+			>
+
+			<Modal.Box>
+				<h3 class="text-lg font-bold">{activeTask?.name}</h3>
+
+				<p>{activeTask?.description}</p>
+
+				<Modal.Actions>
+					<Modal.Close>Close</Modal.Close>
+				</Modal.Actions>
+			</Modal.Box>
+		</Modal.Root>
 	</div>
 </div>
-
-<dialog
-	{@attach (element) => {
-		modal = element;
-	}}
-	id="drawn-task"
-	class="modal"
->
-	<div class="modal-box">
-		<h3 class="text-lg font-bold">{activeTask?.name}</h3>
-
-		<p>{activeTask?.description}</p>
-
-		<div class="modal-action">
-			<form method="dialog">
-				<Button>Close</Button>
-			</form>
-		</div>
-	</div>
-</dialog>

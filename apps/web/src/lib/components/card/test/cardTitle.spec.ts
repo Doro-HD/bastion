@@ -18,6 +18,6 @@ describe('Positive', () => {
 
 		const card = screen.getByRole('heading');
 
-		expect(card.className.includes("card-title")).toBeTruthy();
+		expect(card.className.includes('card-title')).toBeTruthy();
 	});
 });

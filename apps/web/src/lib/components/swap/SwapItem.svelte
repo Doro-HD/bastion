@@ -9,6 +9,11 @@
 	const { type, class: className, children, ...attributes }: IProps = $props();
 </script>
 
+<!--
+@component
+Swap.Item is a sub component of swap, meant to specify if it is the on or off item
+-->
+
 <div
 	data-testid="swap-item"
 	class={[{ 'swap-off': type === 'off' }, { 'swap-on': type === 'on' }, className]}
