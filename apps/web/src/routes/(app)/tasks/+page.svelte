@@ -1,19 +1,18 @@
 <script lang="ts">
 	import { taskService } from '$lib/service/taskService';
 	import { taskStore } from '$lib/stores/taskStore.svelte';
-
-	const modalID = crypto.randomUUID();
-	let modal: HTMLDialogElement;
+	import Card from '$lib/components/card';
+	import Button from '$lib/components/button';
+	import Modal from '$lib/components/modal';
+	import { getModalContext, type TModalContext } from '$lib/components/modal/modalContext';
 
 	let taskName = $state('');
 	let taskDescription = $state('');
 
-	function createNewTask(e: SubmitEvent) {
-		e.preventDefault();
-
+	function createNewTask(modalCtx: TModalContext) {
 		taskService.createTask(taskName, taskDescription);
 
-		modal.close();
+		modalCtx.close();
 
 		taskName = '';
 		taskDescription = '';
@@ -29,63 +28,57 @@
 
 	<div class="grid grid-cols-3 gap-2 text-left">
 		{#each taskStore.tasks as task (task.id)}
-			<div class="group card h-30 w-sm bg-base-100 shadow-sm">
+			<Card.Root class="group">
 				<div class="absolute top-0 right-0 hidden p-2 group-hover:block">
-					<button
-						class="btn btn-circle btn-sm btn-error"
+					<Button
+						variant={{ color: 'error', size: 'sm', modifier: 'circle' }}
 						title="Delete task {task.name}"
 						onclick={() => deleteTask(task.id)}
 					>
 						<span class="icon-[lucide--x]"></span>
-					</button>
+					</Button>
 				</div>
 
-				<div class="card-body">
-					<h2 class="card-title">{task.name}</h2>
+				<Card.Body>
+					<Card.Title>{task.name}</Card.Title>
 
 					<p>{task.description}</p>
-				</div>
-			</div>
+				</Card.Body>
+			</Card.Root>
 		{/each}
 	</div>
 
 	<div class="absolute top-0 right-0 p-2">
-		<button
-			class="btn btn-circle btn-secondary"
-			title="Create new task"
-			onclick={() => modal.showModal()}
-		>
-			<span class="icon-[lucide--plus]"></span>
-		</button>
+		<Modal.Root>
+			<Modal.Trigger title="Create new task" variant={{ color: 'secondary', modifier: 'circle' }}>
+				<span class="icon-[lucide--plus]"></span>
+			</Modal.Trigger>
+
+			<Modal.Box>
+				<h3 class="text-lg font-bold">Create new task</h3>
+
+				<form id="create-task-form" class="flex flex-col items-center gap-y-2">
+					<label class="input">
+						<span class="label">Task name</span>
+						<input type="text" bind:value={taskName} />
+					</label>
+
+					<textarea class="textarea" placeholder="Task description" bind:value={taskDescription}
+					></textarea>
+				</form>
+			</Modal.Box>
+
+			<Modal.Actions>
+				<Modal.Close>Close</Modal.Close>
+
+				<Button
+					variant={{ color: 'primary' }}
+					onclick={() => {
+						const modalCtx = getModalContext();
+						createNewTask(modalCtx);
+					}}>Save</Button
+				>
+			</Modal.Actions>
+		</Modal.Root>
 	</div>
 </div>
-
-<dialog
-	{@attach (element) => {
-		modal = element;
-	}}
-	id={modalID}
-	class="modal"
->
-	<div class="modal-box">
-		<h3 class="text-lg font-bold">Create new task</h3>
-
-		<form id="create-task-form" class="flex flex-col items-center gap-y-2" onsubmit={createNewTask}>
-			<label class="input">
-				<span class="label">Task name</span>
-				<input type="text" bind:value={taskName} />
-			</label>
-
-			<textarea class="textarea" placeholder="Task description" bind:value={taskDescription}
-			></textarea>
-		</form>
-
-		<div class="modal-action">
-			<form method="dialog">
-				<button class="btn">Close</button>
-			</form>
-
-			<button type="submit" form="create-task-form" class="btn btn-primary">Save</button>
-		</div>
-	</div>
-</dialog>
