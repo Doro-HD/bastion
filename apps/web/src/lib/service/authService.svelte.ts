@@ -13,7 +13,12 @@ async function authenticate() {
 
 const authService = {
 	signUp: async (username: string, password: string): Promise<boolean> => {
-		const { data, error } = await authClient.signUp.email({ name: username, email: `${username}@bastion.com`, username, password });
+		const { data, error } = await authClient.signUp.email({
+			name: username,
+			email: `${username}@bastion.com`,
+			username,
+			password
+		});
 		if (error) {
 			return false;
 		}
