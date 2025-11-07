@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { taskService } from '$lib/service/taskService';
+	import { taskService } from '$lib/services/taskService';
 	import { taskStore } from '$lib/stores/taskStore.svelte';
 	import Card from '$lib/components/card';
 	import Button from '$lib/components/button';

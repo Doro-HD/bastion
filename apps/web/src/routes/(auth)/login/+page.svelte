@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { z } from 'zod/v4';
-	import { authService } from '$lib/service/authService.svelte';
+	import { authService } from '$lib/services/authService.svelte';
 	import Card from '$lib/components/card';
 	import Button from '$lib/components/button';
+	import { getAuthCtx } from '$lib/contexts/authContext';
+
+	const authCtx = getAuthCtx();
 
 	const loginSchema = z.object({
 		username: z.string().min(3)
@@ -17,7 +20,7 @@
 			return;
 		}
 
-		authService.login(schemaResult.data.username);
+		authService.login(authCtx, schemaResult.data.username, '');
 	}
 </script>
 
