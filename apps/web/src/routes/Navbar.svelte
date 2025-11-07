@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { authService } from '$lib/service/authService.svelte';
-	import { authStore } from '$lib/stores/authStore.svelte';
+	import { authService } from '$lib/services/authService.svelte';
 	import Button from '$lib/components/button';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
+	import { getAuthCtx } from '$lib/contexts/authContext';
 
-	let isAuthenticated = $derived(authStore.isAuthenticated);
+	const authCtx = getAuthCtx();
 
 	function signOut() {
-		authService.signOut();
+		authService.signOut(authCtx);
 	}
 </script>
 
@@ -15,7 +15,7 @@
 	<div>
 		<a href="/" class="btn text-2xl btn-ghost">Bastion</a>
 
-		{#if isAuthenticated}
+		{#if authCtx.isAuthenticated}
 			<a href="/home" class="btn text-lg btn-ghost">Home</a>
 
 			<a href="/tasks" class="btn text-lg btn-ghost">Tasks</a>
@@ -23,7 +23,7 @@
 	</div>
 
 	<div>
-		{#if isAuthenticated}
+		{#if authCtx.isAuthenticated}
 			<Button variant={{ style: 'ghost' }} onclick={signOut} class="text-lg">Sign out</Button>
 		{:else}
 			<a href="/login" class="btn text-lg btn-ghost">Login</a>

@@ -1,18 +1,18 @@
 import { goto } from '$app/navigation';
 import { authClient } from '$lib/clients/authClient';
-import { authStore } from '$lib/stores/authStore.svelte';
+import { type TAuthCtx } from '$lib/contexts/authContext';
 
-async function authenticate() {
+async function authenticate(authCtx: TAuthCtx) {
 	const { data, error } = await authClient.getSession();
 	if (error || !data?.user.username) {
 		return;
 	}
 
-	authStore.setUser(data.user.username);
+	authCtx.setUser(data.user.username);
 }
 
 const authService = {
-	signUp: async (username: string, password: string): Promise<boolean> => {
+	signUp: async (authCtx: TAuthCtx, username: string, password: string): Promise<boolean> => {
 		const { data, error } = await authClient.signUp.email({
 			name: username,
 			email: `${username}@bastion.com`,
@@ -24,38 +24,38 @@ const authService = {
 		}
 
 		// using name instead of username, as username is not available on the email signup
-		authStore.setUser(data.user.name);
+		authCtx.setUser(data.user.name);
 
 		return true;
 	},
-	login: async (username: string, password: string): Promise<boolean> => {
+	login: async (authCtx: TAuthCtx, username: string, password: string): Promise<boolean> => {
 		const { data, error } = await authClient.signIn.username({ username, password });
 		if (error) {
 			return false;
 		}
 
-		authStore.setUser(data.user.username);
+		authCtx.setUser(data.user.username);
 
 		return true;
 	},
-	signOut: async () => {
+	signOut: async (authCtx: TAuthCtx) => {
 		await authClient.signOut();
-		authStore.removeUser();
+		authCtx.removeUser();
 	},
-	authenticatedOnly: async () => {
-		await authenticate();
+	authenticatedOnly: async (authCtx: TAuthCtx) => {
+		await authenticate(authCtx);
 
 		$effect(() => {
-			if (!authStore.isAuthenticated) {
+			if (!authCtx.isAuthenticated) {
 				goto('/login');
 			}
 		});
 	},
-	nonAuthenticatedOnly: async () => {
-		await authenticate();
+	nonAuthenticatedOnly: async (authCtx: TAuthCtx) => {
+		await authenticate(authCtx);
 
 		$effect(() => {
-			if (authStore.isAuthenticated) {
+			if (authCtx.isAuthenticated) {
 				goto('/home');
 			}
 		});
