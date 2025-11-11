@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { authStore } from '$lib/stores/authStore.svelte';
+	import { getAuthCtx } from '$lib/contexts/authContext';
 	import { taskStore, type ITask } from '$lib/stores/taskStore.svelte';
 	import Button from '$lib/components/button';
 	import Modal from '$lib/components/modal';
 	import { getModalContext, type TModalContext } from '$lib/components/modal/modalContext';
+
+	const authCtx = getAuthCtx();
 
 	let activeTask: ITask | null = null;
 
@@ -20,7 +22,7 @@
 </script>
 
 <div class="flex flex-col items-center gap-y-2 pt-2 text-center">
-	<h1 class="text-4xl font-bold">Welcome {authStore.username}</h1>
+	<h1 class="text-4xl font-bold">Welcome {authCtx.username}</h1>
 
 	<div class="w-lg">
 		<Modal.Root>

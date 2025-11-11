@@ -34,6 +34,8 @@ jobs:
   deployable:
     name: Deployable
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_API_URL: http://localhost:8787
 
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +54,6 @@ jobs:
 
       - name: Is api deployable
         run: pnpm api:deploy:dry
-
 
       - name: Build web
         run: pnpm --filter web build

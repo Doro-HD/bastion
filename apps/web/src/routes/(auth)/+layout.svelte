@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { authService } from '$lib/service/authService.svelte';
+	import { getAuthCtx } from '$lib/contexts/authContext';
+	import { authService } from '$lib/services/authService.svelte';
 	import type { Snippet } from 'svelte';
 
 	type TProps = {
@@ -8,8 +9,10 @@
 	};
 	const { children }: TProps = $props();
 
+	const authCtx = getAuthCtx();
+
 	if (browser) {
-		authService.nonAuthenticatedOnly();
+		authService.nonAuthenticatedOnly(authCtx);
 	}
 </script>
 
